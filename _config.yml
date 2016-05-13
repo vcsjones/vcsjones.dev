@@ -1,0 +1,13 @@
+title: Random Thoughts
+description: Warranty void.
+baseurl: ""
+url: "https://vcsjones.com"
+twitter_username: vcsjones
+github_username:  vcsjones
+
+markdown: kramdown
+permalink: /:year/:month/:day/:title/
+exclude:
+  - app.js
+  - package.json
+  - node_modules
