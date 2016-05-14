@@ -15,6 +15,7 @@ exclude:
   - package.json
   - node_modules
   - gulpfile.js
-  - publish.sh
   - appspec.yml
+  - _deploy
+  - _server
   

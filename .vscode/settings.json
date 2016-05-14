@@ -3,7 +3,8 @@
         "**/.git": true,
         "**/.svn": true,
         "**/.DS_Store": true,
-        "**/.sass-cache": true
+        "**/.sass-cache": true,
+        "**/_site": true
     },
     "editor.rulers": [80]
 }
