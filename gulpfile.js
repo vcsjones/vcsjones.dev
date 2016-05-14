@@ -20,4 +20,9 @@ gulp.task('webp-jpeg', ['jekyll'], () => {
             .pipe(exec(`cwebp -q ${quality} "<%= file.path %>" -o "<%= file.path %>.webp"`));
 });
 
-gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg'], () => {});
+gulp.task('png-crush', ['jekyll'], () => {
+    return gulp.src('./_site/images/**/*.png')
+            .pipe(exec('pngcrush -ow "<%= file.path %>"'));
+});
+
+gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush'], () => {});
