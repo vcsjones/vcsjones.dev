@@ -1,0 +1,10 @@
+version: 0.0
+os: linux
+files:
+  - source: _site
+    destination: /var/wwwroot/vcsjones.com
+  - source: _server/vcsjones.com.conf
+    destination: /etc/nginx/sites-available
+hooks:
+  BeforeInstall:
+    - location: publish.sh
