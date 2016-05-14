@@ -7,6 +7,7 @@
     min-height: 56px;
     background: #333;
     color: #FFF;
+    padding-bottom: 5px;
 
     // Positioning context for the mobile navigation icon
     position: relative;
@@ -89,6 +90,7 @@
         }
 
         .page-link {
+            color: #000;
             display: block;
             padding: 5px 10px;
 
@@ -224,6 +226,27 @@
 .post-content {
     margin-bottom: $spacing-unit;
     
+    table {
+        width: 80%;
+        padding: 0 auto;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: solid 1px #dddddd;
+        thead, tfoot {
+            background: #e0e0e0;
+            text-align: left;
+        }
+        tbody {
+            tr:nth-of-type(even) {
+                background: #e8e8e8;
+            }
+        }
+        td, th {
+            font-size: .83em;
+            padding: 0.5625em 0.625em;
+        }
+    }
+    
     img {
         max-width: 100%;
         margin: 0 auto;
@@ -253,4 +276,10 @@
             font-size: 18px;
         }
     }
+}
+
+aside {
+    border-left: 5px solid gold;
+    padding-left: 5px;
+    min-height: 48px;
 }

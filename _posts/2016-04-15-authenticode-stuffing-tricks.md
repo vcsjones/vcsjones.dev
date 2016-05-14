@@ -19,6 +19,8 @@ are exceptions). The goal of the signature is to ensure the binary hasn't been
 tampered with, and that it comes from a trusted source. The former presents a
 problem.
 
+<!--break-->
+
 If I were to take a binary, and computer a signature on it to make sure it
 hasn't changed, then embed the signature in the binary, I just changed the
 contents of the binary and invalidated the signature I just computed by

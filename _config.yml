@@ -4,9 +4,12 @@ baseurl: ""
 url: "https://vcsjones.com"
 twitter_username: vcsjones
 github_username:  vcsjones
+permalink: /:year/:month/:day/:title/
 
 markdown: kramdown
-permalink: /:year/:month/:day/:title/
+paginate: 1
+gems:
+  - jekyll-paginate
 exclude:
   - app.js
   - package.json
