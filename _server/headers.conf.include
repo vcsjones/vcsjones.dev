@@ -1,0 +1,4 @@
+add_header X-Frame-Options DENY;
+add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload";
+add_header Public-Key-Pins 'pin-sha256="jV54RY1EPxNKwrQKIa5QMGDNPSbj3VwLPtXaHiEE8y8="; pin-sha256="7qVfhXJFRlcy/9VpKFxHBuFzvQZSqajgfRwvsdx1oG8="; pin-sha256="/sMEqQowto9yX5BozHLPdnciJkhDiL5+Ug0uil3DkUM="; max-age=5184000; includeSubDomains';
+add_header Content-Security-Policy "default-src 'self' ; script-src 'none' ; style-src 'self' ; img-src 'self' ; font-src 'none' ; connect-src 'self' ; media-src 'none' ; object-src 'none' ; child-src 'none' ; frame-ancestors 'none' ; form-action 'none' ; block-all-mixed-content; sandbox; reflected-xss block; manifest-src 'none' ; referrer origin";
