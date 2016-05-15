@@ -9,18 +9,18 @@ Continuing my "do everything in Fiddler" approach to web debugging, I ran into a
 situation where I wanted to parse and modify the response of the server before
 the browser received the response using Fiddler.
 
-It’s definitely doable, but there wasn’t a clear cut example on how to do that,
+It's definitely doable, but there wasn't a clear cut example on how to do that,
 so here we go.
 
 The best to start is [Telerik's documentation][1] on building an extension. This
 covers the ins and outs of getting started with developing an extension. Once
-you have a “hello world” extension working, you’re ready to start parsing HTML.
+you have a “hello world” extension working, you're ready to start parsing HTML.
 
 The Fiddler interface of choice here is going to be `IAutoTamper2`, and use the
 interface method `AutoTamperResponseBefore`. `AutoTamperResponseBefore` is where we
 want to modify the HTML. This method is called after Fiddler has received the
 response from the server, but before it has pushed it to the browser.
-Modification’s to the response body here will be reflected in what the browser
+Modification's to the response body here will be reflected in what the browser
 renders.
 
 There are a few guard checks we want to make first. Since we want to modify
@@ -34,7 +34,7 @@ other content types you may want to handle.
 So to start, we have this:
 
 ### F\#
-{% highlight ocaml %}
+```ocaml
 open Fiddler
 
 type LinkAutoTamper() =
@@ -48,10 +48,10 @@ type LinkAutoTamper() =
                 ()
             else
                 () //Handle HTML here
-{% endhighlight %}
+```
 
 ### C\#
-{% highlight csharp %}
+```csharp
 using Fiddler;
 
 public class LinkAutoTamper : IAutoTamper2
@@ -73,7 +73,7 @@ public class LinkAutoTamper : IAutoTamper2
         //Handle HTML here
     }
 }
-{% endhighlight %}
+```
 
 The `OnPeekAtResponseHeaders` is necessary to prevent Fiddler from streaming the
 response back to the browser. Instead, Fiddler will buffer the whole response
@@ -95,28 +95,27 @@ style attribute on anchor elements which have an href attribute beginning with
 "http:".
 
 ### F\#
-{% highlight ocaml %}
+```ocaml
 let body = session.GetResponseBodyAsString()
 let encoding = session.GetResponseBodyEncoding()
 let doc = HtmlDocument()
 doc.LoadHtml(body)
-{% endhighlight %}
+```
 
 ### C\#
-
-{% highlight ocaml %}
+```csharp
 var body = oSession.GetResponseBodyAsString();
 var encoding = oSession.GetResponseBodyEncoding();
 var doc = new HtmlDocument();
 doc.LoadHtml(body);
-{% endhighlight %}
+```
 
 This gets us an HtmlDocument which we are free to manipulate. HtmlAgilityPack
 has an odd behavior where null will be returned for empty collections, so we
 have to check for null in a few cases. 
 
 ### F\#
-{% highlight ocaml %}
+```ocaml
 let anchors : HtmlNode list = 
     match doc.DocumentNode with
     | null -> []
@@ -128,35 +127,35 @@ anchors
     node.SetAttributeValue("style", node.GetAttributeValue("style", "") + "; border: 1px solid red")
     |> ignore)
     
-{% endhighlight %}
+```
 
 ### C\#
-{% highlight csharp %}
+```csharp
 var anchors = doc.DocumentNode?.SelectNodes("//a")?.ToList() ?? new List();
 var httpAnchors = anchors.Where(node => node.GetAttributeValue("href", "").OICStartsWith("http:"));
 foreach(var node in httpAnchors)
 {
     node.SetAttributeValue("style", node.GetAttributeValue("style", "") + "; border: 1px solid red");
 }
-{% endhighlight %}
+```
 
 Once we've modified the document to our liking, we can set it back to Fiddler.
 
 ### F\#
-{% highlight ocaml %} 
+```ocaml 
 use ms = new MemoryStream()
 doc.Save(ms, encoding)
 session.ResponseBody <- ms.ToArray()
-{% endhighlight %}
+```
 
 ### C\#
-{% highlight csharp %}
+```csharp
 using (var ms = new MemoryStream())
 {
     doc.Save(ms, encoding);
     oSession.ResponseBody = ms.ToArray();
 }
-{% endhighlight %}
+```
 
 Note that any 3rd party library your Fiddler extension use must also be copied
 to the same place where to install your Fiddler extension.
