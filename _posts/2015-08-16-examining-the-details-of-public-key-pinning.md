@@ -5,7 +5,7 @@ date:   2015-08-16 12:00:00 -0400
 categories: Security
 ---
 
-I’ve been working on adding some features around HTTP Public Key Pinning to my
+I've been working on adding some features around HTTP Public Key Pinning to my
 FiddlerCert Fiddler extension.
 
 Specifically, I added indicators next to each certificate if it was pinned by
@@ -34,14 +34,14 @@ same hash that OpenSSL does when following the recommended guidelines for
 producing a Public-Key-Pin hash.
 
 The hash needs to include a little more information. For example, hashing just
-the public key doesn’t include certain other components, like what algorithm the
+the public key doesn't include certain other components, like what algorithm the
 key is, such as RSA or ECDSA. Other relevant information should be included as
 well, such as the public key exponent for RSA, or the identifier of the elliptic
 curve for ECDSA, or algorithm parameters.
 
 Why do we need these extra values? Adam Langley has the details on his blog:
 
->Also, we’re hashing the SubjectPublicKeyInfo not the public key bit string.
+>Also, we're hashing the SubjectPublicKeyInfo not the public key bit string.
 The SPKI includes the type of the public key and some parameters along with the
 public key itself. This is important because just hashing the public key leaves
 one open to misinterpretation attacks. Consider a Diffie-Hellman public key: if
@@ -57,10 +57,10 @@ data, the structure must be consistent and platform independent. Should the
 public key exponent be included before or after the public key? What endianness
 is the data? How is the data consistently represented?
 
-For all of the grief it gives people, that’s what ASN.1 encoding is exactly for.
+For all of the grief it gives people, that's what ASN.1 encoding is exactly for.
 What actually ends up getting hashed is a SubjectPublicKeyInfo (SPKI) portion of
 the X509 certificate. This includes all of the data that we need. In OpenSSL,
-it’s this part:
+it's this part:
 
 ```
 Subject Public Key Info:
@@ -87,7 +87,7 @@ In ASN.1 form, it looks like this.
 40 b0 6f f9 6a 98 ce 45 48 48 2c</span>
 </pre>
 
-The green portion should look familiar, it’s the public key. The rest of the
+The green portion should look familiar, it's the public key. The rest of the
 bytes are part of the ASN.1 encoding.
 
 
@@ -95,7 +95,7 @@ bytes are part of the ASN.1 encoding.
 
 ASN.1 is simple in concept, but difficult to write code for in a secure manner.
 ASN.1 consists of tags. Each tag consists of three things: the type of the tag
-(tag identifier), the length of the tag’s value, and the value of the tag. Tags
+(tag identifier), the length of the tag's value, and the value of the tag. Tags
 can consist of other tags. Take this example:
 
 ```
@@ -106,12 +106,12 @@ This is an OBJECT_IDENTIFIER. 0x06 is the identifier for an OBJECT_IDENTIFIER.
 The next value is 7. The rest of the tag is the value, 2a 86 48 ce 3d 02 01 and
 we see that it is exactly 7 bytes long, just as the length value said it was.
 The data in an OBJECT_IDENTIFIER is a variable-length-quantity. This particular
-OBJECT_IDENTIFIER’s value is an OID of 1.2.840.10045.2.1, which is the OID for
-an ECC Public Key, or as we saw from OpenSSL’s output, `id-ecPublicKey`.
+OBJECT_IDENTIFIER's value is an OID of 1.2.840.10045.2.1, which is the OID for
+an ECC Public Key, or as we saw from OpenSSL's output, `id-ecPublicKey`.
 
 0x30, as the data starts with, is the tag identifier for a SEQUENCE. A SEQUENCE
 is a collection of other tags. The length value of a sequence is not the number
-of items in the sequence, but rather the total byte length of it’s contents. The
+of items in the sequence, but rather the total byte length of it's contents. The
 only way to get the number of items in a sequence is to examine each of the tags
 in it and parse them out.
 
