@@ -1,6 +1,9 @@
 /**
  * Syntax highlighting styles
  */
+ code.highlighter-rouge {
+   background-color: inherit;
+ }
 .highlight {
     background: #fff;
     @extend %vertical-rhythm;
