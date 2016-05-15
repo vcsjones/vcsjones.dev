@@ -155,6 +155,8 @@ additional information very similar to Dropbox's. Most of the content of the
 attribute is nulls, presumably to leave plenty of space for more data if they
 ever need it.
 
+![Dummy Certificate][7]
+
 This is a rather interesting technique, and I'm not sure what value it provides
 over the Unauthenticated Attributes other than it's a bit harder to spot. It
 does require creating a new certificate every time, since you cannot change an
@@ -180,8 +182,6 @@ account when you downloaded the installer, it's very likely that's tied to the
 installer, too.
 
 Authenticode Lint will attempt to flag all of these scenarios.
-
-![Dummy Certificate][7]
 
 [1]: https://github.com/vcsjones/AuthenticodeLint
 [2]: https://msdn.microsoft.com/en-us/library/windows/desktop/ms680339(v=vs.85).aspx
