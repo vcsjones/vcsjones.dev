@@ -31,8 +31,6 @@ to worry about where that cron job lives, Lambda is a good place to start.
 As an example, we may want to periodically run optimize on our SOLR cluster.
 Well, with Lambda, we can now do that.
 
-<!--break-->
-
 We have a simple node.js script that hits our SolrCloud cluster with a GET
 request to http://internal-solr-cluster:8983/solr/ourcollection/update?optimize=true.
 

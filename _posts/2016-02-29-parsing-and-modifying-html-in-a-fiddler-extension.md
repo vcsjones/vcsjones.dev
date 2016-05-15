@@ -29,7 +29,7 @@ accomplish this by examining the Content-Type header. If it contains "text/html"
 then there is a good chance the content is HTML. Consult the [IANA registry][2] for
 other content types you may want to handle.
 
-<!--break-->
+<div id="more"></div>
 
 So to start, we have this:
 

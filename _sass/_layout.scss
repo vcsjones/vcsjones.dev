@@ -102,8 +102,6 @@
     }
 }
 
-
-
 /**
  * Site footer
  */
@@ -191,6 +189,12 @@
 
     > li {
         margin-bottom: $spacing-unit;
+    }
+    
+    img {
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
     }
 }
 
@@ -282,4 +286,17 @@ aside {
     border-left: 5px solid gold;
     padding-left: 5px;
     min-height: 48px;
+}
+
+
+.blue {
+    color: #00F;
+}
+
+.red {
+    color: #F00;
+}
+
+.green {
+    color: #0A0;
 }

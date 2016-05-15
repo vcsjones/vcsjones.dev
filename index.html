@@ -12,9 +12,9 @@ layout: default
           <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
         </h2>
         
-        {{ post.content | split:'<!--break-->' | first }}
-        {% if post.content contains '<!--break-->' %}
-          <a href="{{ post.url }}">read more...</a>
+        {{ post.content | split:'<div id="more"></div>' | first }}
+        {% if post.content contains '<div id="more"></div>' %}
+          <a href="{{ post.url }}#more">read more...</a>
         {% endif %}
       </li>
     {% endfor %}
@@ -35,6 +35,4 @@ layout: default
     {% endif %}
   </div>
   {% endif %}
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
 </div>
