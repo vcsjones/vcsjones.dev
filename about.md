@@ -4,12 +4,10 @@ title: About
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+I've always had a passion for the strange, interesting, and extraordinary.
+I'm currently a Security Architect at Higher Logic in Rosslyn Virginia, and focus
+on keeping web applications secure and helping others adopt best practices.
 
-You can find the source code for the Jekyll new theme at:
-{% include icon-github.html username="jglovier" %} /
-[jekyll-new](https://github.com/jglovier/jekyll-new)
-
-You can find the source code for Jekyll at
-{% include icon-github.html username="jekyll" %} /
-[jekyll](https://github.com/jekyll/jekyll)
+I'm also a dedicated community member and ASP.NET MVP. Frequently speaking
+at code camps and user groups, he loves to share what he knows and especially
+learning from others.
