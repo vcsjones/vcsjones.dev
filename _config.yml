@@ -18,4 +18,5 @@ exclude:
   - appspec.yml
   - _deploy
   - _server
+  - README.md
   
