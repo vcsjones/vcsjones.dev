@@ -13,7 +13,7 @@ Static content makes a lot more sense, and a lot of things I wanted to play
 around with on my previous blog I didn't get to do because WordPress fought me
 most of the way.
 
-Things are greatly simpler here. There is no JavaScript. I've abandoned any kind
+Things are simpler here. There is no JavaScript. I've abandoned any kind
 of in-page analytics because I don't value it more than I value other people's
 privacy. Here, all we have is static HTML and CSS.
 

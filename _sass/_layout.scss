@@ -196,6 +196,27 @@
         margin: 0 auto;
         display: block;
     }
+    
+    table {
+        width: 80%;
+        padding: 0 auto;
+        border-collapse: separate;
+        border-spacing: 0;
+        border: solid 1px #dddddd;
+        thead, tfoot {
+            background: #e0e0e0;
+            text-align: left;
+        }
+        tbody {
+            tr:nth-of-type(even) {
+                background: #e8e8e8;
+            }
+        }
+        td, th {
+            font-size: .83em;
+            padding: 0.5625em 0.625em;
+        }
+    }
 }
 
 .post-meta {
@@ -305,3 +326,8 @@ img.retina {
     width: 50%;
     height: 50%;
 }
+
+.post-separator {
+        border: 1px solid #AAA;
+        margin: 30px 0;
+    }
