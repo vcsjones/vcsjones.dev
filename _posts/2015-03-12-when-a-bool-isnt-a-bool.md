@@ -65,4 +65,4 @@ Notice that it just loads the two locals and immediately compares them, it makes
 no attempt to invert the value of the third local (which is "b") in this case.
 
 [1]: http://blog.paranoidcoding.com/2012/08/28/not-all-true-are-created-equal.html
-[2]: http://stackoverflow.com/questions/784929/what-is-the-not-not-operator-in-javascript
+[2]: https://stackoverflow.com/questions/784929/what-is-the-not-not-operator-in-javascript
