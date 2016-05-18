@@ -49,8 +49,8 @@ using the full installation of Windows Server.
 
 Big thanks to [Peter Hahndorf][5] for putting me in the right direction.
 
-[1]: http://blogs.msdn.com/b/daiken/archive/2007/02/12/compress-files-with-windows-powershell-then-package-a-windows-vista-sidebar-gadget.aspx
+[1]: https://blogs.msdn.com/b/daiken/archive/2007/02/12/compress-files-with-windows-powershell-then-package-a-windows-vista-sidebar-gadget.aspx
 [2]: http://www.techiebirdsnest.com/2009/01/powershell-script-to-unzip-many-files.html
 [3]: http://www.sneal.net/blog/2007/09/07/UnzipFilesWithShell32AndPowerShell.aspx
 [4]: https://msdn.microsoft.com/en-us/library/system.io.compression.zipfile.aspx
-[5]: http://serverfault.com/a/447073/64680
+[5]: https://serverfault.com/a/447073/64680
