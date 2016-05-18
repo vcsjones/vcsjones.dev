@@ -24,5 +24,5 @@ it might be parameter that is more harmless, like `numberOfTimesToBeep`, it coul
 be a parameter that has very real-world consequences, like
 `amountOfMoneyToTransfer`.
 
-[1]: http://nickcraver.com/blog/2015/07/27/why-you-should-wait-on-dotnet-46/
-[2]: http://nickcraver.com/blog/2015/07/27/why-you-should-wait-on-dotnet-46/#comment-2159296059
+[1]: https://nickcraver.com/blog/2015/07/27/why-you-should-wait-on-dotnet-46/
+[2]: https://nickcraver.com/blog/2015/07/27/why-you-should-wait-on-dotnet-46/#comment-2159296059
