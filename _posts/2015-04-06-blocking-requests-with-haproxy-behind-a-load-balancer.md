@@ -37,4 +37,4 @@ http-request tarpit if spamlist
 `hdr_ip` takes in the name of the header you want to use, and automatically
 handles it as a list of IP addresses.
 
-[1]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#x-forwarded-headers
+[1]: https://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/TerminologyandKeyConcepts.html#x-forwarded-headers
