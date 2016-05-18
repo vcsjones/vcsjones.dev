@@ -45,4 +45,4 @@ With this template I was issued a ECDSA_P256 certificate, which is exactly what
 I wanted. The usage of a SAN is optional, however it I needed to specify it as
 well, so I left it here.
 
-[1]: http://www.nsa.gov/business/programs/elliptic_curve.shtml
+[1]: https://www.nsa.gov/business/programs/elliptic_curve.shtml
