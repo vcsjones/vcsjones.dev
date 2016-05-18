@@ -64,4 +64,4 @@ something you want to try, go for it.
 
 [1]: /images/soylent.jpg
 [2]: /images/soylent-bag.jpg
-[3]: http://www.amazon.com/Fit-Fresh-Shaker-28-Ounce-Assorted/dp/B00BF7VL2I
+[3]: https://www.amazon.com/Fit-Fresh-Shaker-28-Ounce-Assorted/dp/B00BF7VL2I
