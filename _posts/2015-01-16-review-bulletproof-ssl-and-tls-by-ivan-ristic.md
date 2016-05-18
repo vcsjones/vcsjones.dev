@@ -56,4 +56,4 @@ My criticisms are weak ones – this is a very good book. Any person that deals
 with SSL and TLS on any level should probably read this, or even those that are
 just curious.
 
-[1]: http://www.amazon.com/Bulletproof-SSL-TLS-Understanding-Applications/dp/1907117040
+[1]: https://www.amazon.com/Bulletproof-SSL-TLS-Understanding-Applications/dp/1907117040
