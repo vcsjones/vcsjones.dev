@@ -24,5 +24,5 @@ For now I've turned off CDN on my site while I consider my options – the most
 ikely being, "The CDN is not absolutely necessary". I've [raised the issue with Amazon][2]
 and we'll see if they do anything about it soon.
 
-[1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#RequestCustomEncryption
+[1]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/RequestAndResponseBehaviorCustomOrigin.html#RequestCustomEncryption
 [2]: https://forums.aws.amazon.com/thread.jspa?messageID=664046
