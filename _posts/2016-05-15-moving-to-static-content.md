@@ -17,7 +17,7 @@ Things are simpler here. There is no JavaScript. I've abandoned any kind
 of in-page analytics because I don't value it more than I value other people's
 privacy. Here, all we have is static HTML and CSS.
 
-No JavaScript, dynamic content, or assets from other domains lets make have a
+No JavaScript, dynamic content, or assets from other domains means I can have a
 plain and simple Content Security Policy, which I effectively couldn't do with
 WordPress due to the mess of inline CSS and JavaScript that were thrown around.
 
