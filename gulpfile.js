@@ -25,4 +25,9 @@ gulp.task('png-crush', ['jekyll'], () => {
             .pipe(exec('pngcrush -ow "<%= file.path %>"'));
 });
 
-gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush'], () => {});
+gulp.task('gzip', ['jekyll'], () => {
+    return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml'])
+            .pipe(exec('gzip --keep -9 "<%= file.path %>"'));
+});
+
+gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip'], () => {});
