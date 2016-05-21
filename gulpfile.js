@@ -1,12 +1,19 @@
 "use strict";
 let gulp = require('gulp'),
     exec = require('gulp-exec'),
-    cp_exec = require('child_process').exec;
+    cp_exec = require('child_process').exec,
+    cleanCSS = require('gulp-clean-css');
 
 gulp.task('jekyll', (cb) => {
     cp_exec('jekyll build', (err) => {
         cb(err);
     });
+});
+
+gulp.task('css-minify', ['jekyll'], () => {
+    return gulp.src('./_site/css/**/*.css')
+            .pipe(cleanCSS({compatibility: 'ie8'}))
+            .pipe(gulp.dest('./_site/css/'));
 });
 
 gulp.task('webp-png', ['jekyll'], () => {
@@ -25,14 +32,14 @@ gulp.task('png-crush', ['jekyll'], () => {
             .pipe(exec('pngcrush -ow "<%= file.path %>"'));
 });
 
-gulp.task('gzip', ['jekyll'], () => {
+gulp.task('gzip', ['jekyll', 'css-minify'], () => {
     return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml'])
             .pipe(exec('gzip --keep -9 "<%= file.path %>"'));
 });
 
-gulp.task('brotli', ['jekyll'], () => {
+gulp.task('brotli', ['jekyll', 'css-minify'], () => {
     return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml'])
             .pipe(exec('cat "<%= file.path %>" | /usr/local/bin/bro --quality 11 > "<%= file.path %>.br"'));
 });
 
-gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip', 'brotli'], () => {});
+gulp.task('default', ['jekyll', 'css-minify', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip', 'brotli'], () => {});
