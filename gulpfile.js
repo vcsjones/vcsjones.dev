@@ -30,4 +30,9 @@ gulp.task('gzip', ['jekyll'], () => {
             .pipe(exec('gzip --keep -9 "<%= file.path %>"'));
 });
 
-gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip'], () => {});
+gulp.task('brotli', ['jekyll'], () => {
+    return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml'])
+            .pipe(exec('bro --quality 11 --input "<%= file.path %>" --output "<%= file.path %>.br"'));
+});
+
+gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip', 'brotli'], () => {});
