@@ -32,7 +32,7 @@ gulp.task('gzip', ['jekyll'], () => {
 
 gulp.task('brotli', ['jekyll'], () => {
     return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml'])
-            .pipe(exec('cat "<%= file.path %>" | bro --quality 11 > "<%= file.path %>.br"'));
+            .pipe(exec('cat "<%= file.path %>" | /usr/local/bin/bro --quality 11 > "<%= file.path %>.br"'));
 });
 
 gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip', 'brotli'], () => {});
