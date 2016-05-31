@@ -7,7 +7,7 @@ github_username:  vcsjones
 permalink: /:year/:month/:day/:title/
 
 markdown: kramdown
-paginate: 10
+paginate: 5
 gems:
   - jekyll-paginate
 exclude:
