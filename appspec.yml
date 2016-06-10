@@ -7,6 +7,8 @@ files:
     destination: /etc/nginx/sites-available
   - source: _server/headers.conf.include
     destination: /etc/nginx/sites-available
+  - source: _server/https.conf.include
+    destination: /etc/nginx/sites-available
 hooks:
   BeforeInstall:
     - location: _deploy/publish.sh
