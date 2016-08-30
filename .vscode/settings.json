@@ -4,7 +4,8 @@
         "**/.svn": true,
         "**/.DS_Store": true,
         "**/.sass-cache": true,
-        "**/_site": true
+        "**/_site": true,
+        "**/node_modules": true
     },
     "editor.rulers": [80]
 }
