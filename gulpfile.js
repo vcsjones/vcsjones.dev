@@ -10,12 +10,6 @@ gulp.task('jekyll', (cb) => {
     });
 });
 
-gulp.task('css-minify', ['jekyll'], () => {
-    return gulp.src('./_site/css/**/*.css')
-            .pipe(cleanCSS({compatibility: 'ie8'}))
-            .pipe(gulp.dest('./_site/css/'));
-});
-
 gulp.task('webp-png', ['jekyll'], () => {
     return gulp.src('./_site/images/**/*.png')
             .pipe(exec('cwebp -lossless "<%= file.path %>" -o "<%= file.path %>.webp"'));
@@ -32,14 +26,14 @@ gulp.task('png-crush', ['jekyll'], () => {
             .pipe(exec('pngcrush -ow "<%= file.path %>"'));
 });
 
-gulp.task('gzip', ['jekyll', 'css-minify'], () => {
+gulp.task('gzip', ['jekyll'], () => {
     return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml'])
             .pipe(exec('gzip --keep -9 "<%= file.path %>"'));
 });
 
-gulp.task('brotli', ['jekyll', 'css-minify'], () => {
+gulp.task('brotli', ['jekyll'], () => {
     return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml'])
             .pipe(exec('cat "<%= file.path %>" | /usr/local/bin/bro --quality 11 > "<%= file.path %>.br"'));
 });
 
-gulp.task('default', ['jekyll', 'css-minify', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip', 'brotli'], () => {});
+gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip', 'brotli'], () => {});
