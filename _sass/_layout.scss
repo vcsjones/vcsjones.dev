@@ -188,7 +188,7 @@
     list-style: none;
 
     > li {
-        margin-bottom: $spacing-unit;
+        margin-bottom: $spacing-unit+45px;
     }
     
     img {
@@ -213,7 +213,7 @@
             }
         }
         td, th {
-            font-size: .83em;
+            font-size: .9em;
             padding: 0.5625em 0.625em;
         }
     }
@@ -326,8 +326,3 @@ img.retina {
     width: 50%;
     height: 50%;
 }
-
-.post-separator {
-        border: 1px solid #AAA;
-        margin: 30px 0;
-    }
