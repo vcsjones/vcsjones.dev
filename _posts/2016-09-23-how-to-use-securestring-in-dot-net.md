@@ -3,7 +3,6 @@ layout: post
 title:  "How to use SecureString in .NET"
 date:   2016-09-23 10:30:00 -0400
 categories: Security
-hide: true
 ---
 
 **Don't.** Probably.
