@@ -24,12 +24,14 @@ Constructing a SecureString in the first place is difficult. A common question
 on StackOverflow is "How do I create a SecureString?" an invariably, an answer
 like this comes up:
 
-    //Don't do this!
-    var secureString = new SecureString();
-    var password = Console.ReadLine();
-    foreach(var c in password) {
-        secureString.AppendChar(c);
-    }
+```csharp
+//Don't do this!
+var secureString = new SecureString();
+var password = Console.ReadLine();
+foreach(var c in password) {
+    secureString.AppendChar(c);
+}
+```
 
 This copies the string into a SecureString. Well, except for the problem that
 the original string, `password`, is still in memory, clear as water. Since
@@ -76,23 +78,25 @@ need to carefully put your SecureString back into managed memory, do something
 useful with it without it getting copied out of control, then clean everything
 up. This is what's involved with say, hashing a SecureString.
 
-    var secureString = new SecureString(); //Assume has password
-    var buffer = new byte[secureString.Length * 2];
-    var ptr = Marshal.SecureStringToGlobalAllocUnicode(secureString);
-    try
+```csharp
+var secureString = new SecureString(); //Assume has password
+var buffer = new byte[secureString.Length * 2];
+var ptr = Marshal.SecureStringToGlobalAllocUnicode(secureString);
+try
+{
+    Marshal.Copy(ptr, buffer, 0, buffer.Length);
+    using (var sha256 = SHA256.Create())
     {
-        Marshal.Copy(ptr, buffer, 0, buffer.Length);
-        using (var sha256 = SHA256.Create())
-        {
-            var hash = sha256.ComputeHash(buffer);
-            //Do something useful with the hash
-        } //Dispose on HashAlgorithm zeros internal state 
-    }
-    finally
-    {
-        Array.Clear(buffer, 0, buffer.Length);
-        Marshal.ZeroFreeGlobalAllocUnicode(ptr);
-    }  
+        var hash = sha256.ComputeHash(buffer);
+        //Do something useful with the hash
+    } //Dispose on HashAlgorithm zeros internal state 
+}
+finally
+{
+    Array.Clear(buffer, 0, buffer.Length);
+    Marshal.ZeroFreeGlobalAllocUnicode(ptr);
+}
+```
 
 Here we copy the SecureString into native memory, copy it in to managed a
 managed byte array, hash it, then clear the managed array. Using `Array.Clear`
