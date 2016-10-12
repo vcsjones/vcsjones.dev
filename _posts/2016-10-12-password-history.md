@@ -16,7 +16,7 @@ matches any of the password hashes in the history.
 
 A password hash typically consists of a digest and a salt. I'd strongly
 recommend that each password in the history have their own salt, so don't reuse
-salts when a use types in a new password. So a password history table might
+salts when a user types in a new password. So a password history table might
 look like this:
 
 
@@ -35,7 +35,8 @@ hash_alg_1(salt2 + newPassword) == digest2
 hash_alg_2(salt3 + newPassword) == digest3
 ```
 
-If any of those are "yes", then they've broken their password history.
+If any of those are "yes", then they've used a password in their
+history.
 
 In real life, you are probably using something like bcrypt. Many bcrypt
 libraries put the salt, digest, and "version" (work factor) in to a single
