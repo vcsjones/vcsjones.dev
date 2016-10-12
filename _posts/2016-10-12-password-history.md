@@ -7,8 +7,8 @@ categories: Security
 
 A few tweets have started making the rounds about how companies *must* be doing
 password security wrong because they seemingly do magic. Let's start with the
-simple one, password history. I don't think that's true, and here's some musings
-on how I think some magic could be implemented without a huge loss of security.
+simple one, password history. Here's some musings on how I think some magic
+could be implemented without a huge loss of security.
 
 This is pretty straight forward to solve. Keep a history of the hashes. When the
 user enters a new password, take the password they just entered, and see if it 
