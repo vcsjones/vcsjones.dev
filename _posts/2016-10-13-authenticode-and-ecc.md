@@ -9,9 +9,9 @@ While HTTPS / TLS have been making great strides in adopting new cryptographic
 primitives, such as CHACHA, x25519, and ECC, another place has remained
 relatively stagnant: binary signing.
 
-While many platforms deal with binary signing, I deal the most with,
-Authenticode which is part of the operating system. I thought it would be an
-interesting experiment to sign a few things with an ECDSA certificate and
+While many platforms deal with binary signing, I deal the most with
+Authenticode which is part of the Windows operating system. I thought it would
+be an interesting experiment to sign a few things with an ECDSA certificate and
 release them in to the wild.
 
 First I needed to find a CA willing to give me an ECDSA Authenticode
