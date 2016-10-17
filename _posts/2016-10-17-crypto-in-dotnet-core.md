@@ -80,7 +80,7 @@ all platforms.
 
 # ECC Keys
 
-One of the things missing from .NET Core right now is an easy wait to work with
+One of the things missing from .NET Core right now is an easy way to work with
 ECC keys. In the desktop .NET Framework, `CngKey` is available for loading a
 persisted key from a KSP (like an HSM). .NET Core expected you to work with
 ECC keys mostly in conjunction with an algorithm, like ECDSA. If the private key
