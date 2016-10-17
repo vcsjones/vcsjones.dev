@@ -60,8 +60,8 @@ implemented with a combination of CAPI+CNG, and OpenSSL on *nix and macOS.
 The factory methods should always be used, when possible. These will always do
 the right thing for the right platform.
 
-These factory methods exist for all hash primitives, such as SHA256, AES,
-and HMAC functions. This is also true for ECDSA, and `RandomNumberGenerator`.
+These factory methods exist for all hash primitives, such as SHA256, and also
+AES and HMAC functions. This is also true for ECDSA, and `RandomNumberGenerator`.
 
 The last bears having its own example, since it tends to be one of the ones people
 run in to the most. If you are using `RNGCryptoServiceProvider`, replace it with
