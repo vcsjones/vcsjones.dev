@@ -67,7 +67,7 @@ able to do was put something like this in my template:
 
 ```html
 <link
-    integrity="{% sri_scss_hash css/main.scss %}"
+    integrity="{% raw %}{% sri_scss_hash css/main.scss %}{% endraw %}"
     href="/css/main.scss" />
 ```
 
