@@ -53,7 +53,8 @@ that's on a CDN.
 So SRI is pretty straight forward, in theory. When you get down to it though,
 many websites have an asset pipeline. These pipelines can minify JavaScript and
 CSS, transpile them, or any other transformation. These can either happen at
-build time or at run time.
+build time or at run time. The digests on the assets need to be the digest of
+the final asset of what the browser sees and actually executes.
 
 As this is a static site, [my CSS][2] is actually a SCSS file that gets compiled
 by Jekyll. Every page includes this stylesheet. I needed to have the generated
@@ -107,8 +108,8 @@ hashes for SCSS stylesheets.
 
 I learned a few things implementing this. Specifically, the `sandbox`
 Content-Security-Policy directive gave me some trouble. This took me a little
-while to understand, but SRI is only enforced is some certain origin checks are
-passed for privacy reasons.
+while to understand, but the SRI check will fail if the origin the document
+does not have Cross-Origin access to the resource.
 
 All in all I think SRI is a worthwhile investment if you've got all of the
 low-hanging fruit already picked. It's not as trivial to do as it would first
