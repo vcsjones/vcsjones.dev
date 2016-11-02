@@ -32,7 +32,7 @@ was issued on to the Yubikey, and my Mac recognized it immediately, as did
 OpenSC.
 
 Windows however was a bit different. Normally when you insert a SmartCard on
-Windows, it will read off the public certificate from the SmartCard,
+Windows, it will read the public certificate from the SmartCard,
 automatically import it in to the Personal certificate store, and link-up the
 private key to the SmartCard.
 
@@ -57,7 +57,7 @@ problems signing with ECDSA, and Windows was happy with the signature.
 There was nothing different that needed to be done here. My 
 [Authenticode Lint][2] tool was also happy with the ECDSA signatures. This was
 a little exciting to see an ECDSA certificate "work" in Authenticode Lint. 
-To-date all of the ECC capabilities of it have been done with self-signed
+To-date all of the ECC capabilities of it have been tested with self-signed
 certificates.
 
 # Distribution
@@ -67,16 +67,16 @@ many other things had a problem with it.
 
 The first were Antivirus systems. AV applications take in to account signatures
 to determine the trustworthiness of the application. Of the few that I was able
-to test, none of them recognized the binary as signed, and treated it as
-unsigned. This tripped up Windows SmartScreen, which told me my own application
-wasn't signed, and it seemed confused by the ECDSA signature.
+to test, none of them recognized the binary as signed. This tripped up Windows
+SmartScreen, which told me my own application wasn't signed, seemingly
+confused by the ECDSA signature.
 
 Likewise "UTM" firewalls didn't like the binaries, either. These are firewalls
-that do on-the-fly virus scanning as files are downloaded, and block it if it
+that do on-the-fly virus scanning as files are downloaded and block it if it
 considers it unsafe. Depending on how the UTM is configured, it didn't like the
-ECC signatures, either.
+ECDSA signatures, either.
 
-This is easy enough to "fix" by mixed signing, which is a scarce-to-nonexistant
+This is easy enough to fix by mixed signing, which is a scarce-to-nonexistant
 practice with Authenticode. Most applications are already dual signed, once with
 a SHA1 file digest, and also with a SHA2 file digest. To make ECC work, you
 would need a *third* signature. The ECC one can't take the place of the RSA+SHA2
