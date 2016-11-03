@@ -10,9 +10,9 @@ var headers = {
     'X-UA-Compatible': 'IE=edge'
 };
 var file = new static.Server('./_site', {cache: 0, headers : headers});
- 
+console.log('listening on localhost:8080');
 require('http').createServer(function (request, response) {
     request.addListener('end', function () {
         file.serve(request, response);
     }).resume();
-}).listen(8080);
+}).listen(8080, 'localhost');
