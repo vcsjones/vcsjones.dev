@@ -26,6 +26,19 @@ module VCSJones
             [context.registers[:site].source].freeze
         end
     end
+
+    class SriStaticHashTag < Jekyll::Tags::IncludeRelativeTag
+        def render(context)
+            site = context.registers[:site]
+            result = super(context)
+            "sha256-#{Digest::SHA256.base64digest result}"
+        end
+
+        def tag_includes_dirs(context)
+            [context.registers[:site].source].freeze
+        end
+    end
 end
 
 Liquid::Template.register_tag('sri_scss_hash', VCSJones::SriScssHashTag)
+Liquid::Template.register_tag('sri_static_hash', VCSJones::SriStaticHashTag)
