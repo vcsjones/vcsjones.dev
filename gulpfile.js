@@ -1,8 +1,7 @@
 "use strict";
 let gulp = require('gulp'),
     exec = require('gulp-exec'),
-    cp_exec = require('child_process').exec,
-    cleanCSS = require('gulp-clean-css');
+    cp_exec = require('child_process').exec;
 
 gulp.task('jekyll', (cb) => {
     cp_exec('jekyll build', (err) => {
