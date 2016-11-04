@@ -10,18 +10,24 @@ gulp.task('jekyll', (cb) => {
     });
 });
 
-gulp.task('webp-png', ['jekyll'], () => {
+gulp.task('webp-png', ['png-crush'], () => {
     return gulp.src('./_site/images/**/*.png')
             .pipe(exec('cwebp -lossless "<%= file.path %>" -o "<%= file.path %>.webp"'));
 });
 
-gulp.task('webp-jpeg', ['jekyll'], () => {
+gulp.task('webp-jpeg', ['exif-tool'], () => {
     const quality = 80;
     return gulp.src(['./_site/images/**/*.jpg', './_site/images/**/*.jpeg'])
             .pipe(exec(`cwebp -q ${quality} "<%= file.path %>" -o "<%= file.path %>.webp"`));
 });
 
-gulp.task('png-crush', ['jekyll'], () => {
+gulp.task('exif-tool', ['jekyll'], (cb) => {
+    cp_exec('exiftool -overwrite_original -r -all= ./_site/images/', (err) => {
+        cb(err);
+    });
+});
+
+gulp.task('png-crush', ['exif-tool'], () => {
     return gulp.src('./_site/images/**/*.png')
             .pipe(exec('pngcrush -ow "<%= file.path %>"'));
 });
@@ -36,4 +42,4 @@ gulp.task('brotli', ['jekyll'], () => {
             .pipe(exec('cat "<%= file.path %>" | /usr/local/bin/bro --quality 11 > "<%= file.path %>.br"'));
 });
 
-gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip', 'brotli'], () => {});
+gulp.task('default', ['jekyll', 'webp-png', 'webp-jpeg', 'png-crush', 'gzip', 'brotli', 'exif-tool'], () => {});
