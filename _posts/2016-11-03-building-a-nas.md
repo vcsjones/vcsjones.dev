@@ -62,13 +62,13 @@ I did do *some* planning before I started buying parts. In particular, I needed
 to know approximately how much storage I needed, what operating system I was
 going to run this on, and what my long term options are.
 
-[FreeNAS][2] is the most ubiquitous operating system I fould for building a NAS.
+[FreeNAS][2] is the most ubiquitous operating system I found for building a NAS.
 This operating system has a lot of traction not just for the hobbyist but also
-commercially. It's large community and targeted purpose made it appealing. I
+commercially. Its large community and targeted purpose made it appealing. I
 installed it on a virtual machine just to check it out, and came away fairly
 impressed. The web-GUI is nice, if not a little complicated. It can easily
 handle all of the tasks that I wanted it to, which is basically a file share
-and TimeMachine.
+and Time Machine.
 
 FreeNAS also had one other thing that I was keen on using, which is the ZFS
 file system. ZFS is an interesting file system. It's modern, at least in
@@ -82,7 +82,7 @@ know when selecting hardware.
 
 The next part was how much storage I need. Right now I have 9 Tb of storage.
 3 external drives coming in at 3 Gb each. This meant I wanted at least 9 Tb of
-storage, ideally more so I don't have to worry about it too much later. I
+storage, ideally more so I don't have to worry about it too soon. I
 decided to aim for 12 Tb.
 
 Most importantly, I wanted a set up where a disk could fail and be able to
@@ -90,7 +90,7 @@ recover from the failure. In fact, the more I did reading on the subject, I
 needed to be able to handle two disks failing at the same time for reasonable
 comfort. What I learned is that while it's not that common for more than one
 disk to fail *at the exact same time*, they do tend to fail close to one
-another because the tend to wear evenly. Worse, I had to worry about the stress
+another because they tend to wear evenly. Worse, I had to worry about the stress
 on the remaining disks while recovering a disk. Recovering a lost disk, or
 rebuilding the array, is stressful on the remaining, working, disks. It's so
 stressful that it's not that unlikely that *another* disk will die while trying
@@ -113,7 +113,7 @@ planning parts.
 I know I need 5 disks, minimum, ideally space for more. Let's say 8. I also know
 that I need a drive for the operating system, so that's potentially 9 disks.
 FreeNAS suggests running it off a USB thumb drive, actually. But I figure I can
-just get a dedicate drive for it.
+just get a dedicated drive for it.
 
 I was also looking to keep things fairly compact, have hot-swap drive support
 with external bays, and try to keep power-draw to a minimum.
@@ -141,10 +141,10 @@ that offers 8 SAS ports. This is also a good option if you don't plan on using
 SAS drives, either. Almost all SAS controllers and HBAs also support SATA
 attachments as well. This is a fairly common selection among the NAS community,
 apart from my decision to use SAS drives. It's well known in the FreeNAS
-community and it known to be a good and fairly low-budget choice. This HBA
+community and is known to be a good and a fairly low-budget choice. This HBA
 actually includes some simple RAID functionality, but later we'll configure it
-to ditch the RAID functionality and operate like no-frills HBA. The card has two
-SFF-8087 ports. With the right cable, this breaks out in to 4 SAS ports. If
+to ditch the RAID functionality and operate like a no-frills HBA. The card has two
+SFF-8087 ports. With the right cable, each port breaks out in to 4 SAS ports. If
 you want an HBA with 4 ports instead of 8, there is a 4 port option as well that
 comes in a little cheaper.
 
@@ -152,7 +152,7 @@ comes in a little cheaper.
 
 ## Motherboard
 
-The HBA requires PCIe 2.0 8x slot, which should give it a theoretical maximum of
+The HBA requires a PCIe 2.0 8x slot, which should give it a theoretical maximum of
 4 GB/s back to the system bus. This will be a requirement for the motherboard.
 Since I wanted a small form factor, I decided to see if I could find a
 motherboard that was suitable and came in a Mini-ITX form factor. The FreeNAS
@@ -176,7 +176,7 @@ out the right processor or really even think about it that much. It comes in a
 little expensive at $448 at the time of purchase.
 
 A motherboard with comparible server features is easily $300 and the cheapest
-desktop process, the Intel i3 6300T is $126 with two cores but a higher clock
+desktop processor, the Intel i3 6300T, is $126 with two cores but a higher clock
 speed, this was starting to sound like a good deal. The desktop i3 Skylake comes
 in at 50W of power, while this comes in at approximately 20W.
 
@@ -200,13 +200,13 @@ more if the day comes.
 With my Mini-ITX motherboard in hand with its single PCIe slot, I needed to
 find a case. Ideally it would have 8 bays for full-sized 3.5" drives for
 hot-swapping, have room for the 1 PCIe card, and have good circulation. This was
-actually the hardest decision for me to make, oddly. However it's worth nothing
+actually the hardest decision for me to make, oddly. However it's worth noting
 that if the case doesn't work out for me or anyone else, it's easy to transplant
 all of the other parts in to a new case.
 
 I selected the SilverStone DS380 case, another popular choice among the FreeNAS
 community. The powersupply is separate but SilverStone makes one meant to pair
-with it at 450W.
+with it. It has 450W of power which should be plenty for my needs.
 
 It supports 8 SAS drives, but I would later find out that I was going to have to
 give up one of them for a total of 7 bays. This was rather disappointing, but
@@ -255,7 +255,7 @@ a new drive and re-install FreeNAS, and then import your ZFS disk array back in
 to it. The configuration is easy enough to back up.
 
 The SATADOM turned out to be a good and bad idea. Bad, because it took 2 whole
-months to deliver. The drive I selected with a ServerDOM by Innodisk, and they
+months to deliver. The drive I selected was a ServerDOM by Innodisk, and they
 don't sell in normal places like NewEgg or Amazon at the time I purchased it. I
 had to find a bulk reseller that was willing to sell me *one*, and it came from
 mainland China. It was good because in the end, it worked quite well.
@@ -274,9 +274,9 @@ warranty from Western Digital. They are also price competitive for SAS drives.
 
 At 4 Tb, I needed 5 to hit my storage goals. At a lofty $200 each, this wasn't
 cheap, but I'm pleased with the results so far. Unfortunately reviewing a drive
-is best done a year after its put in to production, and as of now they've been
+is best done a year after it's put in to production, and as of now they've been
 used for a few weeks. From what I've seen these few weeks, the drives are good.
-They operate quitely, don't put out a tremendous amount of heat, and vibration
+They operate quitely, don't put out a tremendous amount of heat, and vibrate
 very little.
 
 ![Western Digital Re Drives][7]
@@ -298,7 +298,7 @@ a SATA drive into a SAS port. Many of the cables will describe themselves as
 
 Phew! That's more than I wanted to write about part selection. Building
 everything was straight forward. The case was a tight fit and offered no cable
-management, but after everything was done, I zip tied everything up and made
+management, but after everything was done, I zip-tied everything up and made
 sure the fans weren't blocked and air could move around well.
 
 The case and motherboard are a bit of an odd pair, but they work. Apart from the
@@ -349,7 +349,7 @@ attempt are in the "Windows" download ZIP. Once you have the zip, you need 3
 files.
 
 And here we have a choice. Remember I said that the HBA has some RAID-like
-qualities. This mode of the HBA is the "IR" mode. The other mode, "IT", disables
+qualities? This mode of the HBA is the "IR" mode. The other mode, "IT", disables
 all of the RAID capabilities of the HBA and gives us a clean HBA. We want to
 flash it with the IT firmware.
 
@@ -364,6 +364,8 @@ existing firmware. You have to delete the firmware first, then add the new one.
 First from the EFI shell you need to CD to the right drive. Like DOS / CMD, you
 just type the drive letter and a colon, like `fs1:`. You can use `map` in an EFI
 shell to show attached devices.
+
+So I started with this,
 
 ```shell
 sas2flash.efi -o -e 6
