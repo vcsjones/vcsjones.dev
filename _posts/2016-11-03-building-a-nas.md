@@ -382,7 +382,7 @@ your HBA is now bricked.
 Now to install the new firmware:
 
 ```shell
-as2flash.efi -o -f 2118it.bin -b mptsas2.rom
+sas2flash.efi -o -f 2118it.bin -b mptsas2.rom
 ```
 
 If all goes as planned, you can reboot back in to FreeNAS and have matching
