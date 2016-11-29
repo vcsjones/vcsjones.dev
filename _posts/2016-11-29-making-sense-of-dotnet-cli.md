@@ -18,7 +18,7 @@ then did `--version` to see that the update took, but then still noticed that
 it said something like "1.0.0-preview2-1-003177". What gives?
 
 The first thing to point out is that the Tooling and the Runtime are two
-different versions. The Runtime has not yet release in 1.0.0 form. The Runtime
+different versions. The Tooling has not yet release in 1.0.0 form. The Runtime
 however, is at 1.1.0 as of writing.
 
 In short, `dotnet --version` **is the version of the tooling**. If you want the
