@@ -22,7 +22,7 @@ different versions. The Tooling has not yet release in 1.0.0 form. The Runtime
 however, is at 1.1.0 as of writing.
 
 In short, `dotnet --version` **is the version of the tooling**. If you want the
-version of the runtime, then `dotnet` is the correct option. It will print
+version of the Core Host, then `dotnet` is the correct option. It will print
 something like this:
 
 > Microsoft .NET Core Shared Framework Host
@@ -30,7 +30,9 @@ something like this:
 >
 > Version  : 1.1.0
 
-That "Microsoft .NET Core Shared Framework Host" is the version of the runtime.
+Finally, there is the `--info` option. This prints some additional information
+about the runtime environment it thinks you are running, such as the RID, and
+OS info.
 
 There is an issue [on GitHub][1] to make `--info` better. I would encourage
 feedback on that issue if all of this seems confusing to you.
