@@ -105,7 +105,7 @@ that installing .NET Core from scratch on an image was actually
 easier than installing node.js. Now I need to put together a
 Dockerfile with everything I need. To start I need all of the dependencies:
 
-```
+```sh
 RUN apt-get install -y --no-install-recommends \
     curl \
 	fakeroot \
@@ -121,7 +121,7 @@ by surf or .NET Core, like `libunwind8`. These are the commands to install
 .NET Core 1.0.1 on Debian Jessie, as verbatim from the Microsoft install
 instructions:
 
-```
+```sh
 RUN curl -sSL -o dotnet.tar.gz https://go.microsoft.com/fwlink/?LinkID=827530 \
     && mkdir -p /opt/dotnet && tar zxf dotnet.tar.gz -C /opt/dotnet \
     && ln -s /opt/dotnet/dotnet /usr/local/bin
@@ -134,7 +134,7 @@ as possible before actually running them. The `dotnet` command will do some
 a new .NET Core project with `dotnet new` in the temp directory, then remove
 it.
 
-```
+```sh
 RUN mkdir -p /var/tmp/dotnet-prime \
     && cd /var/tmp/dotnet-prime && dotnet new && cd ~ \
     && rm -rf /var/tmp/dotnet-prime
@@ -146,7 +146,7 @@ project.json to restore.
 
 Next, we install Surf:
 
-```
+```sh
 RUN npm install -g surf-build@1.0.0-beta.15
 ```
 
@@ -155,7 +155,7 @@ want to do.
 
 Finally, we specify our command:
 
-```
+```sh
 CMD surf-run \
 	-r https://github.com/vcsjones/AuthenticodeLint.Core \
 	-- surf-build -n 'surf-netcore-1.0.1'
