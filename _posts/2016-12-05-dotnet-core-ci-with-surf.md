@@ -179,11 +179,6 @@ All in all I'm super happy with surf. It does nothing more than I need it to,
 and I don't have anything complex set up. If the container instance starts
 misbehaving, I can terminate it and let another takes its place. Having
 everything in a container also means my whole build environment is portable.
-I can do `docker run <instance> surf-build -s <sha> -r <repo>` to run my
-surf build locally, the same way the CI server would, before I open a pull
-request.
-
-
 
 
 [1]: https://github.com/surf-build/surf/
