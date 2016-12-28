@@ -19,4 +19,6 @@ exclude:
   - _deploy
   - _server
   - README.md
+  - yarn.lock
+  - .gitignore
   
