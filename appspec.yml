@@ -5,7 +5,9 @@ files:
     destination: /var/wwwroot/vcsjones.com
   - source: _server/vcsjones.com.conf
     destination: /etc/nginx/sites-available
-  - source: _server/headers.conf.include
+  - source: _server/sec-headers.conf.include
+    destination: /etc/nginx/sites-available
+  - source: _server/content-headers.conf.include
     destination: /etc/nginx/sites-available
   - source: _server/https.conf.include
     destination: /etc/nginx/sites-available
