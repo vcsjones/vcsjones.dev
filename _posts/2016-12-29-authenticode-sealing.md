@@ -1,9 +1,8 @@
 ---
 layout: post
 title:  "Authenticode Sealing"
-date:   2016-12-29 17:40:00 -0500
+date:   2016-12-29 20:55:00 -0500
 categories: Security
-hide: true
 ---
 
 A while ago I wrote about [Authenticode stuffing tricks][1]. In summary, it
