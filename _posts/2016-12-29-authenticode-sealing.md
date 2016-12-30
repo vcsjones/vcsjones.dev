@@ -8,13 +8,13 @@ hide: true
 
 A while ago I wrote about [Authenticode stuffing tricks][1]. In summary, it
 allows someone to change small parts of a binary even after it has been
-signed. These changes wouldn't allow changing how the program behaved, but it
-did allow injecting tracking beacons into the file, even after it has been
+signed. These changes wouldn't allow changing how the program behaves, but do
+allow injecting tracking beacons into the file, even after it has been
 signed. I'd suggest reading that first if you aren't familiar with it.
 
 This has been a critcism of mine about Authenticode, and recently I stumbled on
-a new feature in Authenticode that supposedly fixes two of the three ways that
-Authenticode allows post-signature changes called sealing.
+a new feature in Authenticode, called sealing, that supposedly fixes two of
+the three ways that Authenticode allows post-signature changes.
 
 It looks like Authenticode sealing aims to make these stuffing tricks a lot
 harder. Before we dive in, I want to disclaim that sealing has literally zero
@@ -25,7 +25,7 @@ please keep that in mind.
 Recall that two ways of injecting data in to an Authenticode signature can be
 done in the signatures themselves, because not all parts of the signature are
 actually signed. This includes the certificate table as well as the
-unauthenticated attributes section of the signature. Sealings no longer allows
+unauthenticated attributes section of the signature. Sealing prevents
 those sections to be changed once the seal has been made.
 
 It starts with an "intent to seal" attribute. Intent to seal is done when
@@ -39,7 +39,7 @@ signtool sign
     /td SHA256 /itos authlint.exe
 ```
 
-At this point the file has a primary signature, a time stamp, but the signature
+At this point the file has a primary signature and a timestamp, but the signature
 is not valid. It has been marked as "intent to seal" but no seal has been
 applied. Windows treats it as a bad signature if I try to run it.
 
@@ -49,7 +49,7 @@ Intent to seal is an *authenticated* attribute. That is, the signature at this
 point includes the intention in its own signature. I could not remove the
 intent to seal attribute without invalidating the whole signature.
 
-Now at this point I could add a nested signature, if I want since the seal
+Now at this point I could add a nested signature, if I want, since the seal
 hasn't been finalized. I'll skip that, but it's something you could do if you
 are using dual signatures.
 
@@ -81,7 +81,7 @@ yet it breaks the seal. This means seals are signatures that account for
 unauthenticated attributes.
 
 What this all culminates to is that a seal is a signature of the entire
-signature graph, including the things that were being used to cheat authenticode
+signature graph, including the things that were being used to cheat Authenticode
 in the first place.
 
 Sealing appears to be an unathenticated attribute itself which contains a
@@ -117,6 +117,10 @@ As a reminder, these are my observations of sealing. There is no documentation
 about sealing that I am aware of, but based on the behavior that I observed, it
 has some very powerful properties. I hope that it becomes better documented
 and encouraged, and eventually more strictly enforced.
+
+As for using sealing, I would hold off for now. It's lack of documentation
+expresses that it may not be fully ready for use yet, but it will be interesting
+to see where this goes.
 
 [1]: /2016/04/15/authenticode-stuffing-tricks/
 [2]: /images/intent-to-seal.png
