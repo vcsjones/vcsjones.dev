@@ -25,7 +25,7 @@ Recall that two ways of injecting data in to an Authenticode signature can be
 done in the signatures themselves, because not all parts of the signature are
 actually signed. This includes the certificate table as well as the
 unauthenticated attributes section of the signature. Sealing prevents
-those sections to be changed once the seal has been made.
+those sections from changing once the seal has been made.
 
 It starts with an "intent to seal" attribute. Intent to seal is done when
 applying the primary signature to a binary. We can apply an intent to seal
@@ -75,7 +75,7 @@ signatures the seal will have to be removed and the file will have to
 be re-signed. The /force option must be specified as part of the
 command in order to do so.
 
-This is interesting because appended signature are unauthenticated attributes,
+This is interesting because appended signatures are unauthenticated attributes,
 yet it breaks the seal. This means seals are signatures that account for
 unauthenticated attributes.
 
