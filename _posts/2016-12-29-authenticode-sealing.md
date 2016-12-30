@@ -43,14 +43,15 @@ At this point the file has a primary signature, a time stamp, but the signature
 is not valid. It has been marked as "intent to seal" but no seal has been
 applied. Windows treats it as a bad signature if I try to run it.
 
+![Run Intent to Seal][2]
+
 Intent to seal is an *authenticated* attribute. That is, the signature at this
 point includes the intention in its own signature. I could not remove the
 intent to seal attribute without invalidating the whole signature.
 
-![Run Intent to Seal][2]
-
-Now I could add a nested signature, if I want. I'll skip that, but it's
-something you could do at this point if you are using dual signatures.
+Now at this point I could add a nested signature, if I want since the seal
+hasn't been finalized. I'll skip that, but it's something you could do if you
+are using dual signatures.
 
 The next step is to seal it:
 
