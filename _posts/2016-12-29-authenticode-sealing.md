@@ -6,7 +6,7 @@ categories: Security
 hide: true
 ---
 
-A while ago I wrote about [Authenticode stuffing tricks][1] which in summary
+A while ago I wrote about [Authenticode stuffing tricks][1]. In summary, it
 allows someone to change small parts of a binary even after it has been
 signed. These changes wouldn't allow changing how the program behaved, but it
 did allow injecting tracking beacons into the file, even after it has been
