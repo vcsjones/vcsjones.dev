@@ -117,7 +117,7 @@ about sealing that I am aware of, but based on the behavior that I observed, it
 has some very powerful properties. I hope that it becomes better documented
 and encouraged, and eventually more strictly enforced.
 
-As for using sealing, I would hold off for now. It's lack of documentation
+As for using sealing, I would hold off for now. Its lack of documentation
 expresses that it may not be fully ready for use yet, but it will be interesting
 to see where this goes.
 
