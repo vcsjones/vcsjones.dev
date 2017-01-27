@@ -18,7 +18,7 @@ module VCSJones
                 result = super(context)
                 scss = result.gsub(/^---.*---/m, '')
                 data = converter.convert(scss)
-                "sha256-#{Digest::SHA256.base64digest data}"
+                Digest::SHA256.base64digest data
             })
         end
 
@@ -27,11 +27,25 @@ module VCSJones
         end
     end
 
-    class SriStaticHashTag < Jekyll::Tags::IncludeRelativeTag
+    class SriScssHexHashTag < Jekyll::Tags::IncludeRelativeTag
+        def cache_compiled_scss(path, context, compute)
+            @@cached_scss ||= {}
+            if @@cached_scss.key?(path)
+                @@cached_scss[path]
+            else
+                @@cached_scss[path] = compute.call
+            end
+        end
+
         def render(context)
-            site = context.registers[:site]
-            result = super(context)
-            "sha256-#{Digest::SHA256.base64digest result}"
+            cache_compiled_scss(@file, context, lambda {
+                site = context.registers[:site]
+                converter = site.find_converter_instance(Jekyll::Converters::Scss)
+                result = super(context)
+                scss = result.gsub(/^---.*---/m, '')
+                data = converter.convert(scss)
+                Digest::SHA256.hexdigest data
+            })
         end
 
         def tag_includes_dirs(context)
@@ -41,4 +55,4 @@ module VCSJones
 end
 
 Liquid::Template.register_tag('sri_scss_hash', VCSJones::SriScssHashTag)
-Liquid::Template.register_tag('sri_static_hash', VCSJones::SriStaticHashTag)
+Liquid::Template.register_tag('sri_scss_hex_hash', VCSJones::SriScssHexHashTag)
