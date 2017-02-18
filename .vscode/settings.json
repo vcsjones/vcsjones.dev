@@ -7,5 +7,6 @@
         "**/_site": true,
         "**/node_modules": true
     },
-    "editor.rulers": [80]
+    "editor.rulers": [80],
+    "editor.quickSuggestions": false
 }
