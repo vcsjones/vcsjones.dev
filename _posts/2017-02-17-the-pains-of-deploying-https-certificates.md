@@ -6,7 +6,8 @@ categories: Security
 ---
 
 There's been some discussion recently about how long an x509 certificate should
-be valid for for Certificate Authorities that are members of the CA/B Forum.
+be valid for if they were issued by a Certificate Authority that is a member
+of the CA/B Forum.
 
 Currently, the limit is 39 months, or three and a quarter years. This means that
 operationally, a certificate from a CA must be changed at least every 39 months.
