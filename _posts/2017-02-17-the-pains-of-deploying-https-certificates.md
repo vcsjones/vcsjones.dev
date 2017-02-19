@@ -17,7 +17,7 @@ The discussion proposed shortening that length to 13 months.
 
 While Let's Encrypt is lauded for being free, the most impressive aspect of it
 is that it can be - and is easy - to fully automate. Let's Encrypt makes
-CertBot, a peice of software you install on your server that sets up HTTPS for
+CertBot, a piece of software you install on your server that sets up HTTPS for
 various web servers, and handles renewals, domain validation, etc. Since this is
 fully automated, the validity period of a certificate is inconsequential - the
 certificate could be valid for a single day as long as it keeps getting renewed
