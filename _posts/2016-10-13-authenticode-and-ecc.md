@@ -37,8 +37,8 @@ automatically import it in to the Personal certificate store, and link-up the
 private key to the SmartCard.
 
 That did not work with an ECDSA certificate. The Windows service that is
-responsible for this, "Certificate Propogation", doesn't handle ECDSA
-certificates. Manually importing the ceritificate doesn't work either, because
+responsible for this, "Certificate Propagation", doesn't handle ECDSA
+certificates. Manually importing the certificate doesn't work either, because
 the certificate is missing the "Key Container Name" link back to the SmartCard.
 It's possible to repair this link, but it needs to be done every time the
 SmartCard is re-inserted.
@@ -76,7 +76,7 @@ that do on-the-fly virus scanning as files are downloaded and block it if it
 considers it unsafe. Depending on how the UTM is configured, it didn't like the
 ECDSA signatures, either.
 
-This is easy enough to fix by mixed signing, which is a scarce-to-nonexistant
+This is easy enough to fix by mixed signing, which is a scarce-to-nonexistent
 practice with Authenticode. Most applications are already dual signed, once with
 a SHA1 file digest, and also with a SHA2 file digest. To make ECC work, you
 would need a *third* signature. The ECC one can't take the place of the RSA+SHA2

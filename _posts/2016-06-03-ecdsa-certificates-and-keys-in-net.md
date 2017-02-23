@@ -34,7 +34,7 @@ ECDSA. This was getting bizarre. Strangely enough, I had another certificate
 where this worked perfectly fine and CNG was happy to announce that the algorithm
 was ECDSA.
 
-ECDH and ECDSA keys are interchangable. You probably shouldn't use the same key
+ECDH and ECDSA keys are interchangeable. You probably shouldn't use the same key
 as a key agreement (ECDH) and signing (ECDSA), but ultimately they are just
 points on a curve. Yet somehow, CNG was making a distinction.
 

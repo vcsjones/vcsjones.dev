@@ -6,7 +6,7 @@ categories: Security
 ---
 
 [Subresource Integrity][1] - or SRI - is something I wanted to learn, so the
-natual place to get started with it is right here on my blog. Though it has
+natural place to get started with it is right here on my blog. Though it has
 somewhat limited value on my site since I don't use a CDN, it still proves
 useful with helping me understand these things in a relatively safe place. After
 all, no SLA is going to be violated if my blog's CSS doesn't load.

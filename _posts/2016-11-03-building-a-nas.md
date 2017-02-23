@@ -76,7 +76,7 @@ contrast to HFS, EXT4, and NTFS. It has quite a number of appealing features,
 but the main one being that it is geared toward data storage with multiple
 disks. ZFS is actually a file system that can span multiple disks. Prior to
 reading about ZFS, I was mulling on the idea of using RAID6. An interesting
-peice of information with ZFS is that it does *not* want you to put your disks
+piece of information with ZFS is that it does *not* want you to put your disks
 in a RAID configuration of any kind. I'll explain later, but this was useful to
 know when selecting hardware.
 
@@ -205,7 +205,7 @@ that if the case doesn't work out for me or anyone else, it's easy to transplant
 all of the other parts in to a new case.
 
 I selected the SilverStone DS380 case, another popular choice among the FreeNAS
-community. The powersupply is separate but SilverStone makes one meant to pair
+community. The power supply is separate but SilverStone makes one meant to pair
 with it. It has 450W of power which should be plenty for my needs.
 
 It supports 8 SAS drives, but I would later find out that I was going to have to
@@ -232,7 +232,7 @@ fast yet reliable SSD, so I went to Intel.
 
 Now before this, all of my part purchasing had been done on NewEgg. However,
 Amazon had a good deal on the drive I wanted, about 10% off. This ended up
-delaying my NAS buildout by a few weeks. The drive came from a reseller, and
+delaying my NAS build out by a few weeks. The drive came from a reseller, and
 instead of a shiny new SSD in the delivery box, it was an alarm clock. This
 caused about 3 weeks of whining at the reseller and Amazon to finally get a full
 refund.
@@ -338,7 +338,7 @@ support portals or anything like that. However, it is not a task that took me
 just a few minutes.
 
 Even when I downloaded the new firmware, I wasn't sure what I was supposed to 
-do with it. The documentatation for it is unhelpful at best, and seemed geared
+do with it. The documentation for it is unhelpful at best, and seemed geared
 towards making Windows an easy experience. The next option that seemed the least
 painful for me was to use the EFI shell. Think of this as an extremely limited
 command line environment that the motherboard directly supports.
@@ -357,7 +357,7 @@ The first is `sas2flsh`, which is an executable used to install firmware images.
 The next is `2118it.bin`, which is the firmware for the controller. The final
 file is `mptsas2.rom` which is the BIOS bootload firmware.
 
-Throw these 3 files on a FAT32 thumbdrive and boot in to an EFI shell.
+Throw these 3 files on a FAT32 thumb drive and boot in to an EFI shell.
 
 Now, with this utility you don't just install new firmware overtop of the
 existing firmware. You have to delete the firmware first, then add the new one.

@@ -28,7 +28,7 @@ SHA1. It's useful in some situations, such as Medium Trust, but is generally
 slower. `SHA1CryptoServiceProvider` uses the now-legacy CAPI implementation in
 Windows, and `SHA1Cng` uses CAPI's successor, CNG.
 
-Crutially, each primitive shares a common base. The examples above all inherit
+Crucially, each primitive shares a common base. The examples above all inherit
 from the abstract class [`SHA1`][1]. These abstract classes provide a static
 method called `Create` which act as factory method. `Create` on `SHA1` has a
 return type of `SHA1`.

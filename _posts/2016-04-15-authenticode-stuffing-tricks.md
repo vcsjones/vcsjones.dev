@@ -11,7 +11,7 @@ The primary one being, "Am I digitally signing my binaries correctly?" and two
 
 To back up a bit, Authenticode is the scheme that Microsoft uses to digitally
 sign DLLs, EXEs, etc. It's not a difficult thing to do, but it does offer enough
-flexibility that it can be done in a suboptimal way. The linter is made up of a 
+flexibility that it can be done in a sub-optimal way. The linter is made up of a 
 series of checks that either pass or fail.
 
 When you sign a binary, the signature is embedded inside of it (usually, there
