@@ -22,18 +22,16 @@ and works just as well in its previous form.
 
 The 4C can go on a key ring, just like the 4 could. Their sizes are noticeably
 different though. The 4C is smaller in width and height, at the expense of it
-being much thicker, by comparison.
+being thicker.
 
 ![4C Top View][1]
 ![4C Side View][2]
 
-The thickness isn't troublesome, but the smaller size is a welcome change since
-it's permanently affixed to my key chain.
-
 I find the thickness just slightly troublesome when it's attached to a key ring.
 The previous one left *just* enough space for the key ring to jut out from. With
 the additional thickness, I now have to prop my laptop up, put it on a stand, or
-find a new solution for the key ring.
+find a new solution for the key ring. However the smaller size is a welcome
+change since it's permanently affixed to my key chain.
 
 ## Functionality
 
