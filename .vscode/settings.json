@@ -8,5 +8,9 @@
         "**/node_modules": true
     },
     "editor.rulers": [80],
-    "editor.quickSuggestions": false
+    "editor.quickSuggestions": false,
+    "cSpell.ignoreRegExpList": [
+        "/`.*?`/",
+        "/```(\\r|\\n|.)*```/gm"
+    ]
 }
