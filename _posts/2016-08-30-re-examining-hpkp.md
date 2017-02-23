@@ -31,7 +31,7 @@ For most people, that means the leaf. For very large organizations, you may have
 intermediate certificate. Some recommend pinning a CA's intermediate to reduce the risk
 of losing keys. In this scenario, you would just need to re-key your certificate from
 the same certificate authority. The downside to this is CA's deprecate intermediate
-certificates, and there is no guarentee they'll use the same key in a new intermediate
+certificates, and there is no guarantee they'll use the same key in a new intermediate
 certificate. If you do decide to pin an intermediate, I would recommend one of your backup
 pins be for a leaf.
 
