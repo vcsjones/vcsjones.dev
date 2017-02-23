@@ -11,7 +11,7 @@ signed. These changes wouldn't allow changing how the program behaves, but do
 allow injecting tracking beacons into the file, even after it has been
 signed. I'd suggest reading that first if you aren't familiar with it.
 
-This has been a critcism of mine about Authenticode, and recently I stumbled on
+This has been a criticism of mine about Authenticode, and recently I stumbled on
 a new feature in Authenticode, called sealing, that supposedly fixes two of
 the three ways that Authenticode allows post-signature changes.
 
@@ -83,7 +83,7 @@ What this all culminates to is that a seal is a signature of the entire
 signature graph, including the things that were being used to cheat Authenticode
 in the first place.
 
-Sealing appears to be an unathenticated attribute itself which contains a
+Sealing appears to be an unauthenticated attribute itself which contains a
 signature, same for the timestamp. It wold seem that sealing is, in a
 strange way, Authenticode for Authenticode. The difference being is that a
 sealing signature has no concept of unauthenticated attributes, and it uses the
