@@ -60,7 +60,7 @@ Unfortunately, this 3rd party wasn't exactly fast to perform these changes.
 We needed to coordinate days in advance with them, discuss the operations, and
 they actually counted the hours of work against our support contract.
 
-If this sounds rediculous - I agree. But, it was the requirement. The 3rd party
+If this sounds ridiculous - I agree. But, it was the requirement. The 3rd party
 insisted on doing it - and talking with others they were frustrated by the same
 requirements. The certificate still needed to be issued by a CA - that is they
 would not pin against a self-signed certificate, etc. Also, this party had a
@@ -68,7 +68,7 @@ monopoly on the data we wanted, so we didn't have much choice there, either.
 
 This is one example of *many* that I can recount in an environment where
 renewing a certificate is not easy - or possible - to automate. Other situations
-involved an overly-complex CCRB where changing the certicicate required a lot of
+involved an overly-complex CCRB where changing the certificate required a lot of
 operational testing, sign off, approvals, etc. Process can be fixed, but it's
 more stubborn than some might realize. Other challenges are technology, like
 when an HSM is involved. Yes, it's automatable - but it will take a lot of time
