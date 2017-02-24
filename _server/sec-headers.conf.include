@@ -1,3 +1,3 @@
 add_header X-Frame-Options DENY always;
 add_header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload" always;
-add_header Public-Key-Pins 'pin-sha256="jV54RY1EPxNKwrQKIa5QMGDNPSbj3VwLPtXaHiEE8y8="; pin-sha256="7qVfhXJFRlcy/9VpKFxHBuFzvQZSqajgfRwvsdx1oG8="; pin-sha256="/sMEqQowto9yX5BozHLPdnciJkhDiL5+Ug0uil3DkUM="; max-age=5184000; includeSubDomains' always;
+add_header Public-Key-Pins 'pin-sha256="jV54RY1EPxNKwrQKIa5QMGDNPSbj3VwLPtXaHiEE8y8="; pin-sha256="qpD4jallzEGRh1cDy51574zL8iHOxMrfO9X7fDXwq84="; pin-sha256="C6GPl2/R2S2eei5JT4AFIPaICRprjfgS47XuGTud72w="; pin-sha256="gfnBZjpAw3n7Uj/k1/slHf4DPMqxFUys8OtgDE4AVpE="; pin-sha256="u1N1reIXA9WwYjMbwtV3VwDymQGbJluODR1VB4Qlk8c="; max-age=5184000; includeSubDomains' always;
