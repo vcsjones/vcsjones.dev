@@ -38,11 +38,13 @@ public-cert.cer. You could also use the `/sha1` option to specify a certificate
 in the certificate store that also has only a public key. This will output a few
 files in the "C:\scratch\dir" directory. The digest is the one with the ".dig"
 extension. This file will have the Base64 encoded digest to sign. Next, using
-your custom tool, sign the digest with the private key for the certificate.
+your custom tool, sign the digest with the private key for the certificate. You
+should decode the Base64 signature before signing if the signing API expects a
+raw binary digest.
 
-This file should be placed in the "C:\scratch\dir" directory with the same name
-as the digest file, with the "signed" extension. For example,
-"notepad.exe.dig.signed".
+Next, encode your signature in base64 and place it in a file in the "C:\scratch\dir"
+directory with the same name as the digest file, with the "signed" extension.
+For example, "notepad.exe.dig.signed".
 
 The next step is to ingest the signed digest along with the rest of the
 Authenticode signature to complete the signing.
