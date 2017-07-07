@@ -38,7 +38,7 @@ while older ones use `SignerSignEx2`.
 
 A typical signing operation, loosely, has a few key phases.
 
-First, a digest of the file needs to be made. This isn't quick as simple as
+First, a digest of the file needs to be made. This isn't quick and simple as
 "hash the whole file" as we'll see later, but something as close as possible to
 that needs to be done.
 
@@ -69,7 +69,7 @@ breaking the file itself.
 Using PNG as an example, I can't just put the signature at the end of the file.
 An image viewer would see those bytes, and not know what to do with them, and
 assume the file is corrupt. Fortunately for us, the designers of PNG thought
-they format should provide some extensibility, so we can continue. However for
+the format should provide some extensibility, so we can continue. However for
 other formats that have no concept of metadata, embedding the
 Authenticode signature may not be possible. You can still used detached
 signatures at this point, but that's for another time.
@@ -77,12 +77,12 @@ signatures at this point, but that's for another time.
 # SIP Structure
 
 A SIP is little more than a native DLL. There needs to be a way to register
-and un-register it as SIP and it needs to implement the bare minimum of SIP
+and un-register it, and it needs to implement the bare minimum of SIP
 functionality by exporting a few functions.
 
 During registration phase, a SIP needs to declare what it can, and cannot do.
-There are at least five things the SIP *must* do, with some optional enhanced
-behaviors. For our PNG SIP on GitHub, we implement the bare requirements, but
+There are at least five things the SIP *must* do.
+For our PNG SIP on GitHub, we implement the bare requirements, but
 I'll continue to develop it and write new posts as I make more progress.
 
 A SIP needs to perform these five things.
@@ -232,7 +232,6 @@ STDAPI DllRegisterServer()
 
 BOOL WINAPI PngIsFileSupportedName(WCHAR *pwszFileName, GUID *pgSubject)
 {
-
 	return FALSE;
 }
 
