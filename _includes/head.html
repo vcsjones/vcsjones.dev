@@ -6,4 +6,7 @@
   <link rel="stylesheet" crossorigin="anonymous" integrity="sha256-{% sri_scss_hash css/main.scss %}" href="{{ "/css/main.css" | prepend: site.baseurl }}?{% sri_scss_hex_hash css/main.scss %}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+  {% if page.hide %}
+  <META name="ROBOTS" content="NOINDEX, NOFOLLOW">
+  {% endif %}
 </head>
