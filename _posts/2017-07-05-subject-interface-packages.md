@@ -1,31 +1,50 @@
 ---
 layout: post
 title:  "Subject Interface Packages"
-date:   2017-07-05 15:00:00 -0400
+date:   2017-08-05 20:00:00 -0400
 categories: Security
 hide: true
 ---
 
-I tend to monkey around with Authenticode a lot. While I have a few
-[criticisms][1] of it, my outlook for it is positive and I think there are
-thing coming that will make it [even better][2].
+Authenticode continues to be an area of interest for me, and the surprisingly
+little documentation around some of its features remains an issue for others.
+Authenticode is interesting because it can sign a variety of formats.
+Executables and libraries (PE files), MSI installers, CAB files, and more
+recently APPX packages, which are used to distribute things in the Windows
+Store.
 
-An often overlooked feature of Authenticode is its extensibility. Did you know,
-for example, that you can extend Authenticode to allow it to sign and verify a
-file format of your choosing? Or that the ability to do this goes all the way
-back to Windows XP?
+The Authenticode process has seemingly simple process of creating a canonical
+digest of the file, signing it, and embedding the signature in the file. This
+simple task requires Authenticode to actually understand the file format.
+Take an executable as an example. Authenticode must first create a digest of
+this file. However, it cannot do so by simply hashing the whole file. It must
+be intelligent to ignore certain parts of the file, including where the
+signature itself will go. When it comes time to validate the signature, the
+Authenticode process will first validate that the signature on the embedded
+hash is correct, then re-hash the file and compare the hashes. If during the
+re-hash process it were to include the embedded signature, then the hashes would
+not be equal.
 
-It's not an often needed feature. After all, Authenticode already covers the
-big formats needed, such as EXE, MSI, etc. Extending Authenticode in such a way
-has limited practicality, especially because it requires software to be
-installed on the machine to make it work. Even then, the documentation for such
-a thing is sparse, and examples don't seem to exist.
+Authenticode must further be smart enough to understand how to embed the
+signature in a file that doesn't corrupt the file itself. PE files have specific
+regions for placing digital signatures called the *certificate* section.
+Finally, Authenticode must be able to do this for every file type that it can
+sign.
 
-This is a long post that is going to attempt to explain how to do this, and it
-all starts with Subject Interface Packages, or SIP for short. If you can develop
-a SIP, then you can teach Authenticode new file formats, including giving
-`signtool` the knowledge to sign a file, and Explorer the ability to show the
-"Digital Signatures" tab on a file.
+Now if I were a good software architect, I would design the Windows components
+of Authenticode to create an abstraction over understanding file types.
+Perhaps something like the bridge pattern in software design. Fortunately for
+us, we do have something like the bridge pattern between the signing and
+understanding a file's format: Subject Interface Packages.
+
+Subject Interface Packages, or "SIP" (referred to as such going forward), are
+a way to extend the types of files that Authenticode can understand how to sign
+and verify. Windows uses SIPs internally for its own file formats, but it's
+actually something anyone can use.
+
+If you can develop a SIP, then you can teach Authenticode new file formats,
+including giving `signtool` the knowledge to sign a file, and Explorer the
+ability to show the "Digital Signatures" tab on a file.
 
 To help make this a bit more digestible, I included a fully-functioning SIP for
 signing PNG files over [on GitHub][3].
@@ -38,21 +57,12 @@ while older ones use `SignerSignEx2`.
 
 A typical signing operation, loosely, has a few key phases.
 
-First, a digest of the file needs to be made. This isn't quick and simple as
-"hash the whole file" as we'll see later, but something as close as possible to
-that needs to be done.
-
-Second, the digest needs to be signed. In Authenticode, this is done with CMS
-style messages that result in a big chunk of PKCS#7 data.
+First, a digest of the file needs to be made. Second, the digest needs to be
+signed. In Authenticode, this is done with CMS style messages that result in a
+big chunk of PKCS#7 data.
 
 Third, and finally, the CMS message needs to be embedded in the file, somehow.
 The embedded signature should not affect the behavior of the file.
-
-The first and third parts are where the format of the file, or *subject*, come
-in. Authenticode doesn't know how to canonically hash every file it encounters,
-and it doesn't know how to safely embed the signature in the file. The
-verification process works similarly, except backwards. The signature is
-extracted and validated. The file is re-hashed, and the hashes are compared.
 
 A SIP allows you to extend the first and third steps, but not the second. A SIP
 does not allow you to modify the entire Authenticode process, though there are
@@ -91,7 +101,7 @@ A SIP needs to perform these five things.
 1. It needs to support digesting the file.
 1. It needs to support embedding the signature.
 1. It needs to support extracting the signature.
-1. It needs to support verifying the signature.
+1. It needs to support verifying the digest.
 
 Once we can do those five things, we can round trip a signature.
 
@@ -148,8 +158,7 @@ A very simple implementation of this might looks like this now:
 ```c
 STDAPI DllRegisterServer()
 {
-	SIP_ADD_NEWPROVIDER provider;
-	memset(&provider, 0, sizeof(SIP_ADD_NEWPROVIDER));
+	SIP_ADD_NEWPROVIDER provider = { 0 };
 	GUID subjectGuid = GUID_PNG_SIP;
 	provider.cbStruct = sizeof(SIP_ADD_NEWPROVIDER);
 	provider.pgSubject = &subjectGuid;
@@ -163,8 +172,7 @@ STDAPI DllRegisterServer()
 	provider.pwszCreateFuncName = L"PngCryptSIPCreateIndirectData";
 	provider.pwszVerifyFuncName = L"PngCryptSIPVerifyIndirectData";
 	provider.pwszIsFunctionNameFmt2 = L"PngIsFileSupportedName";
-	BOOL result = CryptSIPAddProvider(&provider);
-	if (result)
+	if (CryptSIPAddProvider(&provider))
 	{
 		return S_OK;
 	}
@@ -190,7 +198,8 @@ are trying to determine that current path of the library to dynamically
 determine it when WOW64 is in play from whatever is performing the registration.
 
 I instead just hard coded the path as I don't really expect the SIP to be
-installed elsewhere.
+installed elsewhere. Note that this is a bit of a naive approach at the moment
+because it does not allow installation on a 32-bit Windows.
 
 The rest of the fields on the struct are names of exports for the functionality
 of the SIP. Their names don't matter, but I would make them unique and not
@@ -203,8 +212,7 @@ The function definitions for these are loosely defined in
 ```c
 STDAPI DllRegisterServer()
 {
-	SIP_ADD_NEWPROVIDER provider;
-	memset(&provider, 0, sizeof(SIP_ADD_NEWPROVIDER));
+	SIP_ADD_NEWPROVIDER provider = { 0 };
 	GUID subjectGuid = GUID_PNG_SIP;
 	provider.cbStruct = sizeof(SIP_ADD_NEWPROVIDER);
 	provider.pgSubject = &subjectGuid;
@@ -218,8 +226,7 @@ STDAPI DllRegisterServer()
 	provider.pwszCreateFuncName = L"PngCryptSIPCreateIndirectData";
 	provider.pwszVerifyFuncName = L"PngCryptSIPVerifyIndirectData";
 	provider.pwszIsFunctionNameFmt2 = L"PngIsFileSupportedName";
-	BOOL result = CryptSIPAddProvider(&provider);
-	if (result)
+	if (CryptSIPAddProvider(&provider))
 	{
 		return S_OK;
 	}
@@ -274,7 +281,7 @@ registry under
 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Cryptography\OID\EncodingType 0
 ```
 
-Under that key are subkeys for all of the possible things a SIP can do.
+Under that key are sub-keys for all of the possible things a SIP can do.
 We aren't doing everything, and some of them remain entirely undocumented and
 to an extent, unused. However, for the five cores parts of a SIP we are
 supporting, we should see our SIP's GUID under those registry keys. Namely,
@@ -297,6 +304,143 @@ correctly. Dependency Walker, ancient as it is, does this well. You'll want to
 not only make sure they are exported, but also are unmangled.
 
 ![Dependency Walker][6]
+
+# File Support
+
+There are two ways a SIP can decide if a file format is supported. It can do
+so by just the name of the file, or it can do so by actually examining the
+contents of the file. For performance, I would recommend implementing just the
+file name check. You can still bail out of the actual signing process with an
+error if you determine that you can't actually sign the file. In our bare-bones
+implementation above, we exported the function `PngIsFileSupportedName` and put
+that in our registration. We need to export a function with that name and return
+a Win32 BOOL indicating if it is supported.
+
+A simple approach is to just check the extension of the file by creating a
+substring and using `_wcsicmp`. An implementation might look something like
+this:
+
+```c
+const WCHAR* ext = L".png";
+size_t len = wcslen(pwszFileName);
+if (len < wcslen(ext))
+{
+	return FALSE;
+}
+size_t offset = len - wcslen(ext);
+assert(offset >= 0);
+const WCHAR* substring = &pwszFileName[offset];
+int result = _wcsicmp(substring, ext);
+if (result == 0)
+{
+	*pgSubject = GUID_PNG_SIP;
+	return TRUE;
+}
+return FALSE;
+```
+
+The name of the file that you are given is wide characters, so make sure you use
+the appropriate functions. You must also specify the GUID of the SIP as an out
+parameter for `pgSubject`. In our case we use our own SIP, however you can use
+this if you have multiple SIPs - you can actually have just one library that
+determines which SIP GUID to use, or delegate the work to another SIP.
+
+If this returns `TRUE`, it moves on to the actual process of creating a digest.
+
+# Create Indirect Data
+
+The actual structure in the PKCS#7 signature is a structure called indirect
+data. Among the things in here is the digest of the file. Our next step is we
+need to create a digest of the file in a function with a signature like this:
+
+```c
+BOOL WINAPI PngCryptSIPCreateIndirectData(
+	SIP_SUBJECTINFO *pSubjectInfo,
+	DWORD *pcbIndirectData,
+	SIP_INDIRECT_DATA *pIndirectData
+	)
+```
+
+This function will actually be called *twice*, the first time with
+`pIndirectData` as NULL, and the second with an address. This pattern may be
+familiar to Win32 developers. The first call it is expecting you to set the
+`pcbIndirectData` parameter with the size of the amount of memory needed for
+`pIndirectData`. Internally, the Authenticode system will then allocate the
+amount of memory you told it to, then call the function again with the address
+of the memory in `pIndirectData`. During the second call, it's up to you to
+set this as a pointer to a `SIP_INDIRECT_DATA` structure.
+
+For the first call, it isn't as simple as just using `sizeof(SIP_INDIRECT_DATA)`
+and going with that. `SIP_INDIRECT_DATA` has a field called `Digest`, which is
+another struct. This is itself a `CRYPT_HASH_BLOB`, which has two fields. The
+first is `DWORD cbData`, and the second is `BYTE *pbData`.
+
+This `pbData` is a pointer to the hash that we need to create. Problem is, a
+pointer to *what*? Who owns the memory? We cannot stack allocate it because we
+need to return it from a function. We can allocate it on the heap, but the SIP
+doesn't have a cleanup phase, or a way to tell us "I'm done with that memory".
+
+Instead what we need to do is set `pcbIndirectData` to enough memory for
+everything that we need to return. The authenticode system owns this memory, and
+will free it when its done with it. We need to make sure this still points to
+a `SIP_INDIRECT_DATA` structure, but we can put anything past that. To make
+this easier and avoid pointer acrobatics, I defined a new structure that looks
+like this:
+
+```c
+#define MAX_HASH_SIZE 64
+#define MAX_OID_SIZE 128
+typedef struct INTERNAL_SIP_INDIRECT_DATA_
+{
+	SIP_INDIRECT_DATA indirectData;
+	BYTE digest[MAX_HASH_SIZE];
+	CHAR oid[MAX_OID_SIZE];
+} INTERNAL_SIP_INDIRECT_DATA;
+```
+
+It starts with a `SIP_INDIRECT_DATA` structure so it still looks like one. After
+that, I make two more fields. The first is a `digest` field, which will create
+64 `BYTE`s after the `indirectData` for us to place our hash. There is no hash
+algorithm that produces a digest bigger than 64 bytes currently, so 64 seems
+sufficient. After that we have a `CHAR` array in the struct which will contain
+the OID of the hash algorithm. I used a generate 128 `CHAR`s for this, even
+though most commonly the longest it can be us 22 CHARs.
+
+We can then set the `pbData` that introduced this problem to the address of the
+`digest` field in our new structure. We will do the same with the OID.
+
+Roughly, that gives us something like this (all validation is omitted here for
+brevity - be careful!):
+
+```c
+BOOL WINAPI PngCryptSIPCreateIndirectData(
+	SIP_SUBJECTINFO *pSubjectInfo,
+	DWORD *pcbIndirectData,
+	SIP_INDIRECT_DATA *pIndirectData
+	) {
+	if (NULL == pIndirectData) {
+		*pcbIndirectData = sizeof(INTERNAL_SIP_INDIRECT_DATA);
+		return TRUE;
+	}
+	//TODO: validations
+	INTERNAL_SIP_INDIRECT_DATA* pInternalIndirectData = (INTERNAL_SIP_INDIRECT_DATA*)pIndirectData;
+	memset(pInternalIndirectData, 0, sizeof(INTERNAL_SIP_INDIRECT_DATA));
+	DWORD digestSize;
+	MagicGetOurHash(&digestSize, &pInternalIndirectData->digest[0]);
+	pInternalIndirectData->indirectData.Digest.cbData = digestSize;
+	pInternalIndirectData->indirectData.Digest.pbData = &pInternalIndirectData->digest[0];
+	//TODO: set all other members of the struct including the OID.
+	*pIndirectData = pInternalIndirectData;
+	return TRUE;
+}
+```
+
+For a real implementation of this member, see the GitHub project. This pattern
+allows us to forgo worrying about the memory cleanup. When authenticode is
+done with the memory, it frees the whole block that we asked it to allocate.
+
+
+
 
 [1]: /2016/04/15/authenticode-stuffing-tricks/
 [2]: /2016/12/30/authenticode-sealing/
