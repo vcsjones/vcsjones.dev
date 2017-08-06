@@ -55,14 +55,12 @@ Under the covers, Windows's signing operations uses `SignerSignEx*` to
 Authenticode sign files. The most recent versions of Windows use `SignerSignEx3`,
 while older ones use `SignerSignEx2`.
 
-A typical signing operation, loosely, has a few key phases.
-
-First, a digest of the file needs to be made. Second, the digest needs to be
-signed. In Authenticode, this is done with CMS style messages that result in a
-big chunk of PKCS#7 data.
-
-Third, and finally, the CMS message needs to be embedded in the file, somehow.
-The embedded signature should not affect the behavior of the file.
+A typical signing operation, loosely, has a few key phases. First, a digest of
+the file needs to be made. Second, the digest needs to be signed. In
+Authenticode, this is done with CMS style messages that result in a big chunk
+of PKCS#7 data. Third, and finally, the CMS message needs to be embedded in the
+file, somehow. The embedded signature should not affect the behavior of the
+file.
 
 A SIP allows you to extend the first and third steps, but not the second. A SIP
 does not allow you to modify the entire Authenticode process, though there are
