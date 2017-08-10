@@ -1,7 +1,7 @@
 ---
 layout: post
-title:  "Subject Interface Packages"
-date:   2017-08-05 20:00:00 -0400
+title:  "Subject Interface Packages - Part 1"
+date:   2017-08-10 11:44:00 -0400
 categories: Security
 hide: true
 ---
@@ -436,6 +436,115 @@ BOOL WINAPI PngCryptSIPCreateIndirectData(
 For a real implementation of this member, see the GitHub project. This pattern
 allows us to forgo worrying about the memory cleanup. When authenticode is
 done with the memory, it frees the whole block that we asked it to allocate.
+
+When `CryptSIPCreateIndirectData` is called for the second time, Authenticode
+expects that, at a minimum, the `pIndirectData`'s `Digest` member is correctly
+filled out. That includes the digest itself, and the OID of the algorithm.
+
+`pSubjectInfo` gives us the information we need to compute the digest. It itself
+includes a `DigestAlgorithm` structure indicating what digest algorithm it's
+asking for. This includes the OID of the algorithm.
+
+To translate the OID in to a more useful type which allows you to get a CSP or
+CNG algorithm identifier, you can use `CryptFindOIDInfo`:
+
+```c
+PCCRYPT_OID_INFO info = CryptFindOIDInfo(
+	CRYPT_OID_INFO_OID_KEY,
+	pSubjectInfo->DigestAlgorithm.pszObjId, //validation omitted here
+	CRYPT_HASH_ALG_OID_GROUP_ID);
+```
+
+One trick with this call us you need to set `CRYPT_OID_INFO_HAS_EXTRA_FIELDS`
+*before* `<windows.h>` is included. For me that meant putting it in a
+pre-compiled header near `WIN32_LEAN_AND_MEAN`. Setting this define puts members
+on the `PCCRYPT_OID_INFO` struct that are helpful for use with CNG, like
+`pwszCNGAlgid`, which can be used with `BCryptOpenAlgorithmProvider`.
+
+Finally, the `pSubjectInfo->hFile` parameter will give a handle to the file that
+is being signed.
+
+It's worth discussing some best practices at this point about *how* to digest
+a file.
+
+## Don't over-interpret the file
+
+Let's use a PE file as an example here. Part of the PE file that is digest is
+the `.text` section, or program code. The digesting process does not care
+what-so-ever about the program code itself. For example, a `NOP` assembly
+instruction doesn't alter the behavior of the program directly, so one could
+argue that the signing process should attempt to read the x86 assembly and
+skip over NOP instructions.
+
+But of course that isn't done. It isn't the signing process's job to understand
+x86, and the theoretical example above could be used in an attack.
+
+The PE signing *does* skip some parts of the PE beyond the signature itself,
+such as skipping the checksum, because the checksum has to be updated after
+the signature has been applied.
+
+Conversely, some canonicalization might be expected. For example, the way a PE's
+sections are arranged in the executable do not matter. The signing process sorts
+the sections (.text, .rdata, etc) so that the order of the sections do not
+matter.
+
+## Don't execute input
+
+Another part to make clear is the signing process shouldn't use the signing
+input as executable code. That would leave the file being signed in control of
+how it is being signed, and could likely convince a SIP to do something
+unexpected.
+
+## Include as much as possible
+
+My recommendation here is to sign everything except the signature itself. The
+PE format makes an exception for the checksum, which cannot be included, but
+otherwise, that's it. The PE format *used* to support omitting the signing of
+embedded debug information, but that is no longer that case.
+
+You might be tempted to skip over benign contents of the file. For example, with
+PNG we might be tempted to skip embedded metadata that aren't part of the actual
+image itself. I would argue that all data is relevant, and omitting metadata
+attached to the image is harmful to the signing process.
+
+## Be wary of the file size
+
+Canonicalization and being smart about the file format might make reading the
+whole file in to memory tempting. However, keep in mind what some file sizes
+might be. You may want to open a memory-mapped view of the file if you cannot
+read it in a stream.
+
+# Put Indirect Data
+
+We can calculate a digest of the file now, but now we need to be help
+Authenticode understand how to embed the signature in the file.
+
+The final thing we need to actually sign a file is to implement
+`CryptSIPPutSignedDataMsg`. This function is pretty straight-forward. Given
+a `SIP_SUBJECTINFO` with a handle to the file being signed, embed the
+`pbSignedDataMsg` parameter whose length is `cbSignedDataMsg`.
+
+As mentioned earlier, we cannot just write this data at the end of the file,
+otherwise it will corrupt the file. We need to embed it in such a way that the
+file will continue to function.
+
+For PNG, this is actually a straight forward process. It is composed of
+*chunks*, and each chunk has a 4 character identifier. The case of the
+identifiers letters indicate a few certain flags. This lead me to create a new
+chunk type called `dsIG`, which indicates that the chunk is not critical and
+that it shouldn't be copied. When we digest the PNG file above when we're
+creating the indirect data, we skip over `dsIG` chunks.
+
+The exact details of this are in the GitHub project. I may write another post
+later about the specifics of PNG files if there is enough interest. However,
+I would take a look at the specification first if you're interested. The format
+is very easy to understand.
+
+At this point, we can *sign* a file, and `signtool` should report successfully
+signing the file type. The `verify` step will fail though because we have not
+implemented `CryptSIPGetSignedDataMsg` and `CryptSIPVerifyIndirectData`.
+
+I'll save those two for Part 2, though they are available on GitHub right now.
 
 
 
