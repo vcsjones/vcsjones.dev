@@ -3,7 +3,6 @@ layout: post
 title:  "Subject Interface Packages - Part 1"
 date:   2017-08-10 11:44:00 -0400
 categories: Security
-hide: true
 ---
 
 Authenticode continues to be an area of interest for me, and the surprisingly
