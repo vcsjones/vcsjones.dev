@@ -129,8 +129,8 @@ There is still plenty to do in later parts. As of now, we cannot:
 * Seal
 
 I hope to get to these soon for this project. More curiously, a slightly-related
-subject has me firmly in the came that this can be done in Rust. I don't think
-it's a stretch either or an abuse. Rust seems well suited for the task without
+subject has me to believe this can be done in Rust. I don't think
+it's a stretch either, or an abuse. Rust seems well suited for the task without
 going down to C or C++.
 
 The last part, sealing, is a ways off, because the details of sealing signatures
