@@ -545,6 +545,8 @@ implemented `CryptSIPGetSignedDataMsg` and `CryptSIPVerifyIndirectData`.
 
 I'll save those two for Part 2, though they are available on GitHub right now.
 
+Update: [Part 2 is available][7].
+
 
 
 
@@ -554,3 +556,4 @@ I'll save those two for Part 2, though they are available on GitHub right now.
 [4]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa380283(v=vs.85).aspx
 [5]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa387767(v=vs.85).aspx
 [6]: /images/sipexports.png
+[7]: /2017/08/11/subject-interface-packages-part-2/
