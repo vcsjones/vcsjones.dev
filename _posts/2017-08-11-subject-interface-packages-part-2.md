@@ -82,11 +82,11 @@ signature itself.
 
 If you are having trouble at this step, it's worth pointing out that you can
 call `CryptVerifyMessageSignature` yourself at this point to verify that you're
-extracting the signature from the file. You should also be able to run this
-through an ASN.1 decoder and see properly decoded output.
+extracting the signature from the file correctly. You should also be able to run
+this through an ASN.1 decoder and see properly decoded output.
 
 It should also be byte-for-byte identical to the "put" operation in part 1,
-so you can compare a these two steps.
+so you can compare at these two steps.
 
 # Verify Indirect Data
 
