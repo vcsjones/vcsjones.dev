@@ -2,17 +2,18 @@ require 'digest'
 
 module VCSJones
     class RetinaTag < Liquid::Tag
-        def render(context)
-           '<div class="retina">'
+        def initialize(tag_name, markup, tokens)
+            super
+            @attributes = {}
+            markup.scan(Liquid::TagAttributes) do |key, value|
+                @attributes[key.to_sym] = value.gsub(/^'|"/, '').gsub(/'|"$/, '')
+            end
         end
-    end
 
-    class EndRetinaTag < Liquid::Tag 
         def render(context)
-            '</div>'
+            "<img class='retina' src='#{@attributes[:src]}' title='#{@attributes[:caption]}' />"
         end
     end
 end
 
-Liquid::Template.register_tag('retina', VCSJones::RetinaTag)
-Liquid::Template.register_tag('endretina', VCSJones::EndRetinaTag)
+Liquid::Template.register_tag('imgretina', VCSJones::RetinaTag)

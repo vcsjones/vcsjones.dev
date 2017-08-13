@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Single Cable USB-C"
-date:   2017-08-11 04:00:00 -0400
+date:   2017-08-13 04:00:00 -0400
 categories: General
 ---
 
@@ -100,7 +100,7 @@ Finding a single USB-C dock that could drive even one display at 4K@60Hz was
 a challenge. To make this a little more complicated, I was slightly mislead by
 USB-C a little bit.
 
-Let me explain. I have a USB-C to HDMI 2.0 cable. It works great, plug one in
+Let me explain. I have a USB-C to HDMI 2.0 cable. It works great, plug one end in
 to USB-C, plug the other in to the monitor, and instant 4K@60Hz. It shouldn't
 be much of a stretch to add inline power and USB hub, right? That's where
 I went astray. USB-C includes *alternate modes*, where the it has a physical
@@ -128,7 +128,8 @@ computer - it just wouldn't be part of the docking setup.
 This was a nice-to-have. WiFi 802.11ac Wave 2 is generally good enough for me,
 I can still make use of my near-gigabit internet connection, and the minor
 latency penalty isn't trouble. The APs are rock solid in my house. Though,
-if a dock had an Ethernet port, I wouldn't pass up the opportunity to have it.
+if a dock had an Ethernet port, I wouldn't pass up the opportunity to have it if
+it came down to putting the money in.
 
 # Shopping
 
@@ -139,7 +140,10 @@ travelling.
 
 It would take me one more attempt at purchasing an HDMI hub and dongle before
 I caught on that HDMI and USB-C just don't do the 4K with the right refresh
-rates.
+rates. This was complicated by the fact that some manufacturers don't label the
+refresh rate. One reviewer of a product said the HDMI did 4K@60Hz, but I have
+to believe that reviewer was mistaken. Lesson learned: only buy a hub where the
+specs are completely spelled out, and reviewers aren't disputing them.
 
 I was initially going to pull the trigger on the [Arc Hub][3], something that
 [The Verge][2] gave very glowing remarks to. I came within moments of purchasing
@@ -161,11 +165,17 @@ pass through power, and 2 USB 2.0 ports. USB 3.0 would be nice, but, I'll take
 it.
 
 The only other thing was it really isn't a single "cable" solution. It was just
-a little dongle with no cable at all! This was less pleasant because three
+a little dongle with no cable at all. This was less pleasant because three
 thick cables were connected to it, and wrestling it in to place was annoying.
-This problem ended up being easy to fix with a USB-C extension cable.
+It also meant that I would have three cables across my desk. This problem ended
+up being easy to fix with a USB-C extension cable.
 
-{% retina-img "Cable setup", "/images/usbc-cable.JPG" %}
+{% imgretina caption: 'Cable setup', src: '/images/usbc-cable.jpg' %}
+
+Overall, I'm a tad annoyed by the experience of this. USB-C is confusing and
+difficult to find the right components, whereas Thunderbolt is in it's 3rd
+iteration and it seems that many of its problems have been addressed since using
+the Thunderbolt Display.
 
 
 [1]: https://www.bourgedesign.com/arc-hub
