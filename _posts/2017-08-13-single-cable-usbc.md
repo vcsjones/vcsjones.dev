@@ -170,7 +170,7 @@ thick cables were connected to it, and wrestling it in to place was annoying.
 It also meant that I would have three cables across my desk. This problem ended
 up being easy to fix with a USB-C extension cable.
 
-{% imgretina caption: 'Cable setup', src: '/images/usbc-cable.jpg' %}
+{% imgretina caption: 'Cable setup', src: '/images/usbc-cables.jpg' %}
 
 Overall, I'm a tad annoyed by the experience of this. USB-C is confusing and
 difficult to find the right components, whereas Thunderbolt is in it's 3rd
