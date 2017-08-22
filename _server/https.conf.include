@@ -8,3 +8,4 @@ ssl_trusted_certificate /etc/ssl/vcsjones.chain.ecc.crt;
 ssl_session_cache       shared:SSL:10m;
 ssl_session_timeout     1440m;
 ssl_prefer_server_ciphers on;
+ssl_ecdh_curve          auto;
