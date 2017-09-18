@@ -44,7 +44,7 @@ Given that, the natural conclusion may be that x509 and PKI are not the correct
 solution. There are other options that will work, such as PGP and Web of Trust
 (WOT). Some members are asking the NuGet team to reconsider x509 and PKI. There
 are other issues with x509 and PKI, but the accessibility of code signing
-certificates seems to be the central point of the communities concerns.
+certificates seems to be the central point of the community's concerns.
 
 I am sympathetic to these concerns which I have also [expressed myself previously][3].
 However despite that, I would like to now explain why I think the NuGet team
