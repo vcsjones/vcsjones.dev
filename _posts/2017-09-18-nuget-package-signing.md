@@ -222,14 +222,15 @@ and place. I just don't think NuGet is the right place. Most people that have
 interest in PGP have only used it sparingly, or are hard-core fanatics that can
 often miss the forest for the trees when it comes to usable cryptography.
 
-To state my opinion plainly, I don't think PGP works unless Microsoft is willing
-to take on the responsibility to vet keys or we adopt in to the web of trust.
-Neither solution is good in my opinion.
-
 We do get some value from PGP if we are willing to accept that signatures are
 not tied to a human being, but rather a NuGet.org account. That means signing
 is tied to NuGet.org and couldn't easily be used with a private NuGet server
 or alternative non-Microsoft server.
+
+To state my opinion plainly, I don't think PGP works unless Microsoft is willing
+to take on the responsibility to vet keys, we adopt in to the web of trust, or
+we accept that signing does not provide identity of the signer. None of these
+solutions are good in my opinion.
 
 [1]: https://blog.nuget.org/20170914/NuGet-Package-Signing.html
 [2]: /images/vs-verified-owners.png
