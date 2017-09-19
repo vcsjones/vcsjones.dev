@@ -20,10 +20,7 @@ This presents a problem to a few groups of people. Young people who are just
 getting in to software development may be excited to publish a NuGet package.
 However getting a code signing certificate may be out of their reach, for
 example for a 15 year old. I'm not clear how a CA would handle processing a
-certificate for a minor who may not have a ID. Also consider the fee. Someone
-with limited to no income may not be able to pay even $50 for a code signing
-certificate. The norm is actually much higher, actually at least $100. This
-young developer probably just wouldn't sign their package. The same goes for
+certificate for a minor who may not have a ID. The same goes for
 individuals of lesser privileged countries. The median monthly income of Belarus, a
 country very dear to me, is $827. A few hundred dollars for a code signing
 certificate is not nothing to sneeze at. There are many groups of people that
