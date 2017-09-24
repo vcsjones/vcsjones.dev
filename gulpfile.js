@@ -32,12 +32,12 @@ gulp.task('png-crush', ['exif-tool'], () => {
 });
 
 gulp.task('gzip', ['jekyll'], () => {
-    return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml'])
+    return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml', './_site/robots.txt'])
             .pipe(exec('gzip --keep -9 "<%= file.path %>"'));
 });
 
 gulp.task('brotli', ['jekyll'], () => {
-    return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml'])
+    return gulp.src(['./_site/**/*.html', './_site/**/*.css', './_site/**/*.xml', './_site/robots.txt'])
             .pipe(exec('cat "<%= file.path %>" | /usr/local/bin/bro --quality 11 > "<%= file.path %>.br"'));
 });
 
