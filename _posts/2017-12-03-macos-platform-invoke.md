@@ -69,5 +69,10 @@ literals of `IntPtr` cleanly, instead having to do something like `(IntPtr)1`.
 A final possibility is to make a native shim that coerces the data types to
 something consistent, like `int32_t` and have a shim per architecture.
 
+Another point of difference is string encoding. Windows vastly prefers to
+use Unicode and ANSI strings (W or A), where MacOS libraries will frequently
+use UTF8. The easiest thing to do here is to marshal them as pointers,
+unfortunately.
+
 Overall, it's not too much different. Pay attention to the calling convention
 and be aware of LP64 over LLP64.
