@@ -312,11 +312,12 @@
 }
 
 aside {
-    border-left: 5px solid gold;
-    padding-left: 5px;
+    color: $grey-color;
+    border-left: 4px solid gold;
+    padding-left: $spacing-unit / 2;
     min-height: 48px;
+    letter-spacing: 0;
 }
-
 
 .blue {
     color: #00F;
