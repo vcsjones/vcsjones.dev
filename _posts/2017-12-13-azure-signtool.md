@@ -151,21 +151,21 @@ this:
 ```c
 HRESULT WINAPI myCallback(
     CERT_CONTEXT* certContext,
-	void* opaque,
-	ALG_ID algId,
-	BYTE* pDigestToSign,
-	DWORD cDigestToSign,
-	CRYPT_DATA_BLOB* signature)
+    void* opaque,
+    ALG_ID algId,
+    BYTE* pDigestToSign,
+    DWORD cDigestToSign,
+    CRYPT_DATA_BLOB* signature)
 {
-	//Set the signature property
-	return 0;
+    //Set the signature property
+    return 0;
 }
 
 int main()
 {
-	SIGN_CALLBACK_INFO callbackInfo = { 0 };
-	callbackInfo.cbSize = sizeof(SIGN_CALLBACK_INFO);
-	callbackInfo.callback = myCallback;
+    SIGN_CALLBACK_INFO callbackInfo = { 0 };
+    callbackInfo.cbSize = sizeof(SIGN_CALLBACK_INFO);
+    callbackInfo.callback = myCallback;
     HRESULT blah = SignerSignEx3(0x400, /*omitted*/ callbackInfo, NULL);
     return blah;
 }
@@ -193,10 +193,10 @@ does not have enough information to do signing operations. It's geared toward
 digesting the file and embedding the digest.</p>
 
 <p>In order for the SIP to get the information needed to perform signing operations,
-`SignerSignEx2/3` is allowed to pass in an opaque pointer that gets passed along
+SignerSignEx2 is allowed to pass in an opaque pointer that gets passed along
 to the SIP. The APPX SIP basically wants every parameter passed to
-`SignerSignEx2/3` passed in to it as a struct. This gives the SIP the parameters
-it needs to make its own invocations of SignerSignEx2/3.</p>
+SignerSignEx2 passed in to it as a struct. This gives the SIP the parameters
+it needs to make its own invocations of SignerSignEx2.</p>
 </aside>
 
 Unfortunately, the struct shape is not documented for `SignerSignEx3`.
