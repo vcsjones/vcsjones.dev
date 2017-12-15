@@ -84,7 +84,7 @@ parts of the entire Windows SDK.
 
 ## SignerSignEx3
 
-While debugging signtool with windbg, I [noticed][4] that Windows 10 includes a
+Later, I [noticed][4] that Windows 10 includes a
 new signing API, `SignerSignEx3`. I happened upon this when I was using windbg
 in `AuthenticodeDigestSign` and saw that the caller of it was `SignerSignEx3`,
 not signtool. I checked out the exports in `mssign32` and did see it as a new
