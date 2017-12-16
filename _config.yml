@@ -21,4 +21,6 @@ exclude:
   - README.md
   - yarn.lock
   - .gitignore
+  - Gemfile
+  - Gemfile.lock
   
