@@ -40,6 +40,10 @@
         to {path}.webp {path}
     }
 
+    redir /feed/ feed.xml 301 
+    redir /ovst https://github.com/vcsjones/OpenVsixSignTool 302
+    redir /ast https://github.com/vcsjones/AzureSignTool 302
+
     errors {
         404 404/index.html
     }
