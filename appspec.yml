@@ -3,14 +3,8 @@ os: linux
 files:
   - source: _site
     destination: /var/wwwroot/vcsjones.com
-  - source: _server/vcsjones.com.conf
-    destination: /etc/nginx/sites-available
-  - source: _server/sec-headers.conf.include
-    destination: /etc/nginx/sites-available
-  - source: _server/content-headers.conf.include
-    destination: /etc/nginx/sites-available
-  - source: _server/https.conf.include
-    destination: /etc/nginx/sites-available
+  - source: _server/Caddyfile
+    destination: /opt/caddy/Caddyfile
 hooks:
   BeforeInstall:
     - location: _deploy/publish.sh

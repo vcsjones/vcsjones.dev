@@ -1,0 +1,44 @@
+:80 {
+    redir /  https://{host}{uri}
+}
+
+:443 {
+    root /var/wwwroot/vcsjones.com
+    tls /etc/ssl/vcsjones.chain.ecc.crt /etc/ssl/private/vcsjones.ecc.key {
+        protocols tls1.2
+        ciphers ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-ECDSA-AES128-GCM-SHA256 ECDHE-ECDSA-AES256-CBC-SHA ECDHE-ECDSA-AES128-CBC-SHA
+        curves X25519 p256 p384
+    }
+
+    header / {
+        Content-Security-Policy "default-src 'none' ; style-src 'self' ; img-src 'self' ; frame-ancestors 'none' ; form-action 'none' ; block-all-mixed-content; sandbox;"
+        X-XSS-Protection "1; mode=block"
+        Referrer-Policy no-referrer
+        X-UA-Compatible IE=edge
+        X-Frame-Options DENY
+    }
+
+    header /css {
+        Cache-Control "public, immutable"
+        Access-Control-Allow-Origin *
+        -Content-Security-Policy
+        -X-XSS-Protection
+    }
+
+    header /images {
+        Vary Accept
+        Cache-Control max-age=315360000
+        -Content-Security-Policy
+        -X-XSS-Protection
+    }
+
+    rewrite {
+        ext .png .jpeg .jpg
+        if {>Accept} has image/webp
+        to {path}.webp {path}
+    }
+
+    errors {
+        404 404/index.html
+    }
+}
