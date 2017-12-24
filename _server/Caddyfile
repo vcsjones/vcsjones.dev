@@ -21,7 +21,7 @@
     }
 
     header /css {
-        Cache-Control "public, immutable"
+        Cache-Control "public, immutable, max-age=315360000"
         Access-Control-Allow-Origin *
         -Content-Security-Policy
         -X-XSS-Protection
@@ -43,6 +43,7 @@
     redir /feed/ feed.xml 301 
     redir /ovst https://github.com/vcsjones/OpenVsixSignTool 302
     redir /ast https://github.com/vcsjones/AzureSignTool 302
+    status 204 /favicon.ico
 
     errors {
         404 404/index.html
