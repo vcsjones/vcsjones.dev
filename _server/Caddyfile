@@ -34,7 +34,7 @@
         -X-XSS-Protection
     }
 
-    rewrite {
+    rewrite /images {
         ext .png .jpeg .jpg
         if {>Accept} has image/webp
         to {path}.webp {path}
