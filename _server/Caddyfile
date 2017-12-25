@@ -49,7 +49,7 @@
     redir /ast https://github.com/vcsjones/AzureSignTool 302
     redir 301 {
         / https://vcsjones.com{uri}
-        if not {host} is vcsjones.com
+        if {host} not vcsjones.com
     }
 
     status 204 /favicon.ico
