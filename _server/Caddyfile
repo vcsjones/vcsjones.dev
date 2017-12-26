@@ -31,7 +31,7 @@
 
     header /images {
         Vary Accept
-        Cache-Control "public, max-age=315360000"
+        Cache-Control "public, immutable, max-age=315360000"
         -Content-Security-Policy
         -X-XSS-Protection
         -X-Frame-Options
