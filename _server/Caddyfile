@@ -14,10 +14,11 @@
         Content-Security-Policy "default-src 'none' ; style-src 'self' ; img-src 'self' ; frame-ancestors 'none' ; form-action 'none' ; block-all-mixed-content; sandbox; base-uri 'none';"
         X-XSS-Protection "1; mode=block"
         Referrer-Policy no-referrer
-        X-UA-Compatible IE=edge
         X-Frame-Options DENY
         X-Content-Type-Options nosniff
         Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+
+        Cache-Control "public, max-age=3600"
     }
 
     header /css {
@@ -25,13 +26,15 @@
         Access-Control-Allow-Origin *
         -Content-Security-Policy
         -X-XSS-Protection
+        -X-Frame-Options
     }
 
     header /images {
         Vary Accept
-        Cache-Control max-age=315360000
+        Cache-Control "public, max-age=315360000"
         -Content-Security-Policy
         -X-XSS-Protection
+        -X-Frame-Options
     }
 
     header /feed.xml {
