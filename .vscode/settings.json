@@ -11,6 +11,7 @@
     "editor.quickSuggestions": false,
     "cSpell.ignoreRegExpList": [
         "/`.*?`/",
-        "/```(\\r|\\n|.)*```/gm"
+        "/```(\\r|\\n|.)*```/gm",
+        "/^\\[\\d+\\]:.*$/gm"
     ]
 }
