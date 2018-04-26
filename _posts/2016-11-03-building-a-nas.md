@@ -98,7 +98,7 @@ to recover first lost one.
 
 So I wanted 12 Tb of storage and allow for 2 disks to fail. This would mean
 using ZFS's "RAIDZ2" configuration, which as I understand has the same disk
-requirements as RAID6. If each disk is 4 Gb, then that means I need 5 disks.
+requirements as RAID6. If each disk is 4 Tb, then that means I need 5 disks.
 I lose two to parity. I'm also going to lose some to file system overhead, I
 figure it somewhere around 3%.
 
