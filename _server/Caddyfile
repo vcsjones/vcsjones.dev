@@ -61,4 +61,10 @@
     errors {
         404 404/index.html
     }
+
+    log / requests.log "\{ \"path\": \"{path}\", \"proto\": \"{proto}\", \"when\": \"{when}\", \"tls_cipher\": \"{tls_cipher}\", \"tls_version\": \"{tls_version}\" \}" {
+        rotate_size 50
+        rotate_age  90
+        rotate_keep 20
+    }
 }
