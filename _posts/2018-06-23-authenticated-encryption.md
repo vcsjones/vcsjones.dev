@@ -401,7 +401,7 @@ ciphertext[9] = (original_ct[9].ord ^ 103 ^ 8).chr
 ```
 
 We get 198, and `160 ^ 198 ^ 8` is "n". If we repeat this pattern, we can fully
-decrypt the last block. Let's automate this a bit now.
+decrypt the block. Let's automate this a bit now.
 
 ```ruby
 ciphertext.freeze
@@ -438,7 +438,7 @@ You can run that in most online ruby REPLs, like [repl.it][2].
 
 The crucial thing about this is that the "decrypt" process never returns the
 decrypted data, it either raises an exception or returns "Data processed". Yet
-we were still able to determine the last block. This doesn't seem like much
+we were still able to determine the contents. This doesn't seem like much
 initially, however consider the example of an encrypted web cookie.
 
 A visitor visits a website, and the server gives the browser an encrypted cookie
@@ -449,12 +449,131 @@ our code above, an attacker that has stolen the cookie is able to decrypt it
 by sending the cookie to the server and observing how it responds to padding
 failures.
 
+I would be remiss not to point out that there are several other design flaws
+with this example we put together for the sake of demonstration. Namely, that
+the IV and Key were hard coded and not generated with a CSPRNG or derived using
+a KDF.
+
 The solution for this is to _authenticate_ our cipher text, which is to say,
 make it tamper-proof. This is easier said than done.
 
-[todo]
+Let's clean up symmetric encryption a bit to make it less of an example.
 
+```ruby
+def process_data(iv, data)
+    cipher = OpenSSL::Cipher::AES.new(128, :CBC)
+    cipher.padding = 0
+    cipher.decrypt
+    cipher.key = @aes_key
+    cipher.iv = iv
+    plaintext = cipher.update(data)
+    last_octet = plaintext[-1].ord
+    raise PaddingError if plaintext.length - last_octet < 0
+    padding = plaintext[-last_octet..-1]
+    is_padding_valid = padding.bytes.inject(0) { |a, b|
+        a | (b ^ last_octet)
+    }.zero?
+    raise PaddingError unless is_padding_valid
+
+    # Process data
+    return true
+end
+```
+
+There. We have a function that takes an independent initialization vector and
+the data, and does a little bit more error handling. It still has flaws mind
+you, regarding padding removal. There are also some short
+comings of our attack, such has handling the case where the amount of padding
+on the ciphertext really is one or decrypting multiple blocks. Both of those are
+currently left as an exercise.
+
+The usual means of authenticating AES-CBC is with an HMAC using Encrypt-then-MAC
+(EtM) to ensure the integrity of the ciphertext. Let's cleanup our code a bit
+and reduce the amount of assumptions we make. No more hard coded keys and IVs.
+We'll go with in-memory values, for now.
+
+The final cleaned up version of this is also [available on GitHub][3]. For
+brevity, here are the function definitions:
+
+```ruby
+def encrypt_data(plaintext); # return is [ciphertext, random_iv]
+def process_data(iv, data); #return is "true", or an exception is raised
+```
+
+HMAC is a symmetric signature, or a "keyed hash". If we sign the contents of
+the cipher text, then validate the HMAC before attempting to decrypt the data,
+then we have reasonable assurance that the cipher text has not been changed.
+
+Let's update the `encrypt_data` function to include a MAC.
+
+```ruby
+HASH_ALGORITHM = 'sha256'.freeze
+
+def encrypt_data(plaintext)
+    new_iv = OpenSSL::Random.random_bytes(16)
+    cipher = OpenSSL::Cipher::AES.new(128, :CBC)
+    cipher.encrypt
+    cipher.key = @aes_key
+    cipher.iv = new_iv
+    ciphertext = cipher.update(plaintext) + cipher.final
+    digest = OpenSSL::Digest.new(HASH_ALGORITHM)
+    mac = OpenSSL::HMAC.digest(digest, @hmac_key, ciphertext)
+    [mac.freeze, ciphertext.freeze, new_iv.freeze]
+end
+```
+
+Our encrypt function now returns the MAC as well. Many uses of EtM simply prepend
+the MAC to the front of the cipher text. The MAC's size will be consistent with
+the underlying algorithm. For example, HMAC-SHA256 will always produce a 256-bit
+length digest, or 32-bytes. When it comes time to decrypt the data, the HMAC is
+split off from the cipher text since the length is known.
+
+The `process_data` can be updated like this:
+
+```ruby
+HASH_ALGORITHM = 'sha256'.freeze
+
+def process_data(iv, mac, data)
+    raise MacError if mac.length != 32
+    digest = OpenSSL::Digest.new(HASH_ALGORITHM)
+    recomputed_mac = OpenSSL::HMAC.digest(digest, @hmac_key, data)
+    is_mac_valid = 0
+    (0...32).each do |index|
+        is_mac_valid |= recomputed_mac[index].ord ^ mac[index].ord
+    end
+    raise MacError if is_mac_valid != 0
+
+    # Continue normal decryption
+```
+
+Our attack on the padding no longer works. When we attempt to tweak the first
+block, the HMAC no longer matches the supplied value. As an attacker, we can't
+feasibly re-compute the HMAC without the HMAC key, and trying to guess one that
+works is also not doable.
+
+Going back to our cookie web server, when the server issues an encrypted cookie,
+the encrypted cookie contains the HMAC for the encrypted data, as well as the
+cipher text. When the server checks the cookie the browser sent, it first
+verifies the HMAC, and if that passes, then it decrypts the cookie contents.
+
+>Aside: The encrypted cookie was an example. If you really are using encrypted
+>data in cookies, I would kindly ask _why_. Storing sensitive data in a cookie
+>is rarely a good idea at all.
+
+We have some simple authenticated data applied to AES-CBC now, and defeated our
+padding oracle attack. Some final words on best practices here.
+
+First, in an application, revealing _why_ the data failed to decrypt is never a
+good idea. If our example cookie is a session identifier for authentication,
+the web server should simply discard the cookie entirely if it cannot be
+decrypted and redirect the user back to the login screen - not display an error
+about decrypting the cookie's contents.
+
+Authenticated encryption is a bare _minimum_ for properly encrypting data, it isn't
+"bonus" security. Things get trickier when large amounts of data get involved,
+or data is streamed, which we will look at next.
 
 
 [1]: https://gist.github.com/vcsjones/f9d52327c31a822cdc2f73423cace383#file-break-cbc-padding-rb
 [2]: https://repl.it/languages/ruby
+[3]: https://gist.github.com/vcsjones/f9d52327c31a822cdc2f73423cace383#file-cleaned-up-aes-break-rb
