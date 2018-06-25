@@ -1,9 +1,8 @@
 ---
 layout: post
 title:  "Authenticated Encryption"
-date:   2018-06-23 10:42:00 -0400
+date:   2018-06-24 10:42:00 -0400
 categories: Security
-hide: true
 ---
 
 There's been some buzz lately about authenticated encryption. The buzz comes
@@ -33,10 +32,10 @@ or libraries that developers depend on offer _primitives_.
 
 A primitive is a cryptographic function that does very little, but it does
 its job and it does its job well. That doesn't mean though that the primitive
-is enough to fully complete the job. "AES" is a widely known primitive
+is enough to fully complete the task. "AES" is a widely known primitive
 encryption function.
 
-It's most common mode of operation is Cipher Block Chaining, or CBC, which is
+Its most common mode of operation is Cipher Block Chaining, or CBC, which is
 not authenticated. To put another way, it is _malleable_. Let's demonstrate with
 some ruby code.
 
@@ -118,7 +117,7 @@ byte.
 This is malleable encryption. It allows an attacker to change bits or whole
 bytes. However the decryption process doesn't "know" that it is producing
 invalid data. It's obvious when you are
-encrypting something like text, but it can be less obvious if the data being
+processing something like text, but it can be less obvious if the data being
 encrypted is binary data, like a JPEG image.
 
 More interestingly, let's try changing the last byte of the cipher text:
@@ -143,7 +142,8 @@ Where did those \6 bytes come from? That how many bytes it took to reach a
 multiple of 16. During decryption, it looks at the last byte to determine how
 much padding to remove.
 
-We can demonstrate this by telling the AES cipher that there is no padding.
+We can demonstrate this by telling the AES cipher during decryption
+that there is no padding.
 
 ```ruby
 cipher.padding = 0
@@ -193,7 +193,7 @@ It turns out that "false" case for `is_padding_valid` has caused a lot of
 problems with AES-CBC, resulting in a _padding oracle_.
 
 For fun, let's change the last byte of the _first_ block, and look at the decrypted
-result and leave the padding on. Remember as we saw previously, changinge the
+result and leave the padding on. Remember as we saw previously, changing the
 Nth byte of the previous block affects the Nth byte of the current block. That's
 true for padding as well, it get encrypted like any other data.
 
@@ -211,7 +211,7 @@ We get:
 ```
 
 Clearly this padding is invalid, because the padding bytes are not all equal
-to 26. In our home-grown padding removal, `is_adding_valid` would be false and
+to 26. In our home-grown padding removal, `is_padding_valid` would be false and
 an error would be returned.
 
 There is one other value that is valid padding, which is 1. If
@@ -264,11 +264,21 @@ encrypted data has padding, but we don't know how much. Perhaps we can fiddle
 with the last byte of the penultimate block.
 
 Fortunately, our decryption process makes a nice big fat error when the padding
-is wrong. The byte of the padding has two possible values. The value it is supposed
+is wrong. The byte of the padding has one or two possible values. The value it is supposed
 to be (remember, it's six because we are cheating for now) and one. If it's one,
 the padding remover will just remove the last byte. If we just try all
 combinations for the last byte of the first block, perhaps we can figure out what
 value makes a padding value of one.
+
+
+```text
+                                                                   Change this
+                                                                             ↓
+Block 1: [15, 90, 144, 183, 105, 160, 17, 219, 160, 166, 20, 201, 53, 30, 2, 29]
+Block 2: [217, 115, 3, 249, 2, 170, 203, 32, 37, 234, 147, 188, 167, 254, 254, 192]
+                                                                               ↑
+                                                                  To affect this
+```
 
 Let's loop over it.
 
@@ -286,7 +296,7 @@ Let's loop over it.
 end
 ```
 
-We get two values back. We 29 and 26. We already know that the value 29 is valid
+We get two values back. We get 29 and 26. We already know that the value 29 is valid
 because that's the actual value from the ciphertext. So 26 forces the padding to
 one.
 
@@ -299,7 +309,7 @@ decrypt(ciphertext)
 return
 ```
 
-and if we peek inside the unpadded, decrypted, value we get:
+and if we peek inside the decrypted result with the padding left on, we get:
 
 ```
 [95, 9, 61, 149, 138, 173, 150, 56, 255, 200, 46, 73, 45, 145, 185,
@@ -311,7 +321,7 @@ padding byte to 1.
 
 OK, no more pretending. We know that if we tweak the cipher text's 15th byte to 26,
 we end up with a padding of one. What can we learn from that? Let's take the
-original ciphertext value, 29, and xor it with which is our guessed value 26,
+original ciphertext value, 29, and xor it with our guessed value 26,
 and then with 1 which is the plaintext value we know it happens to be because
 the padding was removed successfully.
 
@@ -321,17 +331,19 @@ the padding was removed successfully.
 
 We were able to figure out the plaintext last byte of the second block.
 This isn't "sensitive", yet, this is the only a padding value.  However, we did
-successfully decrypt a byte without explicit knowledge of the key.
+successfully decrypt a byte without explicit knowledge of the key or the
+decryption process telling it was 6.
 
 Let's see if we can figure out how to get the padding to (2, 2).
 
 We can control the last byte of the plaintext now. We can force it to 2 using
 
 ```
-ciphertext_value xor plaintext_value xor 2
+ciphertext_value xor known_plaintext_value xor 2
 ```
 
 ```ruby
+original_ct = ciphertext.dup
 ciphertext[15] = (original_ct[15].ord ^ 6 ^ 2).chr
 (0..255).each do |b|
     ciphertext[14] = b.chr
@@ -353,7 +365,7 @@ ciphertext_byte xor guess xor result
 We get `2 ^ 6 ^ 2`, which is 6. So we we have decrypted another byte. Let's use
 that to force our padding to three.
 
-```
+```ruby
 ciphertext[15] = (original_ct[15].ord ^ 6 ^ 3).chr
 ciphertext[14] = (original_ct[14].ord ^ 6 ^ 3).chr
 (0..255).each do |b|
@@ -438,21 +450,20 @@ You can run that in most online ruby REPLs, like [repl.it][2].
 
 The crucial thing about this is that the "decrypt" process never returns the
 decrypted data, it either raises an exception or returns "Data processed". Yet
-we were still able to determine the contents. This doesn't seem like much
-initially, however consider the example of an encrypted web cookie.
+we were still able to determine the contents.
 
-A visitor visits a website, and the server gives the browser an encrypted cookie
-as a session identifier, maybe because they logged in. When the server receives
-the cookie in later web requests, it needs to decrypt it to get the contents.
-However, if the server returns clear error messages for padding failures like
-our code above, an attacker that has stolen the cookie is able to decrypt it
-by sending the cookie to the server and observing how it responds to padding
-failures.
+A common example of this is encrypted data over insecure transports and
+home-grown transport protocols.
+Such an example might be two servers that need to communicate with each other
+securely. The owners of the servers are able to pre-share an AES key for data
+transmission, say with a configuration file of sorts, so they assume they don't
+need to use HTTPS because they can use AES-CBC to communicate data with their
+preshared keys. If that encrypted data is intercepted, and the intercepter is
+able to re-submit that data to one of the servers with padding changed, they
+are now able to decrypt this data.
 
-I would be remiss not to point out that there are several other design flaws
-with this example we put together for the sake of demonstration. Namely, that
-the IV and Key were hard coded and not generated with a CSPRNG or derived using
-a KDF.
+>Aside: You really should just use TLS with a modern configuration of protocol
+>and cipher suites.
 
 The solution for this is to _authenticate_ our cipher text, which is to say,
 make it tamper-proof. This is easier said than done.
@@ -551,27 +562,21 @@ block, the HMAC no longer matches the supplied value. As an attacker, we can't
 feasibly re-compute the HMAC without the HMAC key, and trying to guess one that
 works is also not doable.
 
-Going back to our cookie web server, when the server issues an encrypted cookie,
-the encrypted cookie contains the HMAC for the encrypted data, as well as the
-cipher text. When the server checks the cookie the browser sent, it first
-verifies the HMAC, and if that passes, then it decrypts the cookie contents.
-
->Aside: The encrypted cookie was an example. If you really are using encrypted
->data in cookies, I would kindly ask _why_. Storing sensitive data in a cookie
->is rarely a good idea at all.
-
 We have some simple authenticated data applied to AES-CBC now, and defeated our
-padding oracle attack. Some final words on best practices here.
-
-First, in an application, revealing _why_ the data failed to decrypt is never a
-good idea. If our example cookie is a session identifier for authentication,
-the web server should simply discard the cookie entirely if it cannot be
-decrypted and redirect the user back to the login screen - not display an error
-about decrypting the cookie's contents.
+padding oracle attack.
 
 Authenticated encryption is a bare _minimum_ for properly encrypting data, it isn't
-"bonus" security. Things get trickier when large amounts of data get involved,
-or data is streamed, which we will look at next.
+"bonus" security. This attack is not new, is have been known at least since
+Vaudenay described it in 2002. Yet application developers continue to use
+unauthenticated encryption. Part of that is because people have stated that
+this oracle attack can be mitigated by not revealing that there was a padding
+error during decryption and instead being generic about the failure. This was
+likely incorrect advice - the correct solution is to authenticate the data which
+mitigates the padding oracle attack quite well.
+
+We're not quite done yet. In a later post, we'll look at some of the problems
+with authenticating data using HMAC or using a mode of AES that is already
+authenticated like AES-GCM.
 
 
 [1]: https://gist.github.com/vcsjones/f9d52327c31a822cdc2f73423cace383#file-break-cbc-padding-rb
