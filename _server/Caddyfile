@@ -1,4 +1,18 @@
- https://www.vcsjones.com https://vcsjones.com https://vcsjones.codes https://www.vcsjones.codes {
+ https://vcsjones.codes https://www.vcsjones.codes https://www.vcsjones.com {
+    tls {
+        protocols tls1.2
+        ciphers ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-ECDSA-AES128-GCM-SHA256
+        curves X25519 p256 p384
+        key_type p256
+        must_staple
+    }
+
+    redir 301 {
+        / https://vcsjones.com{uri}
+    }
+ }
+
+ https://vcsjones.com {
     root /var/wwwroot/vcsjones.com
     tls {
         protocols tls1.2
@@ -50,10 +64,6 @@
     redir /feed/ feed.xml 301 
     redir /ovst https://github.com/vcsjones/OpenVsixSignTool 302
     redir /ast https://github.com/vcsjones/AzureSignTool 302
-    redir 301 {
-        / https://vcsjones.com{uri}
-        if {host} not vcsjones.com
-    }
 
     status 204 /favicon.ico
 
