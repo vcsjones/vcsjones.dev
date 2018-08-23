@@ -1,13 +1,11 @@
-:80 {
-    redir /  https://{host}{uri}
-}
-
-:443 {
+ https://www.vcsjones.com https://vcsjones.com https://vcsjones.codes https://www.vcsjones.codes {
     root /var/wwwroot/vcsjones.com
-    tls /etc/ssl/caddy/vcsjones.chain.ecc.crt /etc/ssl/caddy/vcsjones.ecc.key {
+    tls {
         protocols tls1.2
         ciphers ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-ECDSA-AES128-GCM-SHA256
         curves X25519 p256 p384
+        key_type p256
+        must_staple
     }
 
     header / {
