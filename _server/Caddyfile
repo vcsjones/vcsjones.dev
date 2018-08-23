@@ -1,18 +1,4 @@
- https://vcsjones.codes https://www.vcsjones.codes https://www.vcsjones.com {
-    tls {
-        protocols tls1.2
-        ciphers ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-ECDSA-AES128-GCM-SHA256
-        curves X25519 p256 p384
-        key_type p256
-        must_staple
-    }
-
-    redir 301 {
-        / https://vcsjones.com{uri}
-    }
- }
-
- https://vcsjones.com {
+https://vcsjones.com {
     root /var/wwwroot/vcsjones.com
     tls {
         protocols tls1.2
@@ -77,3 +63,17 @@
         rotate_keep 20
     }
 }
+
+https://vcsjones.codes https://www.vcsjones.codes https://www.vcsjones.com {
+    tls {
+        protocols tls1.2
+        ciphers ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-ECDSA-AES128-GCM-SHA256
+        curves X25519 p256 p384
+        key_type p256
+        must_staple
+    }
+
+    redir 301 {
+        / https://vcsjones.com{uri}
+    }
+ }
