@@ -1,5 +1,4 @@
-https://vcsjones.com {
-    root /var/wwwroot/vcsjones.com
+(security-config) {
     tls {
         protocols tls1.2
         ciphers ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-ECDSA-AES128-GCM-SHA256
@@ -19,6 +18,12 @@ https://vcsjones.com {
 
         Cache-Control "public, max-age=3600"
     }
+}
+
+https://vcsjones.com {
+    import security-config
+
+    root /var/wwwroot/vcsjones.com
 
     header /css {
         Cache-Control "public, immutable, max-age=315360000"
@@ -65,13 +70,7 @@ https://vcsjones.com {
 }
 
 https://vcsjones.codes https://www.vcsjones.codes https://www.vcsjones.com {
-    tls {
-        protocols tls1.2
-        ciphers ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-ECDSA-AES128-GCM-SHA256
-        curves X25519 p256 p384
-        key_type p256
-        must_staple
-    }
+    import security-config
 
     redir 301 {
         / https://vcsjones.com{uri}
