@@ -52,7 +52,7 @@ The extensions are are follows
 * "A" extension instructions offer atomic instructions.
 * "C" extension instructions are a few compressed for smaller encoding.
 * "F" extension instructions offer single-precision floating point.
-* "F" extension instructions offer double-precision floating point.
+* "D" extension instructions offer double-precision floating point.
 * "Q" extension instructions offer quad-precision floating point.
 * "L" extension instructions offer decimal floating point.
 
