@@ -1,10 +1,10 @@
 ---
 layout: post
 title:  "Playing with RISC-V"
-date:   2018-08-26 21:45:00 -0400
+date:   2018-08-30 20:45:00 -0400
 categories: General
 excerpt: >
-  RISC-V (pronounced "Risk Five") is a fairly new architecture that has some
+  RISC-V (pronounced Risk Five) is a fairly new architecture that has some
   interesting ideas behind it that make it worth looking it. Originally designed
   at UC Berkeley, it is an open architecture with the goal of being applicable to
   a wide range of devices.
