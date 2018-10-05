@@ -52,11 +52,11 @@ challenge should be used. That still isn't enough to prevent replays and
 a myriad of other things that are desirable in API authentication.
 </p>
 <p>
-But lets focus on the timing side channel for now.
+But let's focus on the timing side channel for now.
 </p>
 </aside>
 
-The issue here is that `!=`, nor `==`, are not fixed-time, and will return false as
+The issue here is that neither `!=` or `==` are fixed-time, and will return false as
 soon as there is an immediate difference. In pseudo code, it might look something
 like this:
 
