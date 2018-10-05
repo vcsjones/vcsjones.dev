@@ -56,7 +56,7 @@ But lets focus on the timing side channel for now.
 </p>
 </aside>
 
-The issue here is the `==` is not fixed-timed, and will return false as
+The issue here is that `!=`, nor `==`, are not fixed-time, and will return false as
 soon as there is an immediate difference. In pseudo code, it might look something
 like this:
 
@@ -65,13 +65,14 @@ compare(word1, word2) {
     if word1.length != word2.length
         return false
     i = 0
-    while (i < word1.length)
+    while (i < word1.length) {
         letter1 = word1[i]
         letter2 = word2[i]
         if letter1 != letter2
             return false
         else
             i = i + 1
+    }
     return true
 }
 ```
@@ -130,17 +131,13 @@ So `==` in C# is a bad was to check strings for equality where timing side
 channels need to be mitigated. So you say, perhaps you'll do something like this:
 
 ```csharp
-private static bool CheckStringsFixedTime(string str1, string str2)
-{
-    if (str1.Length != str2.Length)
-    {
+private static bool CheckStringsFixedTime(string str1, string str2) {
+    if (str1.Length != str2.Length) {
         return false;
     }
     var allTheSame = true;
-    for (var i = 0; i < str1.Length; i++)
-    {
-        if (str1[i] != str2[i])
-        {
+    for (var i = 0; i < str1.Length; i++) {
+        if (str1[i] != str2[i]) {
             allTheSame = false;
         }
     }
@@ -154,15 +151,12 @@ Branch statements, like `if`, have timing implications. We can't take a branch.
 OK, what about this?
 
 ```csharp
-private static bool CheckStringsFixedTime(string str1, string str2)
-{
-    if (str1.Length != str2.Length)
-    {
+private static bool CheckStringsFixedTime(string str1, string str2) {
+    if (str1.Length != str2.Length) {
         return false;
     }
     var allTheSame = true;
-    for (var i = 0; i < str1.Length; i++)
-    {
+    for (var i = 0; i < str1.Length; i++) {
         allTheSame &= str1[i] == str2[i];
     }
     return allTheSame;
@@ -183,15 +177,12 @@ until the very end. `&` is a decision. However, we can improve that some:
 
 
 ```csharp
-private static bool CheckStringsFixedTime(string str1, string str2)
-{
-    if (str1.Length != str2.Length)
-    {
+private static bool CheckStringsFixedTime(string str1, string str2) {
+    if (str1.Length != str2.Length) {
         return false;
     }
     var result = 0;
-    for (var i = 0; i < str1.Length; i++)
-    {
+    for (var i = 0; i < str1.Length; i++) {
         result |= str1[i] ^ str2[i];
     }
     return result == 0;
@@ -218,15 +209,12 @@ of optimizations so the code executes faster.
 
 ```csharp
 [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-private static bool CheckStringsFixedTime(string str1, string str2)
-{
-    if (str1.Length != str2.Length)
-    {
+private static bool CheckStringsFixedTime(string str1, string str2) {
+    if (str1.Length != str2.Length) {
         return false;
     }
     var result = 0;
-    for (var i = 0; i < str1.Length; i++)
-    {
+    for (var i = 0; i < str1.Length; i++) {
         result |= str1[i] ^ str2[i];
     }
     return result == 0;
