@@ -83,8 +83,8 @@ The answer is going to be false every time.
 
 To an attacker that is trying to figure out the contents of the string, carefully
 measuring the time can leak the contents of the string. For argument's sake,
-let's say that checking each letter takes 2ns and the attacker has a very way
-of measuring time over a network and can account for jitter and network latency.
+let's say that checking each letter takes 2ns and the attacker has a very accurate
+way of measuring time over a network and can account for jitter and latency.
 
 <pre>
 GET /SuperSensitiveApi HTTP/1.1
@@ -115,7 +115,7 @@ X-Api-Key: Seaaaaaaaaaaaaaa
 </pre>
 
 This time it took 6ns to check the API key because the first and second letter
-were checked, and the first failed.
+were checked, and the third failed.
 
 The attacker can keep doing this by observing the amount of time each call
 takes. The longer it takes, the attacker can assume they have guessed the next
@@ -124,7 +124,7 @@ accurate enough timing information, but it is believed that it might be possible
 given enough persistence and an adversary that has the means to be in a network
 position that is very stable.
 
-These kinds of attacks do exist, an example timing side-channels is Lucky 13,
+These kinds of attacks do exist, an example timing side-channel is [Lucky 13][2],
 which affected many library's approach to handling CBC padding in TLS.
 
 So `==` in C# is a bad was to check strings for equality where timing side
@@ -198,7 +198,7 @@ the comparison checks failed.
 There is some debate as to what arithmetic operators are better for fixed time
 operations between `str1[x]` and `str2[x]`. Some implementations use XOR, like
 above, other may use SUB for subtraction. Unfortunately, most CPU architectures
-make no guarantees if any operations are constant-time.
+make no guarantee if any operations are constant-time.
 
 We _still_ have a problem to address. The JIT could be making unintended
 optimizations. The C# compiler itself makes very little optimizations. The JIT
@@ -232,8 +232,9 @@ eliminated since a ROS cannot be null.
 This is what .NET Core 2.1's `FixedTimeEquals` does. It just does it over a
 `ReadOnlySpan<byte>` instead of characters. The x86 produced by the current JIT
 will be identical for `ReadOnlySpan<char>` and `ReadOnlySpan<byte>` with the
-exception of the size of the `MOVZX`
+exception of the size of the `MOVZX`.
 
 It's handy that this is just in the box for .NET Core now.
 
 [1]: https://docs.microsoft.com/en-us/dotnet/api/system.security.cryptography.cryptographicoperations.fixedtimeequals?view=netcore-2.1
+[2]: https://en.wikipedia.org/wiki/Lucky_Thirteen_attack
