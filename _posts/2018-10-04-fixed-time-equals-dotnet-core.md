@@ -127,7 +127,7 @@ position that is very stable.
 These kinds of attacks do exist, an example timing side-channel is [Lucky 13][2],
 which affected many library's approach to handling CBC padding in TLS.
 
-So `==` in C# is a bad was to check strings for equality where timing side
+So `==` in C# is a bad way to check strings for equality where timing side
 channels need to be mitigated. So you say, perhaps you'll do something like this:
 
 ```csharp
