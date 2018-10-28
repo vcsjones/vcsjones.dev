@@ -8,7 +8,7 @@ permalink: /:year/:month/:day/:title/
 
 markdown: kramdown
 paginate: 5
-gems:
+plugins:
   - jekyll-paginate
 exclude:
   - app.js
