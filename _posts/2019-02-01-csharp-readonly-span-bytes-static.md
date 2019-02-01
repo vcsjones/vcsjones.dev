@@ -79,8 +79,8 @@ Dumping `@rdx L10` yields:
 ```
 
 So that was a very long-winded way of saying that when using arrays, initializing
-a field with bytes results in `memcpy` from the image into the array, which
-results in more data on the heap.
+a field or variable with bytes results in `memcpy` from the image into the array,
+which results in more data on the heap.
 
 Now, starting in 7.3, we can avoid that `memcpy` when using `ReadOnlySpan<byte>`.
 
