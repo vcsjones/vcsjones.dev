@@ -12,7 +12,7 @@ goodies. Many of them are performance focused, such as safe stack allocations
 using `Span<T>`, or interoperability with improvements to `fixed`.
 
 One that I love, but is not documented well, is some special treatment
-that `ReadOnlySpan<byte>` gets when it's contents are known at compile time.
+that `ReadOnlySpan<byte>` gets when its contents are known at compile time.
 
 Here's an example of a lookup table I used to aide with hex encoding that uses
 a `byte[]`.
