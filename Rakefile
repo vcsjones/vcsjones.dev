@@ -75,7 +75,7 @@ end
 
 task :exif do
   image_dir = File.join(@out_directory, 'images')
-  #sh "exiftool -overwrite_original -r -all= #{image_dir}"
+  sh "exiftool -overwrite_original -r -all= #{image_dir}"
 end
 
 task :crush do

@@ -1,0 +1,18 @@
+phases:
+  install:
+    commands:
+      - apt-get update -y
+      - apt-get install -y webp exiftool pngcrush brotli gzip
+  pre_build:
+    commands:
+      - gem install bundler
+      - bundle install
+  build:
+    commands:
+      - bundle exec jekyll
+      - bundle exec rake
+
+artifacts:
+  files:
+    - _site/**/*
+  name: site
