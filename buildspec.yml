@@ -4,7 +4,13 @@ phases:
   install:
     commands:
       - apt-get update -y
-      - apt-get install -y webp exiftool pngcrush brotli gzip
+      - apt-get install -y webp exiftool pngcrush gzip git cmake
+      - git clone https://github.com/google/brotli.git /tmp/brotli
+      - mkdir /tmp/brotli/out
+      - cd /tmp/brotli/out && ../configure-cmake --disable-debug
+      - make
+      - make install
+
   pre_build:
     commands:
       - gem install bundler
