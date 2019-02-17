@@ -6,7 +6,5 @@ files:
   - source: _server/Caddyfile
     destination: /opt/caddy/Caddyfile
 hooks:
-  BeforeInstall:
-    - location: _deploy/publish.sh
   AfterInstall:
     - location: _deploy/reload.sh
