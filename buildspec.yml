@@ -24,3 +24,4 @@ artifacts:
   files:
     - _site/**/*
   name: site
+  base-directory: _site
