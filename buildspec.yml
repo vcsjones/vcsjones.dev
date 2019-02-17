@@ -17,7 +17,7 @@ phases:
     commands:
       - gem install bundler
       - bundle install
-      - bundle exec jekyll
+      - bundle exec jekyll build
       - bundle exec rake
 
 artifacts:
