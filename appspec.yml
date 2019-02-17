@@ -5,6 +5,24 @@ files:
     destination: /var/wwwroot/vcsjones.com
   - source: _server/Caddyfile
     destination: /opt/caddy/Caddyfile
+
+permissions:
+  - object: /var/wwwroot/vcsjones.com
+    pattern: *
+    owner: root
+    group: root
+    mode: 664
+    type:
+      - file
+
+  - object: /var/wwwroot/vcsjones.com
+    pattern: *
+    owner: root
+    group: root
+    mode: 775
+    type:
+      - directory
+
 hooks:
   AfterInstall:
     - location: _deploy/reload.sh
