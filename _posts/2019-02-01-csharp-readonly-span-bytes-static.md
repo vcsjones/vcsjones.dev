@@ -15,7 +15,7 @@ One that I love, but is not documented well, is some special treatment
 that `ReadOnlySpan<byte>` gets when its contents are known at compile time.
 
 Here's an example of a lookup table I used to aide with hex encoding that uses
-a `byte[]`.
+a `byte[]`:
 
 ```csharp
 private static byte[] LookupTable => new byte[]
