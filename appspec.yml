@@ -8,7 +8,7 @@ files:
 
 permissions:
   - object: /var/wwwroot/vcsjones.com
-    pattern: '*'
+    pattern: '**/*'
     owner: root
     group: root
     mode: 664
@@ -16,7 +16,7 @@ permissions:
       - file
 
   - object: /var/wwwroot/vcsjones.com
-    pattern: '*'
+    pattern: '**/*'
     owner: root
     group: root
     mode: 775
