@@ -8,12 +8,18 @@ files:
 
 permissions:
   - object: /var/wwwroot/vcsjones.com
-    pattern: '**'
     owner: root
     group: root
     mode: 775
     type:
       - directory
+
+  - object: /var/wwwroot/vcsjones.com
+    owner: root
+    group: root
+    mode: 775
+    type:
+      - file
 
 hooks:
   AfterInstall:
