@@ -23,5 +23,5 @@ phases:
 artifacts:
   files:
     - _site/**/*
+    - appspec.yml
   name: site
-  base-directory: _site
