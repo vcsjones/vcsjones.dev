@@ -11,16 +11,12 @@ paginate: 5
 plugins:
   - jekyll-paginate
 exclude:
-  - app.js
-  - package.json
-  - node_modules
-  - gulpfile.js
   - appspec.yml
   - _deploy
   - _server
   - README.md
-  - yarn.lock
   - .gitignore
   - Gemfile
   - Gemfile.lock
+  - Rakefile
   
