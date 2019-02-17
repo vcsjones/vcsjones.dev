@@ -24,4 +24,6 @@ artifacts:
   files:
     - _site/**/*
     - appspec.yml
+    - _server/*
+    - _deploy/*
   name: site
