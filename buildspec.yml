@@ -6,7 +6,7 @@ phases:
       - apt-get update -y
       - apt-get install -y webp exiftool pngcrush gzip git cmake
       - git clone https://github.com/google/brotli.git /tmp/brotli
-      -  /tmp/brotli && git checkout v1.0.7
+      - cd /tmp/brotli && git checkout v1.0.7
       - mkdir /tmp/brotli/out
       - cd /tmp/brotli/out && ../configure-cmake --disable-debug
       - make
