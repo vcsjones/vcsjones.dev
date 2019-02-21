@@ -18,8 +18,7 @@ Here's an example of a lookup table I used to aide with hex encoding that uses
 a `byte[]`:
 
 ```csharp
-private static byte[] LookupTable => new byte[]
-{
+private static byte[] LookupTable => new byte[] {
     (byte)'0', (byte)'1', (byte)'2', (byte)'3', (byte)'4',
     (byte)'5', (byte)'6', (byte)'7', (byte)'8', (byte)'9',
     (byte)'A', (byte)'B', (byte)'C', (byte)'D', (byte)'E',
@@ -86,8 +85,7 @@ Now, starting in 7.3, we can avoid that `memcpy` when using `ReadOnlySpan<byte>`
 
 
 ```csharp
-private static ReadOnlySpan<byte> LookupTable => new byte[]
-{
+private static ReadOnlySpan<byte> LookupTable => new byte[] {
     (byte)'0', (byte)'1', (byte)'2', (byte)'3', (byte)'4',
     (byte)'5', (byte)'6', (byte)'7', (byte)'8', (byte)'9',
     (byte)'A', (byte)'B', (byte)'C', (byte)'D', (byte)'E',
@@ -119,8 +117,56 @@ So we see that the method is now returning the data directly and
 omitting the `memcpy` entirely, so our `ReadOnlySpan<byte>` is pointing directly
 to the `.text` section.
 
-This currently only works with `ReadOnlySpan<byte>` right now. Other types
-will continue to use `InitializeArray` due to needing to handle different
-platforms and how they handle endianness.
+This works for property getters as shown above, but also as the return of a
+method:
+
+```csharp
+ReadOnlySpan<byte> GetBytes() {
+    return new byte[] { ... };
+}
+```
+
+Which works similar to the getter of the property. In addition, this also works
+for locals in a method body as well:
+
+
+```csharp
+void Write200Ok(Stream s) {
+    ReadOnlySpan<byte> data = new byte[] {
+        (byte)'H', (byte)'T', (byte)'T', (byte)'P',
+        (byte)'/', (byte)'1', (byte)'.', (byte)'1',
+        (byte)' ', (byte)'2', (byte)'0', (byte)'0',
+        (byte)' ', (byte)'O', (byte)'K'
+    };
+    s.Write(data);
+}
+```
+
+Which also produces a reasonable JIT disassembly:
+
+```
+sub     rsp, 0x38
+xor     eax, eax
+mov     qword ptr [rsp+0x28], rax
+mov     qword ptr [rsp+0x30], rax
+mov     rcx, 0x1e595b42ade
+mov     eax, 0x0F
+lea     r8, [rsp+0x28]
+mov     qword ptr [r8], rcx
+mov     dword ptr [r8+8], eax
+mov     rcx, rdx
+lea     rdx, [rsp+0x28]
+cmp     dword ptr [rcx], ecx
+call    0x7ff89ede10c8 (Stream.Write(System.ReadOnlySpan`1<Byte>), mdToken: 0000000006000001)
+add     rsp, 0x38
+ret
+ ```
+
+ Here we see  `mov rcx, 0x1e595b42ade` which moves the address of the static
+ data directly in to the register with no additional work to create a byte array.
+
+These optimizations currently only works with `ReadOnlySpan<byte>` right now.
+Other types will continue to use `InitializeArray` due to needing to handle
+different platforms and how they handle endianness.
 
 [1]: https://github.com/dotnet/coreclr/blob/a28b25aacdcd2adb0fdfa70bd869f53ba6565976/src/classlibnative/bcltype/arraynative.cpp#L1377
