@@ -8,7 +8,7 @@
     }
 
     header / {
-        Content-Security-Policy "default-src 'none' ; style-src 'self' ; img-src 'self' ; frame-ancestors 'none' ; form-action 'none' ; block-all-mixed-content; sandbox; base-uri 'none';"
+        Content-Security-Policy "default-src 'none'; style-src 'self'; img-src 'self'; frame-ancestors 'none'; form-action 'none'; block-all-mixed-content; sandbox; base-uri 'none';"
         X-XSS-Protection "1; mode=block"
         Referrer-Policy no-referrer
         X-Frame-Options DENY
