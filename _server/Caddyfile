@@ -1,7 +1,7 @@
 (security-config) {
     tls {
         protocols tls1.2 tls1.3
-        ciphers ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384 ECDHE-ECDSA-AES128-GCM-SHA256
+        ciphers ECDHE-ECDSA-AES128-GCM-SHA256 ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384
         curves X25519 p256 p384
         key_type p256
         must_staple
