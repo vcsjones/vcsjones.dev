@@ -70,7 +70,7 @@ https://vcsjones.com {
     }
 }
 
-https://vcsjones.codes https://www.vcsjones.codes https://www.vcsjones.com {
+https://vcsjones.codes https://www.vcsjones.codes https://www.vcsjones.com https://vcsjones.dev {
     import security-config
 
     redir 301 {
