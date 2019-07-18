@@ -223,6 +223,9 @@ signed with these problematic signatures, you are currently out of luck using
 in-the-box components. As far as other platforms go, both macOS and Linux
 environments for .NET Core will agree with CNG - that the signature is invalid.
 
+The good news is, these signatures are not easy to come by. So far, only the
+old Verisign timestamp authority is known to have produced signatures like this.
+
 
 [1]: https://github.com/dotnet/corefx/issues/34202
 [2]: ftp://ftp.rsasecurity.com/pub/pkcs/ascii/pkcs-1.asc
