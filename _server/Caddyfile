@@ -20,7 +20,7 @@
     }
 }
 
-https://vcsjones.com {
+https://vcsjones.dev {
     import security-config
 
     root /var/wwwroot/vcsjones.com
@@ -70,10 +70,10 @@ https://vcsjones.com {
     }
 }
 
-https://vcsjones.codes https://www.vcsjones.codes https://www.vcsjones.com https://vcsjones.dev {
+https://vcsjones.codes https://www.vcsjones.codes https://www.vcsjones.com https://vcsjones.com https://www.vcsjones.dev {
     import security-config
 
     redir 301 {
-        / https://vcsjones.com{uri}
+        / https://vcsjones.dev{uri}
     }
  }
