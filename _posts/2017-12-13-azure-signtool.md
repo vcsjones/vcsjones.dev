@@ -243,11 +243,11 @@ can sign, but now also how it signs.
 
 AzureSignTool's [source][5] is on GitHub, MIT licensed, and has C# bindings.
 
-[1]: https://vcsjones.com/2017/05/07/custom-authenticode-signing/
+[1]: /2017/05/07/custom-authenticode-signing/
 [2]: https://github.com/onovotny/KeyVaultSignToolWrapper
 [3]: https://github.com/vcsjones/AzureKeyVaultSignTool/blob/master/src/lib.rs
 [4]: https://twitter.com/vcsjones/status/861578775720583168
 [5]: https://github.com/vcsjones/AzureSignTool/blob/d24b0443f57b1f8c2875c7e199bc4c822a5e7473/AzureSignTool/Interop/mssign32.cs#L9
-[6]: https://vcsjones.com/2017/08/10/subject-interface-packages/
+[6]: /2017/08/10/subject-interface-packages/
 [7]: https://msdn.microsoft.com/en-us/library/windows/desktop/jj835834(v=vs.85).aspx
 [8]: https://github.com/vcsjones/AzureSignTool/issues/2#issuecomment-327606234
