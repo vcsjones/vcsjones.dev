@@ -177,9 +177,9 @@ At this point we know what the difference is, and the original specification in
 part 10.1.2 makes it fairly clear that the "data" should be a digest and should
 be encoded as DigestInfo, not a bare digest.
 
-The source of this signature is from Verisign's timestamp authority at
-`http://timestamp.verisign.com/scripts/timstamp.dll`. After checking with
-someone at DigiCert (now running this TSA), it was launched in May 1995.
+<p>The source of this signature is from Verisign's timestamp authority at
+http://timestamp.verisign.com/&#x200B;scripts/&#x200B;timstamp.dll. After checking with
+someone at DigiCert (now running this TSA), it was launched in May 1995.</p>
 
 I suspect that the TSA is old enough that the implementation was made before the
 specification was complete or simply got the specification wrong and no one
