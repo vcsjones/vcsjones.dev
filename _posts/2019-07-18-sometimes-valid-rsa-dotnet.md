@@ -22,7 +22,7 @@ have noticed, Windows', thus .NET Framework's, implementation was a little more
 relaxed in some ways.
 
 This turned out not to be one of those cases. The CMS part was actually working
-just fine. What as failing was RSA itself. The core of the issue was that
+just fine. What was failing was RSA itself. The core of the issue was that
 different implementations of RSA disagreed on the RSA signature's validity.
 
 That seems pretty strange!
