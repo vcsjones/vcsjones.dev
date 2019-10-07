@@ -9,7 +9,7 @@ excerpt: >
 ---
 
 .NET Core 3.0 introduced over a dozen new APIs for importing and exporting RSA
-keys in different formats. Many of them are variant of another with a slightly
+keys in different formats. Many of them are a variant of another with a slightly
 different API, but they are extremely useful for working with private and public
 keys from other systems that work with encoding keys.
 
