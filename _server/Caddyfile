@@ -56,6 +56,7 @@ https://vcsjones.dev {
     redir /ovst https://github.com/vcsjones/OpenVsixSignTool 302
     redir /ast https://github.com/vcsjones/AzureSignTool 302
     redir /modpow https://www.mtholyoke.edu/courses/quenell/s2003/ma139/js/powermod.html 302
+    redir /dotnet-contrib https://github.com/dotnet/corefx/pulls?q=is%3Apr+is%3Aclosed+author%3Avcsjones
 
     status 204 /favicon.ico
 
