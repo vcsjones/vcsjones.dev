@@ -52,6 +52,10 @@
     }
 
     @include media-query($on-palm) {
+        @media (prefers-color-scheme: dark) {
+            background-color: $background-color-dark;
+        }
+
         position: absolute;
         top: 9px;
         right: $spacing-unit / 2;
@@ -75,6 +79,9 @@
 
                 path {
                     fill: $grey-color-dark;
+                    @media (prefers-color-scheme: dark) {
+                        fill: $grey-color-light;
+                    }
                 }
             }
         }
@@ -90,6 +97,9 @@
         }
 
         .page-link {
+            @media (prefers-color-scheme: dark) {
+                color: #fff;
+            }
             color: #000;
             display: block;
             padding: 5px 10px;
