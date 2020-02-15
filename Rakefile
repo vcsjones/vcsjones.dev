@@ -30,7 +30,7 @@ multitask br: markup.pathmap('%p.br')
 task images: [:exif, :crush, :webp]
 
 rule '.png.webp' => ['.png'] do |t|
-  sh "cwebp -lossless \"#{t.source}\" -o \"#{t.name}\""
+  sh "cwebp -z 9 -lossless \"#{t.source}\" -o \"#{t.name}\""
 end
 
 rule '.jpeg.webp' => '.jpeg' do |t|
