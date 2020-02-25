@@ -34,8 +34,8 @@ collector. `stackalloc` is not a general purpose drop-in for arrays.
 They are limited in a number of ways that [other posts][1] explain well enough,
 and require the use of `Span<T>`.
 
-Recently I vented a bit `stackalloc` on Twitter, as one does on Twitter, about
-`stackalloc`, or more specifically the community's fast embrace of it, without
+Recently I vented a bit about `stackalloc` on Twitter, as one does on Twitter,
+specifically the community's fast embrace of it, without
 discussing or well-documenting some of `stackalloc`'s sharp edges. I'm going
 to expand on that here, and make an argument for `stackalloc` still being unsafe
 and requiring some thought about being used.
