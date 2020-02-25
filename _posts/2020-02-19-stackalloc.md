@@ -5,7 +5,7 @@ date:   2020-02-19 00:24:00 -0500
 categories: General
 hide: true
 excerpt: >
-  Span made stackalloc safe-ish to use, but it's still got sharp edges.
+  Span made stackalloc safe-ish to use, but it still has sharp edges.
 ---
 
 In .NET Core 2.1 a small but well-received feature was the ability to "safely"
