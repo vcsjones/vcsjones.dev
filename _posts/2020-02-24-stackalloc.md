@@ -61,7 +61,7 @@ This allows users to take down your process, an effective denial-of-service.
 
 ### DO: Use a constant for allocation size
 
-Instead, it's better to use a contant value for `stackalloc`, always. It
+Instead, it's better to use a constant value for `stackalloc`, always. It
 immediately resolves any ambiguities about how much is allocated on the stack.
 
 ```csharp
