@@ -77,6 +77,18 @@ Span<char> buffer = stackalloc char[256];
 Span<char> input = buffer.Slice(0, userInput.Length);
 ```
 
+Using a constant also guards against accidentially trying to stackalloc with a
+negative number. For example:
+
+```csharp
+int userInput = -1; //DON'T
+Span<byte> b = stackalloc byte[userInput];
+```
+
+This will also produce a stack overflow. It's important that the amount to be
+allocated on the stack is not negative, and a sensible amount.
+
+
 ### DON'T: Use stackalloc in non-constant loop
 
 Even if you allocate a fixed length amount of data on the stack, doing so in a
@@ -189,15 +201,17 @@ upper-half of the integer will not be as expected.
 
 ### DO: Initialize if required
 
-Any item read from a `stackalloc`ed buffer should be explicitly assigned.
+Any item read from a `stackalloc`ed buffer should be explicitly assigned, or
+use `Clear` to explicitly clear the entire `Span<T>` and initialize it to
+defaults.
 
 ```csharp
 Span<byte> buffer = stackalloc byte[sizeof(int)];
+buffer.Clear(); //explicit zero initialize
 byte lo = 1;
 byte hi = 1;
 buffer[0] = lo;
 buffer[1] = hi;
-buffer[2..].Fill(0); //better
 int result = BinaryPrimitives.ReadInt32LittleEndian(buffer);
 ```
 
