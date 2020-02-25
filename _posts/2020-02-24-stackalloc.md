@@ -88,7 +88,7 @@ This will also produce a stack overflow. It's important that the amount to be
 allocated on the stack is not negative, and a sensible amount.
 
 
-### DON'T: Use stackalloc in non-constant loop
+### DON'T: Use stackalloc in non-constant loops
 
 Even if you allocate a fixed length amount of data on the stack, doing so in a
 loop can be dangerous as well, especially if the number of the iterations the
@@ -103,7 +103,7 @@ for (int i = 0; i < userInput; i++) { // DON'T
 This also can cause a denial of service, since this allows someone to control
 the number of stack allocations, though not the length of the allocation.
 
-### DO: Allocate outside of loop
+### DO: Allocate outside of loops
 
 ```csharp
 Span<char> buffer = stackalloc char[256]; //better
@@ -176,10 +176,9 @@ if (rentedFromPool is object) {
 
 ### DON'T: Assume stack allocations are zero initialized
 
-Most normal uses `stackalloc` result in zero-initialized data. This however is
-something that developers may be able to opt-out of in the near future. This will
-be opt-in, however it is better to start making that assumption today so that
-the `SkipLocalsInit` feature can brought in easier later, if you choose. Therefore,
+Most normal uses `stackalloc` result in zero-initialized data. This behavior is
+however not guaranteed, and can change depending if the application is built
+for Debug or Release, and other contents of the method. Therefore,
 don't assume that any of the elements in a `stackalloc`ed `Span<T>` are
 initialized to something by default. For example:
 
@@ -196,6 +195,16 @@ int result = BinaryPrimitives.ReadInt32LittleEndian(buffer);
 In this case, we might expect the result to be 257, every time. However if
 the `stackalloc` does not zero initialize the buffer, then the contents of the
 upper-half of the integer will not be as expected.
+
+This behavior will not always be observed. In Debug builds, it's likely that you
+will see that `stackalloc` zero-initializes its contents every time, whereas in
+Release builds, you may find that the contents of a `stackalloc` are
+uninitialized.
+
+Soon developers will be able to explicitly skip zero-initializing `stackalloc` contents
+with the `SkipLocalsInit` feature. Currently, whether or not `stackalloc` is
+default initialized is up to Roslyn. This feature will allow more explicit
+control over skipping stack allocation initialization.
 
 
 ### DO: Initialize if required
