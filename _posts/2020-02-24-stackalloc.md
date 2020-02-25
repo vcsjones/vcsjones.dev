@@ -43,7 +43,7 @@ and requiring some thought about being used.
 ### DON'T: Use variable allocation lengths
 
 A large risk with using `stackalloc` is running out of stack space. If you've
-ever written a method that it recursive and went too deep, you'll eventually
+ever written a method that is recursive and went too deep, you'll eventually
 receive a `StackOverflowException`. The `StackOverflowException` is a bit
 special in that it is one of the exceptions that cannot be caught. When a
 `StackOverflowException` occurs, the process immediately exits. Allocating too much
