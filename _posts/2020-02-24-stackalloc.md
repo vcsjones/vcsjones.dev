@@ -124,7 +124,7 @@ Span<byte> data = stackalloc byte[8000 * 1024]; // DON'T
 ```
 
 You may find that this runs fine on Linux, but fails on Windows with a stack
-overflow. Different operating systems, archtectures, and environments, have
+overflow. Different operating systems, architectures, and environments, have
 different stacks limits. Linux typically allows for a larger stack than Windows
 by default, and other hosting scenarios such as in an IIS worker process come
 with even lower limits. An embedded environment may have a stack of only a few
