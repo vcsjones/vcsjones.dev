@@ -19,13 +19,17 @@ unsafe {
 }
 ```
 
-The use of `unsafe` was enough to deter a lot of people from using it that it
-remained a relatively niche feature. The introduction of `Span<T>` now means
-this can be done without being in an `unsafe` context now:
+The use of `unsafe`, along with the little number of APIs in .NET that could
+work with pointers, was enough to deter a lot of people from using it. As a
+result, it remained a relatively niche feature. The introduction of `Span<T>`
+now means this can be done without being in an `unsafe` context now:
 
 ```csharp
 Span<byte> data = stackalloc byte[256];
 ```
+
+The .NET team has also been working diligently to add `Span<T>` APIs where it
+makes sense. There is now more appeal and possibility to use `stackalloc`. 
 
 `stackalloc` is desirable in some performance sensitive areas. It can be used
 in places where small arrays were used, with the advantage that it does not
@@ -46,9 +50,9 @@ A large risk with using `stackalloc` is running out of stack space. If you've
 ever written a method that is recursive and went too deep, you'll eventually
 receive a `StackOverflowException`. The `StackOverflowException` is a bit
 special in that it is one of the exceptions that cannot be caught. When a
-`StackOverflowException` occurs, the process immediately exits. Allocating too much
-with `stackalloc` has the same effect - it causes a `StackOverflowException` and
-causes the process to immediately terminate.
+a stack overflow occurs, the process immediately exits. Allocating too much
+with `stackalloc` has the same effect - it causes a stack overflow and the
+process immediately terminates.
 
 This is particularly worrisome when the allocation's length is determined by user
 input:
@@ -58,6 +62,15 @@ Span<char> buffer = stackalloc char[userInput.Length]; //DON'T
 ```
 
 This allows users to take down your process, an effective denial-of-service.
+
+Using a constant also reduces the risk of arithmetic or overflow mistakes.
+Currently, .NET Core's CLR interprets that amount to be allocated as an unsigned
+integer. This means that an arithmetic over or under flow may result in a 
+stack overflow.
+
+```csharp
+Span<byte> b = stackalloc byte[(userInput % 64) - 1]; //DON'T
+```
 
 ### DO: Use a constant for allocation size
 
@@ -75,17 +88,6 @@ adjust it to the correct size:
 Span<char> buffer = stackalloc char[256];
 Span<char> input = buffer.Slice(0, userInput.Length);
 ```
-
-Using a constant also guards against accidentially trying to stackalloc with a
-negative number. For example:
-
-```csharp
-int userInput = -1; //DON'T
-Span<byte> b = stackalloc byte[userInput];
-```
-
-This will also produce a stack overflow. It's important that the amount to be
-allocated on the stack is not negative, and a sensible amount.
 
 
 ### DON'T: Use stackalloc in non-constant loops
@@ -176,8 +178,8 @@ if (rentedFromPool is object) {
 
 ### DON'T: Assume stack allocations are zero initialized
 
-Most normal uses `stackalloc` result in zero-initialized data. This behavior is
-however not guaranteed, and can change depending if the application is built
+Most normal uses of `stackalloc` result in zero-initialized data. This behavior
+is however not guaranteed, and can change depending if the application is built
 for Debug or Release, and other contents of the method. Therefore,
 don't assume that any of the elements in a `stackalloc`ed `Span<T>` are
 initialized to something by default. For example:
