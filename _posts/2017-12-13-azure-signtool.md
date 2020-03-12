@@ -5,7 +5,7 @@ date:   2017-12-13 20:20:00 -0500
 categories: General
 ---
 
-A while ago, Oren Novotny and I started exploring the feasibility of doing
+A while ago, Claire Novotny and I started exploring the feasibility of doing
 Authenticode signing with Azure Key Vault. Azure Key Vault lets you do some
 pretty interesting things, including which lets you treat it as a pseudo
 network-attached HSM.
@@ -67,7 +67,7 @@ HRESULT WINAPI AuthenticodeDigestSign(
 ```
 
 With this, it was indeed possible to make a library that `signtool` would call
-this function for signing the digest. Oren put together a C# library that did
+this function for signing the digest. Claire put together a C# library that did
 exactly that on GitHub under [KeyVaultSignToolWrapper][2]. I even made some
 decent progress on a [rust implementation][3].
 
@@ -244,7 +244,7 @@ can sign, but now also how it signs.
 AzureSignTool's [source][5] is on GitHub, MIT licensed, and has C# bindings.
 
 [1]: /2017/05/07/custom-authenticode-signing/
-[2]: https://github.com/onovotny/KeyVaultSignToolWrapper
+[2]: https://github.com/novotnyllc/KeyVaultSignToolWrapper
 [3]: https://github.com/vcsjones/AzureKeyVaultSignTool/blob/master/src/lib.rs
 [4]: https://twitter.com/vcsjones/status/861578775720583168
 [5]: https://github.com/vcsjones/AzureSignTool/blob/d24b0443f57b1f8c2875c7e199bc4c822a5e7473/AzureSignTool/Interop/mssign32.cs#L9

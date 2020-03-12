@@ -11,8 +11,8 @@ I agree! It has a niche audience, considering that Microsoft already makes a
 tool for signing VSIX packages, which are extensions for Visual Studio.
 Why an OSS version of it?
 
-The idea came from [Oren Novotny][2], so kudos to him for wanting to make signing
-VSIX packages better. Oren encountered some limitations of the existing sign
+The idea came from [Claire Novotny][2], so kudos to her for wanting to make signing
+VSIX packages better. Claire encountered some limitations of the existing sign
 tool, and implementing a new one from scratch wasn't an entirely crazy idea.
 
 The limitation came down to where the existing VsixSignTool was willing to look
@@ -32,4 +32,4 @@ packages is something you want to do, give it a try and let me know how it can
 be better.
 
 [1]: https://github.com/vcsjones/OpenVsixSignTool
-[2]: https://twitter.com/onovotny/
+[2]: https://twitter.com/clairernovotny/

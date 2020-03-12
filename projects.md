@@ -22,6 +22,6 @@ interception. When Fiddler performs HTTPS interception, the browser shows
 Fiddler's generated certificate - not the one sent by the server.
 
 [1]: https://github.com/vcsjones/AzureSignTool
-[2]: https://github.com/onovotny/SignService/
+[2]: https://github.com/dotnet/SignService
 [3]: https://github.com/vcsjones/OpenOpcSignTool
 [4]: https://github.com/vcsjones/FiddlerCert
