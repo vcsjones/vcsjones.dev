@@ -28,7 +28,6 @@ https://vcsjones.dev {
 
     header /css {
         Cache-Control "public, immutable, max-age=315360000"
-        Access-Control-Allow-Origin *
         Vary Origin
         -Content-Security-Policy
         -X-XSS-Protection
