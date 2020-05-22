@@ -35,6 +35,7 @@ vcsjones.dev {
     -Content-Security-Policy
     -Cache-Control
     Vary Accept
+    Content-Type text/css
     Cache-Control "public, immutable, max-age=315360000"
   }
 
