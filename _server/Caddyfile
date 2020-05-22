@@ -1,80 +1,56 @@
-(security-config) {
-    tls {
-        protocols tls1.2 tls1.3
-        ciphers ECDHE-ECDSA-AES128-GCM-SHA256 ECDHE-ECDSA-WITH-CHACHA20-POLY1305 ECDHE-ECDSA-AES256-GCM-SHA384
-        curves X25519 p256 p384
-        key_type p256
-        must_staple
-    }
-
-    header / {
-        Content-Security-Policy "default-src 'none'; style-src 'self'; img-src 'self'; frame-ancestors 'none'; form-action 'none'; block-all-mixed-content; base-uri 'none';"
-        X-XSS-Protection "1; mode=block"
-        Referrer-Policy no-referrer
-        X-Frame-Options DENY
-        X-Content-Type-Options nosniff
-        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-        Expect-CT "max-age=86400, enforce"
-        Cross-Origin-Resource-Policy "same-origin"
-        Cross-Origin-Embedder-Policy "require-corp"
-        Cache-Control "public, max-age=3600"
-    }
+{
+  key_type p256
+  email kevin@vcsjones.com
+  default_sni vcsjones.dev
 }
 
-https://vcsjones.dev {
-    import security-config
-
-    root /var/wwwroot/vcsjones.com
-
-    header /css {
-        Cache-Control "public, immutable, max-age=315360000"
-        Vary Origin
-        -Content-Security-Policy
-        -X-XSS-Protection
-        -X-Frame-Options
-    }
-
-    header /images {
-        Vary Accept
-        Cache-Control "public, immutable, max-age=315360000"
-        -Content-Security-Policy
-        -X-XSS-Protection
-        -X-Frame-Options
-    }
-
-    header /feed.xml {
-        Content-Type "application/rss+xml; charset=utf-8"
-    }
-
-    rewrite /images {
-        ext .png .jpeg .jpg
-        if {>Accept} has image/webp
-        to {path}.webp {path}
-    }
-
-    redir /feed/ feed.xml 301 
-    redir /ovst https://github.com/vcsjones/OpenVsixSignTool 302
-    redir /ast https://github.com/vcsjones/AzureSignTool 302
-    redir /modpow https://www.mtholyoke.edu/courses/quenell/s2003/ma139/js/powermod.html 302
-    redir /dotnet-contrib https://github.com/dotnet/runtime/commits?author=vcsjones 302
-
-    status 204 /favicon.ico
-
-    errors {
-        404 404/index.html
-    }
-
-    log / /var/log/caddy/requests.log "\{ \"path\": \"{path}\", \"proto\": \"{proto}\", \"when\": \"{when}\", \"tls_cipher\": \"{tls_cipher}\", \"tls_protocol\": \"{tls_protocol}\" \}" {
-        rotate_size 50
-        rotate_age  90
-        rotate_keep 20
-    }
+(tls) {
+  tls {
+    curves x25519 secp256r1 secp384r1 secp521r1
+    ciphers TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256 TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384
+  }
 }
 
-https://vcsjones.codes https://www.vcsjones.codes https://www.vcsjones.com https://vcsjones.com https://www.vcsjones.dev {
-    import security-config
+(tls-headers) {
+  header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+  header Expect-CT "max-age=86400, enforce"
+}
 
-    redir 301 {
-        / https://vcsjones.dev{uri}
+vcsjones.dev {
+  import tls
+  import tls-headers
+
+  header * {
+    Content-Security-Policy "default-src 'none'; style-src 'self'; img-src 'self'; frame-ancestors 'none'; form-action 'none'; block-all-mixed-content; base-uri 'none';"
+    X-XSS-Protection "1; mode=block"
+    Referrer-Policy no-referrer
+    X-Frame-Options DENY
+    X-Content-Type-Options nosniff
+    Cross-Origin-Resource-Policy "same-origin"
+    Cross-Origin-Embedder-Policy "require-corp"
+    Cache-Control "public, max-age=3600"
+  }
+
+  header /css/* {
+    -Content-Security-Policy
+    -Cache-Control
+    Vary Accept
+    Cache-Control "public, immutable, max-age=315360000"
+  }
+
+  root * /var/wwwroot/vcsjones.com
+
+  @brotli {
+    header Accept-Encoding *br*
+    file {
+      try_files {path}.br
     }
- }
+  }
+
+  handle @brotli {
+    header Content-Encoding br
+    rewrite * {http.matchers.file.relative}
+  }
+
+  file_server
+}
