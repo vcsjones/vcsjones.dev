@@ -39,6 +39,13 @@ vcsjones.dev {
     Cache-Control "public, immutable, max-age=315360000"
   }
 
+  header /images/* {
+    -Content-Security-Policy
+    -Cache-Control
+    Vary Accept
+    Cache-Control "public, max-age=86400"
+  }
+
   root * /var/wwwroot/vcsjones.com
 
   @brotli {
@@ -48,8 +55,20 @@ vcsjones.dev {
     }
   }
 
+  @gzip {
+    header Accept-Encoding *gzip*
+    file {
+      try_files {path}.gz
+    }
+  }
+
   handle @brotli {
     header Content-Encoding br
+    rewrite * {http.matchers.file.relative}
+  }
+
+  handle @gzip {
+    header Content-Encoding gzip
     rewrite * {http.matchers.file.relative}
   }
 
