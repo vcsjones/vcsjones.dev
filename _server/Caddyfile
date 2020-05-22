@@ -16,6 +16,13 @@
   header Expect-CT "max-age=86400, enforce"
 }
 
+www.vcsjones.dev, vcsjones.com, www.vcsjones.com {
+    import tls
+    import tls-headers
+
+    redir https://vcsjones.dev{uri}
+}
+
 vcsjones.dev {
   import tls
   import tls-headers
