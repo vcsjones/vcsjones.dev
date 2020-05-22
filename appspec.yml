@@ -4,7 +4,7 @@ files:
   - source: _site
     destination: /var/wwwroot/vcsjones.com
   - source: _server/Caddyfile
-    destination: /opt/caddy/Caddyfile
+    destination: /etc/caddy/
 
 permissions:
   - object: /var/wwwroot/vcsjones.com
