@@ -69,6 +69,19 @@ vcsjones.dev {
     }
   }
 
+  @webp {
+    header Accept *image/webp*
+    path /images/*
+    file {
+      try_files {path}.webp
+    }
+  }
+
+  handle @webp {
+    header Content-Type image/webp
+    rewrite * {http.matchers.file.relative}
+  }
+
   handle @brotli {
     header Content-Encoding br
     rewrite * {http.matchers.file.relative}
