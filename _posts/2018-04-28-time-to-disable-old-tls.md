@@ -86,4 +86,4 @@ performance. The exact ones I use on this site are my [Caddyfile][2].
 
 
 [1]: https://www.ssllabs.com/ssltest/clients.html
-[2]: https://github.com/vcsjones/vcsjones.com/blob/master/_server/Caddyfile
+[2]: https://github.com/vcsjones/vcsjones.dev/blob/main/_server/Caddyfile

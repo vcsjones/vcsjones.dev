@@ -117,5 +117,5 @@ seem do to the complexities of build processes.
 
 
 [1]: https://developer.mozilla.org/en-US/docs/Web/Security/Subresource_Integrity
-[2]: https://github.com/vcsjones/vcsjones.com/blob/master/css/main.scss
-[3]: https://github.com/vcsjones/vcsjones.com/blob/61ba0443725f73898a78bdc625df36ca3b1c3735/_plugins/sri.rb
+[2]: https://github.com/vcsjones/vcsjones.dev/blob/main/css/main.scss
+[3]: https://github.com/vcsjones/vcsjones.dev/blob/61ba0443725f73898a78bdc625df36ca3b1c3735/_plugins/sri.rb

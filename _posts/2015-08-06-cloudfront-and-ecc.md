@@ -12,7 +12,7 @@ certificate – I would have seen HPKP violations myself if I did. I also did it
 to test something I hadn't considered at first: CDNs.
 
 Originally this website was set up to serve static content via Amazon's
-CloudFront where my own server (vcsjones.com) was an Origin for the
+CloudFront where my own server (vcsjones.dev) was an Origin for the
 distribution. CloudFront does support communicating with origins over HTTPS, but
 sadly they don't support ECDSA cipher suites. According to [their documentation][1],
 they actually have a pretty limited cipher suite support and top out at TLS 1.0.

@@ -42,4 +42,4 @@ a few times it eventually clicked and I was able to get it working correctly.
 The migration has left some things missing, for now, such as comments, but
 eventually I'll bring those back.
 
-[1]: https://github.com/vcsjones/vcsjones.com
+[1]: https://github.com/vcsjones/vcsjones.dev

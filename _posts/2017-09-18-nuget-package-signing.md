@@ -143,7 +143,7 @@ Re-keying is a natural and encouraged process. Then organizations would need to
 find the new key to trust.
 
 This is harder for individuals. Do I put my public key on my website? Does
-anyone know if vcsjones.com is really operated by someone named Kevin Jones?
+anyone know if vcsjones.dev is really operated by someone named Kevin Jones?
 What if I don't have HTTPS on my site - would you trust the key that you found
 there?
 
