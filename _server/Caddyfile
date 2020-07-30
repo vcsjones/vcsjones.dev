@@ -91,6 +91,8 @@ vcsjones.dev {
     header Content-Encoding gzip
     rewrite * {http.matchers.file.relative}
   }
+  
+  redir /dotnet-contrib https://github.com/dotnet/runtime/commits/master?author=vcsjones
 
   file_server
 }
