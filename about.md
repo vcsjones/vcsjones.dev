@@ -4,8 +4,6 @@ title: About
 permalink: /about/
 ---
 
-I've always had a passion for the strange, interesting, and extraordinary.
+I do information security with a focus on applied cryptography. I also like to [contribute][1] to the .NET Platform libraries.
 
-I'm also a dedicated community member and Microsoft MVP. Frequently speaking
-at code camps and user groups, I love to share what I know, and especially
-learning from others.
+[1]: /dotnet-contrib
