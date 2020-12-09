@@ -203,11 +203,9 @@ will see that `stackalloc` zero-initializes its contents every time, whereas in
 Release builds, you may find that the contents of a `stackalloc` are
 uninitialized.
 
-Soon developers will be able to explicitly skip zero-initializing `stackalloc` contents
-with the `SkipLocalsInit` feature. Currently, whether or not `stackalloc` is
-default initialized is up to Roslyn. This feature will allow more explicit
-control over skipping stack allocation initialization.
-
+Starting in .NET 5, developers can opt to explicitly skip zero-initializing
+`stackalloc` contents with the [`SkipLocalsInit`][2] attribute. Without it, whether
+or not `stackalloc` is default initialized is up to Roslyn.
 
 ### DO: Initialize if required
 
@@ -236,3 +234,4 @@ aren't running any more.
 
 
 [1]: https://docs.microsoft.com/en-us/archive/msdn-magazine/2018/january/csharp-all-about-span-exploring-a-new-net-mainstay
+[2]: https://docs.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.skiplocalsinitattribute?view=net-5.0
