@@ -29,7 +29,7 @@ vcsjones.dev {
 
   header * {
     Content-Security-Policy "default-src 'none'; style-src 'self'; img-src 'self'; frame-ancestors 'none'; form-action 'none'; block-all-mixed-content; base-uri 'none';"
-    X-XSS-Protection "1; mode=block"
+    X-XSS-Protection "0"
     Referrer-Policy no-referrer
     X-Frame-Options DENY
     X-Content-Type-Options nosniff
