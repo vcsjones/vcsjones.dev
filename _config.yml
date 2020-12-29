@@ -18,6 +18,7 @@ exclude:
   - _server
   - README.md
   - .gitignore
+  - .devcontainer.json
   - Gemfile
   - Gemfile.lock
   - Rakefile
