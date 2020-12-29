@@ -1,0 +1,23 @@
+title: Random Thoughts
+description: Warranty void.
+baseurl: ""
+url: "https://vcsjones.dev"
+twitter_username: vcsjones
+github_username:  vcsjones
+permalink: /:year/:month/:day/:title/
+
+markdown: kramdown
+paginate: 5
+plugins:
+  - jekyll-paginate
+exclude:
+  - appspec.yml
+  - _deploy
+  - _server
+  - README.md
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+  - Rakefile
+  - buildspec.yml
+  
