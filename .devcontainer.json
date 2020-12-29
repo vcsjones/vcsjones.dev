@@ -2,5 +2,5 @@
     "dockerFile": "Dockerfile",
     "forwardPorts": [4000],
     "name": "vcsjones.dev",
-    "postCreateCommand": "bash -l -c 'gem install bundler && bundle install'"
+    "postCreateCommand": "bash -l -c \"gem install bundler && bundle install\""
 }
