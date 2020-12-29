@@ -1,5 +1,5 @@
 {
-    "image": "mcr.microsoft.com/vscode/devcontainers/ruby:2.7",
+    "dockerFile": "Dockerfile",
     "forwardPorts": [4000],
     "name": "vcsjones.dev",
     "postCreateCommand": "gem install bundler && bundle install"
