@@ -8,6 +8,8 @@ permalink: /:year/:month/:day/:title/
 
 markdown: kramdown
 paginate: 5
+sass:
+  sourcemap: never
 plugins:
   - jekyll-paginate
 exclude:
