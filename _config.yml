@@ -19,6 +19,7 @@ exclude:
   - README.md
   - .gitignore
   - .devcontainer.json
+  - .startup.sh
   - Gemfile
   - Gemfile.lock
   - Rakefile
