@@ -4,7 +4,7 @@ baseurl: ""
 url: "https://vcsjones.dev"
 twitter_username: vcsjones
 github_username:  vcsjones
-permalink: /:title/
+permalink: /:year/:month/:day/:title/
 
 markdown: kramdown
 paginate: 5
