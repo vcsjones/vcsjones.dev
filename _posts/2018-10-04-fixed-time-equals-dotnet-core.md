@@ -2,6 +2,7 @@
 layout: post
 title:  "FixedTimeEquals in .NET Core"
 date:   2018-10-04 18:35:00 -0400
+modified: 2020-12-31 11:36:00 -0500
 categories: Security
 excerpt: >
   Taking a thorough look at .NET Core's FixedTimeEquals and the problem in

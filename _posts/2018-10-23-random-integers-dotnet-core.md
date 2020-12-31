@@ -2,6 +2,7 @@
 layout: post
 title:  "Secure Random Integers in .NET Core 3"
 date:   2018-10-23 18:35:00 -0400
+modified: 2020-12-31 11:36:00 -0500
 categories: Security
 excerpt: >
   .NET Core 3's secure random integer generation.

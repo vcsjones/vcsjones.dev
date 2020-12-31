@@ -2,6 +2,7 @@
 layout: post
 title: "C# ReadOnlySpan<byte> and static data"
 date:   2019-02-01 9:20:00 -0500
+modified: 2020-12-31 11:36:00 -0500
 categories: General
 excerpt: >
   A useful C# feature for static binary data and avoiding copying.

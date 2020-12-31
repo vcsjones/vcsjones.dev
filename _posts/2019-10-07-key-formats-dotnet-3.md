@@ -2,6 +2,7 @@
 layout: post
 title: "Import and Export RSA Key Formats in .NET Core 3"
 date:   2019-10-07 16:24:00 -0400
+modified: 2020-12-31 11:36:00 -0500
 categories: General
 excerpt: >
   .NET Core 3 has new APIs for importing keys in different formats,
