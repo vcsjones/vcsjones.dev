@@ -40,7 +40,7 @@ vcsjones.dev {
   }
 
   @legacy {
-    path_regexp legacyregexp ^/\d{4}/\d{2}/\d{2}/(.*?)/$
+    path_regexp legacyregexp ^/\d{4}/\d{2}/\d{2}/(.*?)/?$
   }
 
   redir @legacy /{http.regexp.legacyregexp.1}/ permanent
