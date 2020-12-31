@@ -550,10 +550,10 @@ Update: [Part 2 is available][7].
 
 
 
-[1]: /2016/04/15/authenticode-stuffing-tricks/
-[2]: /2016/12/30/authenticode-sealing/
+[1]: /authenticode-stuffing-tricks/
+[2]: /authenticode-sealing/
 [3]: https://github.com/vcsjones/PngSip
 [4]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa380283(v=vs.85).aspx
 [5]: https://msdn.microsoft.com/en-us/library/windows/desktop/aa387767(v=vs.85).aspx
 [6]: /images/sipexports.png
-[7]: /2017/08/11/subject-interface-packages-part-2/
+[7]: /subject-interface-packages-part-2/

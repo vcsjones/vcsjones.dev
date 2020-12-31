@@ -102,7 +102,7 @@ doesn't chain back to a trusted root certificate.
 I'm not sure if this is indicative of how adoption will go for NuGet. I'm
 curious to see where NuGet is three years from now on signing.
 
-[1]: /2017/09/18/nuget-package-signing/
+[1]: /nuget-package-signing/
 [2]: https://venturebeat.com/2013/01/30/rubygems-org-hacked-interrupting-heroku-services-and-putting-millions-of-sites-using-rails-at-risk/
 [3]: https://rubygems.org/stats?page=1
 [4]: https://github.com/vcsjones/rubygem-signing-research

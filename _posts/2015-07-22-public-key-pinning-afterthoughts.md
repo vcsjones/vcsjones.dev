@@ -57,4 +57,4 @@ Even if you don’t plan on completely switching to ECC, pinning one as a backup
 is still advisable if you ever plan on deploying multiple certificates. Apache
 supports this today, and Nginx is working on it.
 
-[1]: /2015/02/23/public-key-pinning/
+[1]: /public-key-pinning/

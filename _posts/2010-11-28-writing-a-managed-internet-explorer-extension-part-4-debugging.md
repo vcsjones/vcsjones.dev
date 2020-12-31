@@ -100,11 +100,11 @@ route you choose.
 1. [Writing a Managed Internet Explorer Extension: Part 5 – Working with the DOM][5]
 1. [Writing a Managed Internet Explorer Extension: Part 6 – Regrets][6]
 
-[1]: /2009/11/18/writing-a-managed-internet-explorer-extension-part-1-basics/
+[1]: /writing-a-managed-internet-explorer-extension-part-1-basics/
 [2]: /images/iebreak.png
-[3]: /2010/05/31/writing-a-managed-internet-explorer-extension-part-2-dom-basics/
-[4]: /2010/06/10/writing-a-managed-internet-explorer-extension-part-3/
-[5]: /2010/12/12/writing-a-managed-internet-explorer-extension-part-5-working-with-the-dom/
-[6]: /2012/09/03/regrets-managed-browser-helper-objects/
+[3]: /writing-a-managed-internet-explorer-extension-part-2-dom-basics/
+[4]: /writing-a-managed-internet-explorer-extension-part-3/
+[5]: /writing-a-managed-internet-explorer-extension-part-5-working-with-the-dom/
+[6]: /regrets-managed-browser-helper-objects/
 [7]: /images/ieattach.png
 [8]: /images/iebphit.png

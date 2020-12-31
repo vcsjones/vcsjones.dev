@@ -87,9 +87,9 @@ not recommended simply because its easier.
 1. [Writing a Managed Internet Explorer Extension: Part 5 – Working with the DOM][6]
 1. Writing a Managed Internet Explorer Extension: Part 6 – Regrets
 
-[1]: /2009/11/18/writing-a-managed-internet-explorer-extension-part-1-basics/
+[1]: /writing-a-managed-internet-explorer-extension-part-1-basics/
 [2]: /images/ieaddontime.png
-[3]: /2010/05/31/writing-a-managed-internet-explorer-extension-part-2-dom-basics/
-[4]: /2010/06/10/writing-a-managed-internet-explorer-extension-part-3/
-[5]: /2010/11/28/writing-a-managed-internet-explorer-extension-part-4-debugging/
-[6]: /2010/12/12/writing-a-managed-internet-explorer-extension-part-5-working-with-the-dom/
+[3]: /writing-a-managed-internet-explorer-extension-part-2-dom-basics/
+[4]: /writing-a-managed-internet-explorer-extension-part-3/
+[5]: /writing-a-managed-internet-explorer-extension-part-4-debugging/
+[6]: /writing-a-managed-internet-explorer-extension-part-5-working-with-the-dom/

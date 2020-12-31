@@ -136,5 +136,5 @@ going down to C or C++.
 The last part, sealing, is a ways off, because the details of sealing signatures
 is not public yet, and are known only due to some careful inspection.
 
-[1]: /2017/08/10/subject-interface-packages/
+[1]: /subject-interface-packages/
 [2]: https://github.com/vcsjones/PngSip

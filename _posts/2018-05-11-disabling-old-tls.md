@@ -211,8 +211,8 @@ smaller, more secure, certificates, and cleaning up the list of supported cipher
 suites.
 
 
-[1]: /2018/04/28/time-to-disable-old-tls/
-[2]: /2015/04/14/turn-sslv3-off-means-turn-it-off/
+[1]: /time-to-disable-old-tls/
+[2]: /turn-sslv3-off-means-turn-it-off/
 [3]: https://caddyserver.com/docs/log
 [4]: https://caddyserver.com/docs/placeholders
 [5]: https://github.com/mholt/caddy/issues/2146

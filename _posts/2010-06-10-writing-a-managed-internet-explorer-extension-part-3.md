@@ -176,11 +176,11 @@ get this off my chest.
 1. [Writing a Managed Internet Explorer Extension: Part 5 – Working with the DOM][5]
 1. [Writing a Managed Internet Explorer Extension: Part 6 – Regrets][6]
 
-[1]: /2009/11/18/writing-a-managed-internet-explorer-extension-part-1-basics/
+[1]: /writing-a-managed-internet-explorer-extension-part-1-basics/
 [2]: https://msdn.microsoft.com/en-us/library/bb250462(VS.85).aspx#dse_stlip
-[3]: /2010/05/31/writing-a-managed-internet-explorer-extension-part-2-dom-basics/
-[4]: /2010/11/28/writing-a-managed-internet-explorer-extension-part-4-debugging/
-[5]: /2010/12/12/writing-a-managed-internet-explorer-extension-part-5-working-with-the-dom/
-[6]: /2012/09/03/regrets-managed-browser-helper-objects/
+[3]: /writing-a-managed-internet-explorer-extension-part-2-dom-basics/
+[4]: /writing-a-managed-internet-explorer-extension-part-4-debugging/
+[5]: /writing-a-managed-internet-explorer-extension-part-5-working-with-the-dom/
+[6]: /regrets-managed-browser-helper-objects/
 [7]: /images/ieattach.png
 [8]: /images/iebphit.png

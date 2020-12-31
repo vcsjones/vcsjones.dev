@@ -55,4 +55,4 @@ first when deploying HPKP, and testing a failover to each and every backup pin. 
 this, I ran in to a situation where a backup pin wasn't working. It turned out that the
 SHA256 digest of the SPKI was actually a digest of the string "File not found".  
 
-[1]: /2015/02/23/public-key-pinning/
+[1]: /public-key-pinning/

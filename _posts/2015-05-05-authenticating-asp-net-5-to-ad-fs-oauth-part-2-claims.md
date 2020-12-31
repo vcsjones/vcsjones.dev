@@ -67,5 +67,5 @@ the value of the outgoing claim when we originally set up the claim rules.
 Putting it all together, we now have OAuth2 authentication with full support
 for claims.
 
-[1]: /2015/05/04/authenticating-asp-net-5-to-ad-fs-oauth/
+[1]: /authenticating-asp-net-5-to-ad-fs-oauth/
 [2]: /images/claimrules.png

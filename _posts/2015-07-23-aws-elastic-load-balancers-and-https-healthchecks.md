@@ -39,5 +39,5 @@ limited cipher suites listed above.
 After changing my ELB check to use TCP port-establishment as the health check,
 the ELB was happy to bring the instances back online.
 
-[1]: /2015/07/21/going-ecc/
+[1]: /going-ecc/
 [2]: /images/elbcheck.png

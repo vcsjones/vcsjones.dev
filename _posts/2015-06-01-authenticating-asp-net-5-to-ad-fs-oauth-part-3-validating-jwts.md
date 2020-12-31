@@ -62,4 +62,4 @@ if (certificates.Count == 0)
 var certificate = certificates[0];
 ```
 
-[1]: /2015/05/04/authenticating-asp-net-5-to-ad-fs-oauth/
+[1]: /authenticating-asp-net-5-to-ad-fs-oauth/

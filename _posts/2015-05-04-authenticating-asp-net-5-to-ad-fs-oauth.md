@@ -147,4 +147,4 @@ using Microsoft.AspNet.Authorization;
 [2]: /images/adfs-manual.png
 [3]: /images/adfs-identifiers.png
 [4]: /images/adfs-transform.png
-[5]: /2015/05/05/authenticating-asp-net-5-to-ad-fs-oauth-part-2-claims/
+[5]: /authenticating-asp-net-5-to-ad-fs-oauth-part-2-claims/

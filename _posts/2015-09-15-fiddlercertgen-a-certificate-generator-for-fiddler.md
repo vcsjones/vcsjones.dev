@@ -59,5 +59,5 @@ remove the Fiddler reference and add the one for the .NET 2.0 Fiddler.
 The GitHub repository's README contains installation instructions.
 
 [1]: https://www.telerik.com/blogs/understanding-fiddler-certificate-generators
-[2]: /2015/08/12/a-certificate-inspector-for-fiddler/
+[2]: /a-certificate-inspector-for-fiddler/
 [3]: https://github.com/vcsjones/FiddlerCertGen

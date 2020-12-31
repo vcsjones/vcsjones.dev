@@ -121,5 +121,5 @@ As for using sealing, I would hold off for now. Its lack of documentation
 expresses that it may not be fully ready for use yet, but it will be interesting
 to see where this goes.
 
-[1]: /2016/04/15/authenticode-stuffing-tricks/
+[1]: /authenticode-stuffing-tricks/
 [2]: /images/intent-to-seal.png

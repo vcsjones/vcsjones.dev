@@ -305,11 +305,11 @@ Call regasm like we did before, except use /unregister rather than /register.
 1. [Writing a Managed Internet Explorer Extension: Part 5 – Working with the DOM][5]
 1. [Writing a Managed Internet Explorer Extension: Part 6 – Regrets][6]
 
-[1]: /2010/05/31/writing-a-managed-internet-explorer-extension-part-2-dom-basics/
+[1]: /writing-a-managed-internet-explorer-extension-part-2-dom-basics/
 [2]: /images/iebho.png
-[3]: /2010/06/10/writing-a-managed-internet-explorer-extension-part-3/
-[4]: /2010/11/28/writing-a-managed-internet-explorer-extension-part-4-debugging/
-[5]: /2010/12/12/writing-a-managed-internet-explorer-extension-part-5-working-with-the-dom/
-[6]: /2012/09/03/regrets-managed-browser-helper-objects/
+[3]: /writing-a-managed-internet-explorer-extension-part-3/
+[4]: /writing-a-managed-internet-explorer-extension-part-4-debugging/
+[5]: /writing-a-managed-internet-explorer-extension-part-5-working-with-the-dom/
+[6]: /regrets-managed-browser-helper-objects/
 [7]: /images/ieattach.png
 [8]: /images/iebphit.png

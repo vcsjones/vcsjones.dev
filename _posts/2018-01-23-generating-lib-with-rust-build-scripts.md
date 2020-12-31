@@ -182,5 +182,5 @@ project, you'll want to account for all of this in the Windows-specific parts.
 With this, I now only need to check in a `.def` text file and Cargo will take
 care of the rest.
 
-[1]: /2017/12/14/azure-signtool/
+[1]: /azure-signtool/
 [2]: /images/mssign32-link.png
