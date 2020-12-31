@@ -26,6 +26,7 @@ www.vcsjones.dev, vcsjones.com, www.vcsjones.com {
 vcsjones.dev {
   import tls
   import tls-headers
+  encode gzip
 
   header * {
     Content-Security-Policy "default-src 'none'; style-src 'self'; img-src 'self'; frame-ancestors 'none'; form-action 'none'; block-all-mixed-content; base-uri 'none';"
@@ -41,56 +42,16 @@ vcsjones.dev {
   header /css/* {
     -Content-Security-Policy
     -Cache-Control
-    Vary Accept
-    Content-Type text/css
     Cache-Control "public, immutable, max-age=315360000"
   }
 
   header /images/* {
     -Content-Security-Policy
     -Cache-Control
-    Vary Accept
     Cache-Control "public, max-age=86400"
   }
 
   root * /var/wwwroot/vcsjones.com
-
-  @brotli {
-    header Accept-Encoding *br*
-    file {
-      try_files {path}.br
-    }
-  }
-
-  @gzip {
-    header Accept-Encoding *gzip*
-    file {
-      try_files {path}.gz
-    }
-  }
-
-  @webp {
-    header Accept *image/webp*
-    path /images/*
-    file {
-      try_files {path}.webp
-    }
-  }
-
-  handle @webp {
-    header Content-Type image/webp
-    rewrite * {http.matchers.file.relative}
-  }
-
-  handle @brotli {
-    header Content-Encoding br
-    rewrite * {http.matchers.file.relative}
-  }
-
-  handle @gzip {
-    header Content-Encoding gzip
-    rewrite * {http.matchers.file.relative}
-  }
   
   redir /dotnet-contrib https://github.com/dotnet/runtime/commits/master?author=vcsjones
 

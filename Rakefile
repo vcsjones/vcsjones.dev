@@ -13,20 +13,8 @@ def images
     )
 end
 
-def markup
-  Rake::FileList.new(
-    File.join(@out_directory, '**', '*.xml'),
-    File.join(@out_directory, '**', '*.html'),
-    File.join(@out_directory, '**', '*.css'),
-    File.join(@out_directory, '**', '*.txt')
-    )
-end
-
-task compress: [:images, :compress_images]
-multitask compress_images: [:gz, :br]
+task compress: [:images]
 multitask webp: images.pathmap('%p.webp')
-multitask gz: markup.pathmap('%p.gz')
-multitask br: markup.pathmap('%p.br')
 task images: [:exif, :crush, :webp]
 
 rule '.png.webp' => ['.png'] do |t|
@@ -39,38 +27,6 @@ end
 
 rule '.jpg.webp' => '.jpg' do |t|
   sh "cwebp -q 80 \"#{t.source}\" -o \"#{t.name}\""
-end
-
-rule '.html.gz' => '.html' do |t|
-  sh "gzip --keep -9 \"#{t.source}\""
-end
-
-rule '.css.gz' => '.css' do |t|
-  sh "gzip --keep -9 \"#{t.source}\""
-end
-
-rule '.xml.gz' => '.xml' do |t|
-  sh "gzip --keep -9 \"#{t.source}\""
-end
-
-rule '.txt.gz' => '.txt' do |t|
-  sh "gzip --keep -9 \"#{t.source}\""
-end
-
-rule '.html.br' => '.html' do |t|
-  sh "brotli --no-copy-stat --keep --best --output=\"#{t.name}\" \"#{t.source}\""
-end
-
-rule '.css.br' => '.css' do |t|
-  sh "brotli --no-copy-stat --keep --best --output=\"#{t.name}\" \"#{t.source}\""
-end
-
-rule '.xml.br' => '.xml' do |t|
-  sh "brotli --no-copy-stat --keep --best --output=\"#{t.name}\" \"#{t.source}\""
-end
-
-rule '.txt.br' => '.txt' do |t|
-  sh "brotli --no-copy-stat --keep --best --output=\"#{t.name}\" \"#{t.source}\""
 end
 
 task :exif do
