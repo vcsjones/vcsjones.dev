@@ -38,6 +38,12 @@ vcsjones.dev {
     Cache-Control "public, max-age=3600"
   }
 
+  @legacy {
+    path_regexp legacyregexp ^/\d{4}/\d{2}/\d{2}/(.*?)/$
+  }
+
+  redir @legacy /{http.regexp.legacyregexp.1}/ permanent
+
   header /css/* {
     -Content-Security-Policy
     -Cache-Control
