@@ -24,4 +24,5 @@ exclude:
   - Gemfile.lock
   - Rakefile
   - buildspec.yml
+  - Dockerfile
   
