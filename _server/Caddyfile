@@ -16,6 +16,13 @@
   header Expect-CT "max-age=86400, enforce"
 }
 
+shrug.fyi {
+    import tls
+    import tls-headers
+
+    respond "¯\_(ツ)_/¯"
+}
+
 www.vcsjones.dev, vcsjones.com, www.vcsjones.com {
     import tls
     import tls-headers
