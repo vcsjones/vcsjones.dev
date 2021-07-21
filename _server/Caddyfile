@@ -21,6 +21,7 @@ shrug.fyi {
     import tls-headers
 
     respond "¯\_(ツ)_/¯"
+    header Content-Type "text/plain; charset=utf-8"
 }
 
 www.vcsjones.dev, vcsjones.com, www.vcsjones.com {
