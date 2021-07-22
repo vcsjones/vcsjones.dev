@@ -20,8 +20,9 @@ shrug.fyi {
     import tls
     import tls-headers
 
-    respond "¯\_(ツ)_/¯"
+    header Cache-Control "public, max-age=86400"
     header Content-Type "text/plain; charset=utf-8"
+    respond "¯\_(ツ)_/¯"
 }
 
 www.vcsjones.dev, vcsjones.com, www.vcsjones.com {
