@@ -13,5 +13,9 @@
         "/`.*?`/",
         "/```(\\r|\\n|.)*```/gm",
         "/^\\[\\d+\\]:.*$/gm"
+    ],
+    "cSpell.words": [
+        "ciphertext",
+        "ciphertexts"
     ]
 }
