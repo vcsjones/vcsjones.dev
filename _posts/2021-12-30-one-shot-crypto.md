@@ -13,7 +13,7 @@ use.
 
 "Better" is an interesting point of conversation with cryptographic API design.
 To a developer, better may mean more throughput, less allocations, or a simply
-less cumbersome API. To framework or library author, it means thinking about
+less cumbersome API. To a framework or library author, it means thinking about
 how developers will use, or mis-use, an API.
 
 Let's look at AES encryption as it was in the .NET Framework days:
@@ -59,27 +59,27 @@ offer simple `Encrypt` or `Decrypt` APIs that takes data and return data, or wri
 to an existing buffer.
 
 This, while less flexible, resolves many concerns about misusing the AES GCM cipher
-mode. Primarily among those concerns was releasing authenticated ciphertexts.
+mode. Primarily among those concerns was releasing unauthenticated data.
 Streaming decryption is, put simply, difficult to do safely.
 
-"Streaming" decryption here doesn't necessarily mean the use of `System.IO.Stream`.
+"Streaming" decryption doesn't necessarily mean the use of `System.IO.Stream`.
 Rather, it means processing a block of plaintext or ciphertext a block at a time
 and doing something with it in the middle of encrypting or decrypting. This is
 often perceived as desirable when handling large amounts of data. After all, if
 I have a 12 gigabyte file, I can't just put that in a byte array and encrypt it.
-Rather, processing it in chunks lets a me handle it in memory.
+Rather, processing it in chunks lets me handle it in memory.
 
 In pseudo code, let's say I wanted to decrypt a file and send it over the network:
 
 ```ruby
 # NOTE: This is an example of doing things improperly
-fileStream = getFile()
+encryptedFileStream = getFile()
 stream = getStream()
 
 loop {
-    data = fileStream.read(128) # One AES block size
+    data = encryptedFileStream.read(128 / 8) # One AES block size
 
-    if (data.length == 128) {
+    if (data.length == 128 / 8) {
         stream.write(decrypt(data))
     }
     else {
@@ -130,7 +130,7 @@ better at that over the past few releases.
 
 Like `AesGcm`, the `SymmetricAlgorithm` and its derivatives like `Aes`,
 `TripleDES`, etc. all offer similar one-shot APIs starting in .NET 6 in the form
-of `EncryptCbc`, `EncryptEcb` or `DecryptCbc` and `DecryptCbc`.
+of `EncryptCbc`, `EncryptEcb` or `DecryptCbc` and `DecryptEcb`.
 
 ```csharp
 using System.Security.Cryptography;
@@ -144,6 +144,7 @@ using (Aes aes = Aes.Create())
 
     aes.Key = key;
 
+    // Encrypt all the data at once
     byte[] encrypted = aes.EncryptCbc(data, iv);
 }
 ```
@@ -179,7 +180,7 @@ byte[] digest = SHA256.HashData(data);
 This is much easier to reason about. The method is static, there is no stateful
 hash object that needs to be instantiated, no need to remember to dispose of it,
 and no need to worry about thread safety. Not only are the one shots easier to
-use, they are almost always offer better performance, either in throughput or
+use, they almost always offer better performance, either in throughput or
 reduced allocations. These one shots are not simple wrappers around
 `HashAlgorithm.Create()` and then hashing something. They internally do not
 allocate on the managed heap at all. Everyone benefits here: the APIs are
