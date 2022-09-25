@@ -8,7 +8,11 @@
         "**/node_modules": true
     },
     "editor.rulers": [80],
-    "editor.quickSuggestions": false,
+    "editor.quickSuggestions": {
+        "comments": "off",
+        "strings": "off",
+        "other": "off"
+    },
     "cSpell.ignoreRegExpList": [
         "/`.*?`/",
         "/```(\\r|\\n|.)*```/gm",
