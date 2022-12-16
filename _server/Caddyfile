@@ -68,6 +68,7 @@ vcsjones.dev {
   root * /var/wwwroot/vcsjones.com
   
   redir /dotnet-contrib https://github.com/dotnet/runtime/commits/main?author=vcsjones
+  redir /mastodon https://infosec.exchange/@vcsjones
 
   file_server
 }
