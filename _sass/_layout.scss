@@ -51,63 +51,12 @@
         }
     }
 
-    @include media-query($on-palm) {
-        @media (prefers-color-scheme: dark) {
-            background-color: $background-color-dark;
-        }
+    .page-link-icon {
+        display: inline-block;
+        margin-top: 10pt;
 
-        position: absolute;
-        top: 9px;
-        right: $spacing-unit / 2;
-        background-color: $background-color;
-        border: 1px solid $grey-color-light;
-        border-radius: 5px;
-        text-align: right;
-
-        .menu-icon {
-            display: block;
-            float: right;
-            width: 36px;
-            height: 26px;
-            line-height: 0;
-            padding-top: 10px;
-            text-align: center;
-
-            > svg {
-                width: 18px;
-                height: 15px;
-
-                path {
-                    fill: $grey-color-dark;
-                    @media (prefers-color-scheme: dark) {
-                        fill: $grey-color-light;
-                    }
-                }
-            }
-        }
-
-        .trigger {
-            clear: both;
-            display: none;
-        }
-
-        &:hover .trigger {
-            display: block;
-            padding-bottom: 5px;
-        }
-
-        .page-link {
-            @media (prefers-color-scheme: dark) {
-                color: #fff;
-            }
-            color: #000;
-            display: block;
-            padding: 5px 10px;
-
-            &:not(:last-child) {
-                margin-right: 0;
-            }
-            margin-left: 20px;
+        &:not(:last-child) {
+            margin-right: 10px;
         }
     }
 }
@@ -200,13 +149,13 @@
     > li {
         margin-bottom: $spacing-unit+45px;
     }
-    
+
     img {
         max-width: 100%;
         margin: 0 auto;
         display: block;
     }
-    
+
     table {
         width: 80%;
         padding: 0 auto;
@@ -260,7 +209,7 @@
 
 .post-content {
     margin-bottom: $spacing-unit;
-    
+
     table {
         width: 80%;
         padding: 0 auto;
@@ -281,7 +230,7 @@
             padding: 0.5625em 0.625em;
         }
     }
-    
+
     img {
         max-width: 100%;
         margin: 0 auto;
@@ -343,7 +292,7 @@ aside {
 
 img.retina, div.retina img {
     max-width: 50%;
-    
+
     @include media-query($on-palm) {
         max-width: 100%;
     }
