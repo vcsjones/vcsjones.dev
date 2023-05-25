@@ -35,13 +35,16 @@ asn.vcsjones.dev {
   import tls
   import tls-headers
   encode gzip
-  X-XSS-Protection "0"
-  Referrer-Policy no-referrer
-  X-Frame-Options DENY
-  X-Content-Type-Options nosniff
-  Cross-Origin-Resource-Policy "same-origin"
-  Cross-Origin-Embedder-Policy "require-corp"
-  Cache-Control "public, max-age=3600"
+
+  header * {
+    X-XSS-Protection "0"
+    Referrer-Policy no-referrer
+    X-Frame-Options DENY
+    X-Content-Type-Options nosniff
+    Cross-Origin-Resource-Policy "same-origin"
+    Cross-Origin-Embedder-Policy "require-corp"
+    Cache-Control "public, max-age=3600"
+  }
 
   root * /var/wwwroot2/asn
   file_server
