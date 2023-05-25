@@ -43,7 +43,7 @@ asn.vcsjones.dev {
   Cross-Origin-Embedder-Policy "require-corp"
   Cache-Control "public, max-age=3600"
 
-  root * /var/wwwroot/asn
+  root * /var/wwwroot2/asn
   file_server
 }
 
