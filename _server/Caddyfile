@@ -31,6 +31,22 @@ www.vcsjones.dev, vcsjones.com, www.vcsjones.com {
     redir https://vcsjones.dev{uri}
 }
 
+asn.vcsjones.dev {
+  import tls
+  import tls-headers
+  encode gzip
+  X-XSS-Protection "0"
+  Referrer-Policy no-referrer
+  X-Frame-Options DENY
+  X-Content-Type-Options nosniff
+  Cross-Origin-Resource-Policy "same-origin"
+  Cross-Origin-Embedder-Policy "require-corp"
+  Cache-Control "public, max-age=3600"
+
+  root * /var/wwwroot/asn
+  file_server
+}
+
 vcsjones.dev {
   import tls
   import tls-headers
@@ -66,7 +82,7 @@ vcsjones.dev {
   }
 
   root * /var/wwwroot/vcsjones.com
-  
+
   redir /dotnet-contrib https://github.com/dotnet/runtime/commits/main?author=vcsjones
   redir /mastodon https://infosec.exchange/@vcsjones
 
