@@ -43,6 +43,7 @@ asn.vcsjones.dev {
     X-Content-Type-Options nosniff
     Cross-Origin-Resource-Policy "same-origin"
     Cross-Origin-Embedder-Policy "require-corp"
+    Cross-Origin-Opener-Policy "same-origin"
     Cache-Control "public, max-age=3600"
   }
 
