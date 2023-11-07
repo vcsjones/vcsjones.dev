@@ -45,6 +45,7 @@ asn.vcsjones.dev {
     Cross-Origin-Embedder-Policy "require-corp"
     Cross-Origin-Opener-Policy "same-origin"
     Cache-Control "public, max-age=3600"
+    Content-Security-Policy "default-src 'none'; connect-src 'self'; style-src 'self'; script-src 'self' 'wasm-unsafe-eval'; frame-ancestors 'none'; form-action 'none'; block-all-mixed-content; base-uri 'none';"
   }
 
   root * /var/wwwroot2/asn
