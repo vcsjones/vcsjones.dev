@@ -1,4 +1,3 @@
-
 name: Deployment
 concurrency: live
 
@@ -14,6 +13,7 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: live
     steps:
     - name: Checkout
       uses: actions/checkout@v4
@@ -30,3 +30,16 @@ jobs:
         bundle install
         bundle exec jekyll build
         bundle exec rake
+    - name: Tailscale
+      uses: tailscale/github-action@v2
+      with:
+        oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
+        oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+        tags: tag:ci
+    - name: Copy To Production
+      run: |
+        mkdir -p ~/.ssh
+        echo "vcsjones-dev ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHEVhpLvozMlKqO8s5pffq0GBV5Ju32kECNzLyU2r4Nv" >> ~/.ssh/known_hosts
+        rsync -a --delete _site/ deployer@vcsjones-dev:/var/wwwroot/vcsjones.com
+        rsync --ignore-times _server/Caddyfile deployer@vcsjones-dev:/etc/caddy/Caddyfile
+        ssh deployer@vcsjones-dev 'systemctl reload caddy.service'
