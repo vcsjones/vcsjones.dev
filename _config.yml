@@ -13,16 +13,14 @@ sass:
 plugins:
   - jekyll-paginate
 exclude:
-  - appspec.yml
-  - _deploy
   - _server
   - README.md
+  - .github
   - .gitignore
   - .devcontainer.json
   - .startup.sh
+  - .vscode
   - Gemfile
   - Gemfile.lock
   - Rakefile
-  - buildspec.yml
   - Dockerfile
-  
