@@ -23,8 +23,8 @@ jobs:
         ruby-version: '3.1.4'
     - name: Setup Tooling
       run: |
-        apt-get update -y
-        apt-get install -y webp exiftool pngcrush gzip brotli
+        sudo apt-get update -y
+        sudo apt-get install -y webp exiftool pngcrush gzip brotli
     - name: Build
       run: |
         bundle install
