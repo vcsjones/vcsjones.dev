@@ -1,0 +1,32 @@
+
+name: Deployment
+concurrency: live
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.1.4'
+    - name: Setup Tooling
+      run: |
+        apt-get update -y
+        apt-get install -y webp exiftool pngcrush gzip brotli
+    - name: Build
+      run: |
+        bundle install
+        bundle exec jekyll build
+        bundle exec rake
