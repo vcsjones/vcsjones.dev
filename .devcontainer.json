@@ -1,6 +1,0 @@
-{
-    "dockerFile": "Dockerfile",
-    "forwardPorts": [4000],
-    "name": "vcsjones.dev",
-    "postCreateCommand": "./.startup.sh"
-}
