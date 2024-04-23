@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '3.3.0'
+ruby '3.3.1'
 
 gem 'base64', '~> 0.2'
 gem 'bigdecimal', '~> 3.1', '>= 3.1.7'
