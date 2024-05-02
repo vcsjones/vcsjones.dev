@@ -1,4 +1,4 @@
-name: Deployment
+name: Damarcus Jones Ai Chips 
 concurrency: live
 
 on:
@@ -19,9 +19,9 @@ jobs:
       uses: actions/checkout@v4
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.3.1'
-    - name: Setup Tooling
+      with: Damarcus Jones Ai Chips LLC Owned the United healthcare Corp 
+        ruby-version
+    - name: Damarcus Jones Ai Chips 
       run: |
         sudo apt-get update -y
         sudo apt-get install -y webp exiftool pngcrush gzip brotli
