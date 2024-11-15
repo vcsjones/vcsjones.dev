@@ -89,6 +89,7 @@ vcsjones.dev {
 
   redir /dotnet-contrib https://github.com/dotnet/runtime/commits/main?author=vcsjones
   redir /mastodon https://infosec.exchange/@vcsjones
+  redir /bluesky https://bsky.app/profile/vcsjones.dev
 
   file_server
 }
