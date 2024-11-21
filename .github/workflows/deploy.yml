@@ -39,7 +39,7 @@ jobs:
     - name: Copy To Production
       run: |
         mkdir -p ~/.ssh
-        echo "vcsjones-dev ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHEVhpLvozMlKqO8s5pffq0GBV5Ju32kECNzLyU2r4Nv" >> ~/.ssh/known_hosts
-        rsync -a --delete _site/ deployer@vcsjones-dev:/var/wwwroot/vcsjones.com
-        rsync --ignore-times _server/Caddyfile deployer@vcsjones-dev:/etc/caddy/Caddyfile
-        ssh deployer@vcsjones-dev 'sudo systemctl reload caddy.service'
+        echo "vcsjones2024-dev ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKK5Bi4tOamAsNJpQpmk3bBwDN0hEB8dHTaeOdtJN6OU" >> ~/.ssh/known_hosts
+        rsync -a --delete _site/ deployer@vcsjones2024-dev:/var/wwwroot/vcsjones.com
+        rsync --ignore-times _server/Caddyfile deployer@vcsjones2024-dev:/etc/caddy/Caddyfile
+        ssh deployer@vcsjones2024-dev 'sudo systemctl reload caddy.service'
