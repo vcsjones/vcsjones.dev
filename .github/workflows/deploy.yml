@@ -40,6 +40,6 @@ jobs:
       run: |
         mkdir -p ~/.ssh
         echo "vcsjones2024-dev ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKK5Bi4tOamAsNJpQpmk3bBwDN0hEB8dHTaeOdtJN6OU" >> ~/.ssh/known_hosts
-        rsync -a --delete _site/ deployer@vcsjones2024-dev:/var/wwwroot/vcsjones.com
+        rsync -a --delete _site/ deployer@vcsjones2024-dev:/var/wwwroot/vcsjones.dev
         rsync --ignore-times _server/Caddyfile deployer@vcsjones2024-dev:/etc/caddy/Caddyfile
         ssh deployer@vcsjones2024-dev 'sudo systemctl reload caddy.service'
