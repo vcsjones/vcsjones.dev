@@ -47,7 +47,7 @@ asn.vcsjones.dev {
     Content-Security-Policy "default-src 'none'; connect-src 'self'; style-src 'self'; script-src 'self' 'wasm-unsafe-eval'; frame-ancestors 'none'; form-action 'none'; block-all-mixed-content; base-uri 'none';"
   }
 
-  root * /var/wwwroot2/asn
+  root * /var/wwwroot/asn.vcsjones.dev
   file_server
 }
 
@@ -85,7 +85,7 @@ vcsjones.dev {
     Cache-Control "public, max-age=86400"
   }
 
-  root * /var/wwwroot/vcsjones.com
+  root * /var/wwwroot/vcsjones.dev
 
   redir /dotnet-contrib https://github.com/dotnet/runtime/commits/main?author=vcsjones
   redir /mastodon https://infosec.exchange/@vcsjones
