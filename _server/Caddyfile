@@ -2,6 +2,9 @@
   key_type p256
   email kevin@vcsjones.com
   default_sni vcsjones.dev
+  on_demand_tls {
+		ask http://localhost:3000/tls-check
+	}
 }
 
 (tls) {
@@ -12,6 +15,14 @@
 
 (tls-headers) {
   header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+}
+
+*.pds.vcsjones.dev, pds.vcsjones.dev {
+	tls {
+		on_demand
+	}
+
+	reverse_proxy http://localhost:3000
 }
 
 shrug.fyi {
