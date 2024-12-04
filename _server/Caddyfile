@@ -17,6 +17,8 @@
   header Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
 }
 
+import caddy.d/*
+
 *.pds.vcsjones.dev, pds.vcsjones.dev {
   tls {
     on_demand
@@ -46,27 +48,6 @@ www.vcsjones.dev, vcsjones.com, www.vcsjones.com {
     import tls-headers
 
     redir https://vcsjones.dev{uri}
-}
-
-asn.vcsjones.dev {
-  import tls
-  import tls-headers
-  encode gzip
-
-  header * {
-    X-XSS-Protection "0"
-    Referrer-Policy no-referrer
-    X-Frame-Options DENY
-    X-Content-Type-Options nosniff
-    Cross-Origin-Resource-Policy "same-origin"
-    Cross-Origin-Embedder-Policy "require-corp"
-    Cross-Origin-Opener-Policy "same-origin"
-    Cache-Control "public, max-age=3600"
-    Content-Security-Policy "default-src 'none'; connect-src 'self'; style-src 'self'; script-src 'self' 'wasm-unsafe-eval'; frame-ancestors 'none'; form-action 'none'; block-all-mixed-content; base-uri 'none';"
-  }
-
-  root * /var/wwwroot/asn.vcsjones.dev
-  file_server
 }
 
 vcsjones.dev {
