@@ -24,6 +24,11 @@
   }
 
   import tls-headers
+
+  handle /tls-check {
+		respond 404
+	}
+
   reverse_proxy http://localhost:3000
 }
 
