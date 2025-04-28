@@ -11,8 +11,10 @@ Many years after this post was originally written, Microsoft has
 <a href="https://learn.microsoft.com/en-us/security/trusted-root/program-requirements#b-signature-requirements" target="_blank">published guidance</a>
 saying that ECC certificates are discouraged.
 
-> The Microsoft Trusted Root Program recommends that ECC/ECDSA certificates shouldn't
-> be issued to subscribers due to this known incompatibility and risk.
+<blockquote>
+The Microsoft Trusted Root Program recommends that ECC/ECDSA certificates shouldn't
+be issued to subscribers due to this known incompatibility and risk.
+</blockquote>
 
 This documentation is directed at Certificate Authorities that issue code signing
 (Authenticode) certificates. This indicates to the CAs that they should avoid issuing
