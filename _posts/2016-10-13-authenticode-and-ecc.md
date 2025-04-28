@@ -131,4 +131,3 @@ is the way to go.
 [3]: /images/signing-ecdsa-pin-prompt.png
 [4]: /images/signing-ecdsa-cert.png
 [5]: /images/signing-triple-sign.png
-[6]:
