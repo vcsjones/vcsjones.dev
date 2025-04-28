@@ -4,7 +4,7 @@
   {% if page.hide %}<meta name="ROBOTS" content="NOINDEX, NOFOLLOW">{% endif %}
   <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
-  <link rel="stylesheet" crossorigin="anonymous" integrity="sha256-{% sri_scss_hash css/main.scss %}" href="{{ "/css/main.css" | prepend: site.baseurl }}?{% sri_scss_hex_hash css/main.scss %}">
+  <link rel="stylesheet" crossorigin="anonymous" href="{{ "/css/main.css" | prepend: site.baseurl }}?{% sri_scss_hex_hash css/main.scss %}">
   <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
   <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
 

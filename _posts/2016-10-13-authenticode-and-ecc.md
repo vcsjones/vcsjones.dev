@@ -2,8 +2,21 @@
 layout: post
 title:  "Authenticode and ECC"
 date:   2016-10-13 9:30:00 -0400
+modified: 2025-04-28 10:00:00 -0400
 categories: Security
 ---
+
+<aside>
+Many years after this post was originally written, Microsoft has [published guidance][6]
+saying that ECC certificates are discouraged.
+
+> The Microsoft Trusted Root Program recommends that ECC/ECDSA certificates shouldn't
+> be issued to subscribers due to this known incompatibility and risk.
+
+This documentation is directed at Certificate Authorities that issue code signing
+(Authenticode) certificates. This indicates to the CAs that they should avoid issuing
+ECC certificates to their customers.
+</aside>
 
 While HTTPS / TLS have been making great strides in adopting new cryptographic
 primitives, such as CHACHA, x25519, and ECC, another place has remained
@@ -44,7 +57,7 @@ It's possible to repair this link, but it needs to be done every time the
 SmartCard is re-inserted.
 
 For purposes of this experiment, I decided to forgo the SmartCard and instead
-import the private key in to the Windows Key Container store, and force it to 
+import the private key in to the Windows Key Container store, and force it to
 prompt me for a pin every time it's used to sign.
 
 ![Signing Pin Prompt][3]
@@ -54,9 +67,9 @@ prompt me for a pin every time it's used to sign.
 Signing with the ECDSA certificate worked as expected. `signtool` had no
 problems signing with ECDSA, and Windows was happy with the signature.
 
-There was nothing different that needed to be done here. My 
+There was nothing different that needed to be done here. My
 [Authenticode Lint][2] tool was also happy with the ECDSA signatures. This was
-a little exciting to see an ECDSA certificate "work" in Authenticode Lint. 
+a little exciting to see an ECDSA certificate "work" in Authenticode Lint.
 To-date all of the ECC capabilities of it have been tested with self-signed
 certificates.
 
@@ -117,3 +130,4 @@ is the way to go.
 [3]: /images/signing-ecdsa-pin-prompt.png
 [4]: /images/signing-ecdsa-cert.png
 [5]: /images/signing-triple-sign.png
+[6]: https://learn.microsoft.com/en-us/security/trusted-root/program-requirements#b-signature-requirements
