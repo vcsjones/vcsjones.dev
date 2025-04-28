@@ -7,7 +7,8 @@ categories: Security
 ---
 
 <aside>
-Many years after this post was originally written, Microsoft has [published guidance][6]
+Many years after this post was originally written, Microsoft has
+<a href="https://learn.microsoft.com/en-us/security/trusted-root/program-requirements#b-signature-requirements" target="_blank">published guidance</a>
 saying that ECC certificates are discouraged.
 
 > The Microsoft Trusted Root Program recommends that ECC/ECDSA certificates shouldn't
@@ -130,4 +131,4 @@ is the way to go.
 [3]: /images/signing-ecdsa-pin-prompt.png
 [4]: /images/signing-ecdsa-cert.png
 [5]: /images/signing-triple-sign.png
-[6]: https://learn.microsoft.com/en-us/security/trusted-root/program-requirements#b-signature-requirements
+[6]:
