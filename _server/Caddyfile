@@ -92,6 +92,7 @@ vcsjones.dev {
   redir /dotnet-contrib https://github.com/dotnet/runtime/commits/main?author=vcsjones
   redir /mastodon https://infosec.exchange/@vcsjones
   redir /bluesky https://bsky.app/profile/vcsjones.dev
+  redir /modpow https://nrich.maths.org/powmodcalculator/main.html
 
   file_server
 }
