@@ -13,10 +13,13 @@ permissions:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     environment: live
     steps:
     - name: Checkout
-      uses: actions/checkout@v4
+      uses: actions/checkout@v7
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
       with:
@@ -31,15 +34,15 @@ jobs:
         bundle exec jekyll build
         bundle exec rake
     - name: Tailscale
-      uses: tailscale/github-action@v2
+      uses: tailscale/github-action@v4
       with:
-        oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
-        oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
+        oauth-client-id: ${{ secrets.TS_OIDC_CLIENT_ID }}
+        audience: ${{ secrets.TS_OIDC_AUDIENCE }}
         tags: tag:ci
     - name: Copy To Production
       run: |
         mkdir -p ~/.ssh
-        echo "vcsjones2024-dev ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKK5Bi4tOamAsNJpQpmk3bBwDN0hEB8dHTaeOdtJN6OU" >> ~/.ssh/known_hosts
-        rsync -a --delete _site/ deployer@vcsjones2024-dev:/var/wwwroot/vcsjones.dev
-        rsync --ignore-times _server/Caddyfile deployer@vcsjones2024-dev:/etc/caddy/Caddyfile
-        ssh deployer@vcsjones2024-dev 'sudo systemctl reload caddy.service'
+        echo "vcsjones-dev ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKK5Bi4tOamAsNJpQpmk3bBwDN0hEB8dHTaeOdtJN6OU" >> ~/.ssh/known_hosts
+        rsync -a --delete _site/ deployer@vcsjones-dev:/var/wwwroot/vcsjones.dev
+        rsync --ignore-times _server/Caddyfile deployer@vcsjones-dev:/etc/caddy/Caddyfile
+        ssh deployer@vcsjones-dev 'sudo systemctl reload caddy.service'
