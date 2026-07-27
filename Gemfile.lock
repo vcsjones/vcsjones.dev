@@ -44,7 +44,7 @@ GEM
       sass-embedded (~> 1.75)
     jekyll-watch (2.2.1)
       listen (~> 3.0)
-    json (2.11.3)
+    json (2.19.9)
     kramdown (2.3.1)
       rexml
     kramdown-parser-gfm (1.1.0)
